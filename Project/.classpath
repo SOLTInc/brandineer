@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry including="**/*.java" kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar" sourcepath="M2_REPO/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar" sourcepath="M2_REPO/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/javax/transaction/javax.transaction-api/1.2/javax.transaction-api-1.2.jar" sourcepath="M2_REPO/javax/transaction/javax.transaction-api/1.2/javax.transaction-api-1.2-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/javax/transaction/javax.transaction-api/1.2/javax.transaction-api-1.2-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/javax/websocket/javax.websocket-api/1.0/javax.websocket-api-1.0.jar" sourcepath="M2_REPO/javax/websocket/javax.websocket-api/1.0/javax.websocket-api-1.0-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/javax/websocket/javax.websocket-api/1.0/javax.websocket-api-1.0-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/apache/wicket/wicket-core/8.0.0-SNAPSHOT/wicket-core-8.0.0-SNAPSHOT.jar" sourcepath="M2_REPO/org/apache/wicket/wicket-core/8.0.0-SNAPSHOT/wicket-core-8.0.0-SNAPSHOT-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/apache/wicket/wicket-core/8.0.0-SNAPSHOT/wicket-core-8.0.0-SNAPSHOT-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/apache/wicket/wicket-request/8.0.0-SNAPSHOT/wicket-request-8.0.0-SNAPSHOT.jar" sourcepath="M2_REPO/org/apache/wicket/wicket-request/8.0.0-SNAPSHOT/wicket-request-8.0.0-SNAPSHOT-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/apache/wicket/wicket-request/8.0.0-SNAPSHOT/wicket-request-8.0.0-SNAPSHOT-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/apache/wicket/wicket-util/8.0.0-SNAPSHOT/wicket-util-8.0.0-SNAPSHOT.jar" sourcepath="M2_REPO/org/apache/wicket/wicket-util/8.0.0-SNAPSHOT/wicket-util-8.0.0-SNAPSHOT-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/apache/wicket/wicket-util/8.0.0-SNAPSHOT/wicket-util-8.0.0-SNAPSHOT-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/commons-fileupload/commons-fileupload/1.3.2/commons-fileupload-1.3.2.jar" sourcepath="M2_REPO/commons-fileupload/commons-fileupload/1.3.2/commons-fileupload-1.3.2-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/commons-fileupload/commons-fileupload/1.3.2/commons-fileupload-1.3.2-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/commons-io/commons-io/2.5/commons-io-2.5.jar" sourcepath="M2_REPO/commons-io/commons-io/2.5/commons-io-2.5-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-collections4/4.1/commons-collections4-4.1.jar" sourcepath="M2_REPO/org/apache/commons/commons-collections4/4.1/commons-collections4-4.1-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/apache/commons/commons-collections4/4.1/commons-collections4-4.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/danekja/jdk-serializable-functional/1.8.1/jdk-serializable-functional-1.8.1.jar" sourcepath="M2_REPO/org/danekja/jdk-serializable-functional/1.8.1/jdk-serializable-functional-1.8.1-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/danekja/jdk-serializable-functional/1.8.1/jdk-serializable-functional-1.8.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/com/tdunning/json/1.8/json-1.8.jar" sourcepath="M2_REPO/com/tdunning/json/1.8/json-1.8-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/com/tdunning/json/1.8/json-1.8-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/apache/logging/log4j/log4j-slf4j-impl/2.7/log4j-slf4j-impl-2.7.jar" sourcepath="M2_REPO/org/apache/logging/log4j/log4j-slf4j-impl/2.7/log4j-slf4j-impl-2.7-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/apache/logging/log4j/log4j-slf4j-impl/2.7/log4j-slf4j-impl-2.7-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/apache/logging/log4j/log4j-api/2.7/log4j-api-2.7.jar" sourcepath="M2_REPO/org/apache/logging/log4j/log4j-api/2.7/log4j-api-2.7-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/apache/logging/log4j/log4j-api/2.7/log4j-api-2.7-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/apache/logging/log4j/log4j-core/2.7/log4j-core-2.7.jar" sourcepath="M2_REPO/org/apache/logging/log4j/log4j-core/2.7/log4j-core-2.7-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/apache/logging/log4j/log4j-core/2.7/log4j-core-2.7-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/junit/junit/4.12/junit-4.12.jar" sourcepath="M2_REPO/junit/junit/4.12/junit-4.12-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/junit/junit/4.12/junit-4.12-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/aggregate/jetty-all/9.3.12.v20160915/jetty-all-9.3.12.v20160915-uber.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-client/9.3.12.v20160915/jetty-client-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-client/9.3.12.v20160915/jetty-client-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-client/9.3.12.v20160915/jetty-client-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-http/9.3.12.v20160915/jetty-http-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-http/9.3.12.v20160915/jetty-http-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-http/9.3.12.v20160915/jetty-http-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-util/9.3.12.v20160915/jetty-util-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-util/9.3.12.v20160915/jetty-util-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-util/9.3.12.v20160915/jetty-util-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-io/9.3.12.v20160915/jetty-io-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-io/9.3.12.v20160915/jetty-io-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-io/9.3.12.v20160915/jetty-io-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-deploy/9.3.12.v20160915/jetty-deploy-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-deploy/9.3.12.v20160915/jetty-deploy-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-deploy/9.3.12.v20160915/jetty-deploy-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-webapp/9.3.12.v20160915/jetty-webapp-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-webapp/9.3.12.v20160915/jetty-webapp-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-webapp/9.3.12.v20160915/jetty-webapp-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-xml/9.3.12.v20160915/jetty-xml-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-xml/9.3.12.v20160915/jetty-xml-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-xml/9.3.12.v20160915/jetty-xml-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-servlet/9.3.12.v20160915/jetty-servlet-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-servlet/9.3.12.v20160915/jetty-servlet-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-servlet/9.3.12.v20160915/jetty-servlet-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-security/9.3.12.v20160915/jetty-security-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-security/9.3.12.v20160915/jetty-security-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-security/9.3.12.v20160915/jetty-security-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-server/9.3.12.v20160915/jetty-server-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-server/9.3.12.v20160915/jetty-server-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-server/9.3.12.v20160915/jetty-server-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-jmx/9.3.12.v20160915/jetty-jmx-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-jmx/9.3.12.v20160915/jetty-jmx-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-jmx/9.3.12.v20160915/jetty-jmx-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-plus/9.3.12.v20160915/jetty-plus-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-plus/9.3.12.v20160915/jetty-plus-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-plus/9.3.12.v20160915/jetty-plus-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-jndi/9.3.12.v20160915/jetty-jndi-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-jndi/9.3.12.v20160915/jetty-jndi-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-jndi/9.3.12.v20160915/jetty-jndi-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-annotations/9.3.12.v20160915/jetty-annotations-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-annotations/9.3.12.v20160915/jetty-annotations-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-annotations/9.3.12.v20160915/jetty-annotations-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm/5.0.1/asm-5.0.1.jar" sourcepath="M2_REPO/org/ow2/asm/asm/5.0.1/asm-5.0.1-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/ow2/asm/asm/5.0.1/asm-5.0.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm-commons/5.0.1/asm-commons-5.0.1.jar" sourcepath="M2_REPO/org/ow2/asm/asm-commons/5.0.1/asm-commons-5.0.1-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/ow2/asm/asm-commons/5.0.1/asm-commons-5.0.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm-tree/5.0.1/asm-tree-5.0.1.jar" sourcepath="M2_REPO/org/ow2/asm/asm-tree/5.0.1/asm-tree-5.0.1-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/ow2/asm/asm-tree/5.0.1/asm-tree-5.0.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-jaspi/9.3.12.v20160915/jetty-jaspi-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-jaspi/9.3.12.v20160915/jetty-jaspi-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-jaspi/9.3.12.v20160915/jetty-jaspi-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/orbit/javax.security.auth.message/1.0.0.v201108011116/javax.security.auth.message-1.0.0.v201108011116.jar" sourcepath="M2_REPO/org/eclipse/jetty/orbit/javax.security.auth.message/1.0.0.v201108011116/javax.security.auth.message-1.0.0.v201108011116-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/orbit/javax.security.auth.message/1.0.0.v201108011116/javax.security.auth.message-1.0.0.v201108011116-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-rewrite/9.3.12.v20160915/jetty-rewrite-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-rewrite/9.3.12.v20160915/jetty-rewrite-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-rewrite/9.3.12.v20160915/jetty-rewrite-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-servlets/9.3.12.v20160915/jetty-servlets-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-servlets/9.3.12.v20160915/jetty-servlets-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-servlets/9.3.12.v20160915/jetty-servlets-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-continuation/9.3.12.v20160915/jetty-continuation-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-continuation/9.3.12.v20160915/jetty-continuation-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-continuation/9.3.12.v20160915/jetty-continuation-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-quickstart/9.3.12.v20160915/jetty-quickstart-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-quickstart/9.3.12.v20160915/jetty-quickstart-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-quickstart/9.3.12.v20160915/jetty-quickstart-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/websocket-servlet/9.3.12.v20160915/websocket-servlet-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/websocket/websocket-servlet/9.3.12.v20160915/websocket-servlet-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/websocket/websocket-servlet/9.3.12.v20160915/websocket-servlet-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/websocket-api/9.3.12.v20160915/websocket-api-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/websocket/websocket-api/9.3.12.v20160915/websocket-api-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/websocket/websocket-api/9.3.12.v20160915/websocket-api-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/javax-websocket-server-impl/9.3.12.v20160915/javax-websocket-server-impl-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/websocket/javax-websocket-server-impl/9.3.12.v20160915/javax-websocket-server-impl-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/websocket/javax-websocket-server-impl/9.3.12.v20160915/javax-websocket-server-impl-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/javax-websocket-client-impl/9.3.12.v20160915/javax-websocket-client-impl-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/websocket/javax-websocket-client-impl/9.3.12.v20160915/javax-websocket-client-impl-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/websocket/javax-websocket-client-impl/9.3.12.v20160915/javax-websocket-client-impl-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/websocket-client/9.3.12.v20160915/websocket-client-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/websocket/websocket-client/9.3.12.v20160915/websocket-client-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/websocket/websocket-client/9.3.12.v20160915/websocket-client-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/websocket-common/9.3.12.v20160915/websocket-common-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/websocket/websocket-common/9.3.12.v20160915/websocket-common-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/websocket/websocket-common/9.3.12.v20160915/websocket-common-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/websocket-server/9.3.12.v20160915/websocket-server-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/websocket/websocket-server/9.3.12.v20160915/websocket-server-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/websocket/websocket-server/9.3.12.v20160915/websocket-server-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-alpn-client/9.3.12.v20160915/jetty-alpn-client-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-alpn-client/9.3.12.v20160915/jetty-alpn-client-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/jetty-alpn-client/9.3.12.v20160915/jetty-alpn-client-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/http2/http2-server/9.3.12.v20160915/http2-server-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/http2/http2-server/9.3.12.v20160915/http2-server-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/http2/http2-server/9.3.12.v20160915/http2-server-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/http2/http2-common/9.3.12.v20160915/http2-common-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/http2/http2-common/9.3.12.v20160915/http2-common-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/http2/http2-common/9.3.12.v20160915/http2-common-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/http2/http2-hpack/9.3.12.v20160915/http2-hpack-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/http2/http2-hpack/9.3.12.v20160915/http2-hpack-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/http2/http2-hpack/9.3.12.v20160915/http2-hpack-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/http2/http2-client/9.3.12.v20160915/http2-client-9.3.12.v20160915.jar" sourcepath="M2_REPO/org/eclipse/jetty/http2/http2-client/9.3.12.v20160915/http2-client-9.3.12.v20160915-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/http2/http2-client/9.3.12.v20160915/http2-client-9.3.12.v20160915-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/orbit/javax.mail.glassfish/1.4.1.v201005082020/javax.mail.glassfish-1.4.1.v201005082020.jar" sourcepath="M2_REPO/org/eclipse/jetty/orbit/javax.mail.glassfish/1.4.1.v201005082020/javax.mail.glassfish-1.4.1.v201005082020-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/orbit/javax.mail.glassfish/1.4.1.v201005082020/javax.mail.glassfish-1.4.1.v201005082020-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/orbit/javax.activation/1.1.0.v201105071233/javax.activation-1.1.0.v201105071233.jar" sourcepath="M2_REPO/org/eclipse/jetty/orbit/javax.activation/1.1.0.v201105071233/javax.activation-1.1.0.v201105071233-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/ryokuhei/.m2/repository/org/eclipse/jetty/orbit/javax.activation/1.1.0.v201105071233/javax.activation-1.1.0.v201105071233-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
