@@ -1,4 +1,4 @@
-package com.solt_com;
+package com.solt_inc;
 
 import java.lang.management.ManagementFactory;
 

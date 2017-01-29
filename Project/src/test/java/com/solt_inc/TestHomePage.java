@@ -1,8 +1,11 @@
-package com.solt_com;
+package com.solt_inc;
 
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.solt_inc.WicketApplication;
+import com.solt_inc.viewController.homePage.HomePage;
 
 /**
  * Simple test using the WicketTester
