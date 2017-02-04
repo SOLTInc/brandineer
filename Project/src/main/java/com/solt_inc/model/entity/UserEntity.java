@@ -1,17 +1,31 @@
 package com.solt_inc.model.entity;
 
-public class UserEntity {
+import java.io.Serializable;
+import java.util.List;
+
+public class UserEntity implements Serializable {
+    
+    private int   id;
     private String name;
-    private String icon;
+    private String photo;
     private String age;
     private String jobCategory;
     private String location;
     private String annualIncome;
+    private List<HobbyEntity> hobbyList;
     
     public UserEntity() {
     }
     
     public UserEntity(String name) {
+    }
+    
+    public int getId() {
+        return this.id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
     }
     
     public String getName() {
@@ -22,12 +36,12 @@ public class UserEntity {
         this.name = name;
     }
     
-    public String getIcon() {
-        return icon;
+    public String getPhoto() {
+        return photo;
     }
     
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
     
     public String getAge() {
@@ -60,5 +74,15 @@ public class UserEntity {
     
     public void setAnnualIncome(String annualIncome) {
         this.annualIncome = annualIncome;
+    }
+    
+    public List<HobbyEntity> getHobbyList() {
+        return this.hobbyList;
+    }
+    public void setHobbyList(String hobbyName, String hobbyImage) {
+         
+        HobbyEntity hobby = new HobbyEntity(hobbyName, hobbyImage);
+        
+        this.hobbyList.add(hobby);
     }
 }
