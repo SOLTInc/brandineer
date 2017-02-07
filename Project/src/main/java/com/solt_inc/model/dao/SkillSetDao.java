@@ -10,20 +10,21 @@ import java.util.List;
 import org.apache.wicket.model.IModel;
 
 import com.solt_inc.model.entity.HobbyEntity;
+import com.solt_inc.model.entity.SkillSetEntity;
 
-public class HobbyDao {
+public class SkillSetDao {
 
     public List<HobbyEntity> getHobby(int id) {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    public List<HobbyEntity> getHobby() {
+    public List<SkillSetEntity> getSkillSet() {
         
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT * FROM hobby";
+        String sql = "SELECT * FROM skill";
         
-        List<HobbyEntity> hobbyList = new ArrayList<HobbyEntity>();
+        List<SkillSetEntity> skillList = new ArrayList<SkillSetEntity>();
         
         try(Connection con = cm.getConnection();
                 PreparedStatement pstmt = con.prepareStatement(sql)) {
@@ -32,26 +33,26 @@ public class HobbyDao {
             
             while(rs.next()) {
                 
-                HobbyEntity hobby = new HobbyEntity();
+                SkillSetEntity skill = new SkillSetEntity();
                 
-                hobby.setHobbyName(rs.getString("HOBBY_NAME"));
-                hobby.setHobbyImage(rs.getString("HOBBY_IMAGE_PATH"));
+                skill.setSkillName(rs.getString("SKILL_NAME"));
+                skill.setSkillImage(rs.getString("SKILL_IMAGE_PATH"));
                 
-                hobbyList.add(hobby);
+                skillList.add(skill);
                 
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return hobbyList;
+        return skillList;
     }
     
-    public List<HobbyEntity> getUserHobby(IModel<Integer> userId) {
+    public List<SkillSetEntity> getUserSkillSet(IModel<Integer> userId) {
         
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT * FROM hobby WHERE USER_ID = ?";
+        String sql = "SELECT * FROM skill WHERE USER_ID = ?";
         
-        List<HobbyEntity> hobbyList = new ArrayList<HobbyEntity>();
+        List<SkillSetEntity> skillList = new ArrayList<SkillSetEntity>();
         
         try(Connection con = cm.getConnection();
                 PreparedStatement pstmt = con.prepareStatement(sql)) {
@@ -60,18 +61,18 @@ public class HobbyDao {
             ResultSet rs = pstmt.executeQuery();
             
             while(rs.next()) {
-                HobbyEntity hobby = new HobbyEntity();
+                SkillSetEntity skill = new SkillSetEntity();
                 
-                hobby.setHobbyName(rs.getString("HOBBY_NAME"));
-                hobby.setHobbyImage(rs.getString("HOBBY_IMAGE_PATH"));
+                skill.setSkillName(rs.getString("SKILL_NAME"));
+                skill.setSkillImage(rs.getString("SKILL_IMAGE_PATH"));
                 
-                hobbyList.add(hobby);
+                skillList.add(skill);
             }
             
         } catch (SQLException e) {
             e.printStackTrace();
         }
         
-        return hobbyList;
+        return skillList;
     }
 }

@@ -37,7 +37,7 @@ public class UserDao {
             if(rs.next()) {
                 user.setId(rs.getInt("USER_ID"));
                 user.setName(rs.getString("NAME"));
-                user.setPhoto(rs.getString("ICON_PATH"));
+                user.setPhotoName(rs.getString("ICON_PATH"));
                 user.setAge(rs.getString("AGE"));
                 user.setJobCategory(rs.getString("JOB_CATEGORY"));
                 user.setLocation(rs.getString("LOCATION"));
@@ -67,7 +67,7 @@ public class UserDao {
             if(rs.next()) {	
                 user.setId(rs.getInt("USER_ID"));
                 user.setName(rs.getString("NAME"));
-                user.setPhoto(rs.getString("ICON_PATH"));
+                user.setPhotoName(rs.getString("ICON_PATH"));
                 user.setAge(rs.getString("AGE"));
                 user.setJobCategory(rs.getString("JOB_CATEGORY"));
                 user.setLocation(rs.getString("LOCATION"));
@@ -96,7 +96,7 @@ public class UserDao {
                 PreparedStatement pstmt = con.prepareStatement(sql)) {
 
             pstmt.setString(1, user.getName());
-            pstmt.setString(2, user.getPhoto());
+            pstmt.setString(2, user.getPhotoName());
             pstmt.setString(3, user.getAge());
             pstmt.setString(4, user.getJobCategory());
             pstmt.setString(5, user.getLocation());

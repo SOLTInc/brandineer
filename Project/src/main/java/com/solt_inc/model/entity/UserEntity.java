@@ -7,7 +7,7 @@ public class UserEntity implements Serializable {
     
     private int   id;
     private String name;
-    private String photo;
+    private String photoName;
     private String age;
     private String jobCategory;
     private String location;
@@ -36,12 +36,12 @@ public class UserEntity implements Serializable {
         this.name = name;
     }
     
-    public String getPhoto() {
-        return photo;
+    public String getPhotoName() {
+        return photoName;
     }
     
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPhotoName(String photoName) {
+        this.photoName = photoName;
     }
     
     public String getAge() {

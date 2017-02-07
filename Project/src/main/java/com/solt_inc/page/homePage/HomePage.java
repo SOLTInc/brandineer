@@ -26,10 +26,10 @@ public class HomePage extends WebPage {
         @Override
         protected void onSubmit() {
             
-            UserDao userDao = new UserDao();
-            user = userDao.getUserProfile(userId);
+//            UserDao userDao = new UserDao();
+//            user = userDao.getUserProfile(userId);
             
-            ProfilePage profilePage = new ProfilePage(user);
+            ProfilePage profilePage = new ProfilePage(userId);
             setResponsePage(profilePage);
         }
     };

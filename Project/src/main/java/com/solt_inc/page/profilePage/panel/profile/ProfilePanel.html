@@ -3,24 +3,26 @@
   <body>    
     <wicket:panel>
     <form wicket:id="form">
-      <table>
-        <tr>
-          <td>name:<span wicket:id="name"> in name </span></td>
-        </tr>
-        <tr>
-          <td>photo:<span wicket:id="photo"> in photo </span></td>
-        </tr>
-        <tr>
-          <td>age:<span wicket:id="age"> in age </span></td>
-        </tr>
-        <tr>
-          <td>job_category:<span wicket:id="jobCategory"> in job category </span></td>
-        </tr>
-        <tr>
-          <td>location:<span wicket:id="location"> in location </span></td>
-        </tr>
-        <tr>
-          <td>annual_income:<span wicket:id="annualIncome"> in annual income </span></td>
+      <span wicket:id="name"> in name </span>'s profile
+        <table>
+         <tr>
+          <td><img wicket:id="photo" width="150" height="120" /></td>
+          <td>
+            <table>
+              <tr>
+                <td>age:<span wicket:id="age"> in age </span></td>
+              </tr>
+              <tr>
+                <td>job_category:<span wicket:id="jobCategory"> in job category </span></td>
+              </tr>
+              <tr>
+                <td>location:<span wicket:id="location"> in location </span></td>
+              </tr>
+              <tr>
+                <td>annual_income:<span wicket:id="annualIncome"> in annual income </span></td>
+              </tr>
+            </table>
+          </td>
         </tr>
       </table>
     </form>
