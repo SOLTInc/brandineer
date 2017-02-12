@@ -17,6 +17,7 @@ public class RegistrationUserPage extends WebPage {
     
     UserEntity user = new UserEntity();
     IModel<UserEntity> regModel = new CompoundPropertyModel<UserEntity>(user);
+    Button cancelButton;
     
     public RegistrationUserPage(PageParameters params) {
         
@@ -24,6 +25,8 @@ public class RegistrationUserPage extends WebPage {
         
         Form<?> form = new Form("form");
         form.add(new ProfileInputPanel("profile", regModel));
+//        form.add(new ProfileInputPanel("profile"));
+//        form.add(new TestFileUploadPanel("profile"));
         form.add(new Button("register") {
             private static final long serialVersionUID = 1L;
             @Override
@@ -37,13 +40,16 @@ public class RegistrationUserPage extends WebPage {
                 }
             }
         });
+        cancelButton = new Button("cancel") {
+            @Override
+            public void onSubmit() {
+                setResponsePage(HomePage.class);
+            }
+            
+        };
+        cancelButton.setDefaultFormProcessing(false);
+        form.add(cancelButton);
         
-        form.add(new Button("cancel") {
-           @Override
-           public void onSubmit() {
-               setResponsePage(HomePage.class);
-           }
-        });
         add(form);
     }
 }

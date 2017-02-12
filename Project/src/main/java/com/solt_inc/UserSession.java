@@ -1,15 +1,18 @@
 package com.solt_inc;
 
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.protocol.http.WebSession;
 import org.apache.wicket.request.Request;
 
+import com.solt_inc.model.dao.FollowDao;
 import com.solt_inc.model.dao.UserDao;
 import com.solt_inc.model.entity.UserEntity;
 
 public class UserSession extends WebSession {
     private static final long serialVersionUID = 8771090050951362338L;
     
-    private UserEntity user;
+    private IModel<UserEntity> user;
+    private FollowDao followDao;
     
     public UserSession(Request request) {
         super(request);
@@ -22,14 +25,18 @@ public class UserSession extends WebSession {
     }
     
     public int getMyUserId() {
-        return user.getId();
+        return user.getObject().getId();
     }
     
     public String getMyName() {
-        return user.getName();
+        return user.getObject().getFirstName();
     }
     
-    public boolean isFollower() {
-        return true;
+    public boolean isFollower(IModel<Integer> followerId) {
+        
+        if(this.followDao == null) {
+            this.followDao = new FollowDao();
+        }
+        return followDao.checkFollower(user.getObject().getId(), followerId.getObject());
     }
 }

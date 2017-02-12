@@ -6,7 +6,8 @@ import java.util.List;
 public class UserEntity implements Serializable {
     
     private int   id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String photoName;
     private String age;
     private String jobCategory;
@@ -28,12 +29,19 @@ public class UserEntity implements Serializable {
         this.id = id;
     }
     
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return this.firstName;
     }
     
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
     
     public String getPhotoName() {

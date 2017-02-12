@@ -71,7 +71,7 @@ public class ProfilePage extends WebPage {
                 
                 String followIcon;
                 session = (UserSession)Session.get();
-                if(session.isFollower()) {
+                if(session.isFollower(userId)) {
                     followIcon = "path.icon.follow";
                 } else {
                     followIcon = "path.icon.unfollow";

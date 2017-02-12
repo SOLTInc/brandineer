@@ -14,29 +14,24 @@ import com.solt_inc.model.entity.UserEntity;
 
 public class UserDao {
 
-    public IModel<UserEntity> getUserProfile(IModel<Integer> id) {
+    public IModel<UserEntity> getUserProfile(int id) {
         
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT * FROM project_db.user WHERE USER_ID = ?";
+        String sql = "SELECT * FROM project_db.user WHERE ID = ?";
         
         UserEntity user = new UserEntity();
         IModel<UserEntity> userModel;
-//        int userIdNo = -1;
-//        try {
-//            userIdNo = Integer.parseInt(id.getObject());
-//        } catch(NumberFormatException e) {
-//            e.printStackTrace();
-//        }
         
         try(Connection con = cm.getConnection();
                 PreparedStatement pstmt = con.prepareStatement(sql)) {
             
-            pstmt.setInt(1, id.getObject());
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             
             if(rs.next()) {
-                user.setId(rs.getInt("USER_ID"));
-                user.setName(rs.getString("NAME"));
+                user.setId(rs.getInt("ID"));
+                user.setFirstName(rs.getString("FIRST_NAME"));
+                user.setLastName(rs.getString("LAST_NAME"));
                 user.setPhotoName(rs.getString("ICON_PATH"));
                 user.setAge(rs.getString("AGE"));
                 user.setJobCategory(rs.getString("JOB_CATEGORY"));
@@ -49,58 +44,25 @@ public class UserDao {
         userModel = new CompoundPropertyModel<UserEntity>(user);
         return userModel;
     }
-    
-    // TEST用
-    public UserEntity getUserProfile(int userId) {
         
-        ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT * FROM project_db.user WHERE USER_ID = ?";
-        
-        UserEntity user = new UserEntity();
-        
-        try(Connection con = cm.getConnection();
-                PreparedStatement pstmt = con.prepareStatement(sql)) {
-            
-            pstmt.setInt(1, userId);
-            ResultSet rs = pstmt.executeQuery();
-            
-            if(rs.next()) {	
-                user.setId(rs.getInt("USER_ID"));
-                user.setName(rs.getString("NAME"));
-                user.setPhotoName(rs.getString("ICON_PATH"));
-                user.setAge(rs.getString("AGE"));
-                user.setJobCategory(rs.getString("JOB_CATEGORY"));
-                user.setLocation(rs.getString("LOCATION"));
-                user.setAnnualIncome(rs.getString("ANNUAL_INCOME"));				
-            }
-            
-            if(user.getName() == null) {
-                System.exit(0);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return user;
-    }
-    
     public int insert(UserEntity user) {
 
         ConnectionManager cm = ConnectionManager.getInstance();
         String sql = "INSERT INTO project_db.user"
-                + " (NAME, ICON_PATH, AGE, JOB_CATEGORY, LOCATION, ANNUAL_INCOME)"
+                + " (FIRST_NAME, LAST_NAME, ICON_PATH, AGE, JOB_CATEGORY, LOCATION, ANNUAL_INCOME)"
                 + " VALUES (?, ?, ?, ?, ?, ?)";
         int result = 0;
         
         try(Connection con = cm.getConnection();
                 PreparedStatement pstmt = con.prepareStatement(sql)) {
 
-            pstmt.setString(1, user.getName());
-            pstmt.setString(2, user.getPhotoName());
-            pstmt.setString(3, user.getAge());
-            pstmt.setString(4, user.getJobCategory());
-            pstmt.setString(5, user.getLocation());
-            pstmt.setString(6, user.getAnnualIncome());
+            pstmt.setString(1, user.getFirstName());
+            pstmt.setString(2, user.getLastName());
+            pstmt.setString(3, user.getPhotoName());
+            pstmt.setString(4, user.getAge());
+            pstmt.setString(5, user.getJobCategory());
+            pstmt.setString(6, user.getLocation());
+            pstmt.setString(7, user.getAnnualIncome());
             result = pstmt.executeUpdate();
             
         } catch (SQLException e) {
@@ -115,7 +77,7 @@ public class UserDao {
         List<Integer> userIdList = new ArrayList<Integer>();
         
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT USER_ID FROM project_db.user";
+        String sql = "SELECT ID FROM project_db.user";
         
         try(Connection con = cm.getConnection();
                 PreparedStatement pstmt = con.prepareStatement(sql)) {
@@ -123,7 +85,7 @@ public class UserDao {
             ResultSet rs = pstmt.executeQuery();
             
             while(rs.next()) {
-                int userId = rs.getInt("USER_ID");
+                int userId = rs.getInt("ID");
                 userIdList.add(userId);
             }
         } catch (SQLException e) {

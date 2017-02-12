@@ -5,10 +5,21 @@
     <form wicket:id="form">
       <table>
         <tr>
-          <td>name:<input type="text" wicket:id="name"></td>
+          <td>First Name : <input type="text" wicket:id="firstName"></td>
+          <td>Last Name : <input type="text" wicket:id="lastName"></td>
         </tr>
         <tr>
-          <td>photo:<input type="text" wicket:id="photo"></td>
+          <td>
+            <span wicket:id="fileUpload">
+            </span>
+          </td>
+<!--
+          <td><img src="" wicket:id="photoImage" width="150" height="120" style="border: solid 2px;"></td>
+          <td>photo:
+            <input type="file" wicket:id="photo">
+            <input type="button" wicket:id="uploadButton" value="upload">
+          </td>
+-->
         </tr>
         <tr>
           <td>age:<input type="text" wicket:id="age"></td>

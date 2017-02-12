@@ -22,10 +22,11 @@ public class ProfilePanel extends Panel {
         
         super(id, userId);
         UserDao userDao = new UserDao();
-        this.userModel = userDao.getUserProfile(userId);
+        this.userModel = userDao.getUserProfile(userId.getObject());
         this.settings();
         
-        form.add(new Label("name"));
+        form.add(new Label("firstName"));
+        form.add(new Label("lastName"));
         form.add(photo);
         form.add(new Label("age"));
         form.add(new Label("jobCategory"));
