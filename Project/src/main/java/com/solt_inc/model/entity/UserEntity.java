@@ -1,12 +1,19 @@
 package com.solt_inc.model.entity;
 
-public class UserEntity {
-    private String name;
-    private String icon;
+import java.io.Serializable;
+import java.util.List;
+
+public class UserEntity implements Serializable {
+    
+    private int   id;
+    private String firstName;
+    private String lastName;
+    private String photoName;
     private String age;
     private String jobCategory;
     private String location;
     private String annualIncome;
+    private List<HobbyEntity> hobbyList;
     
     public UserEntity() {
     }
@@ -14,20 +21,35 @@ public class UserEntity {
     public UserEntity(String name) {
     }
     
-    public String getName() {
-        return name;
+    public int getId() {
+        return this.id;
     }
     
-    public void setName(String name) {
-        this.name = name;
+    public void setId(int id) {
+        this.id = id;
     }
     
-    public String getIcon() {
-        return icon;
+    public String getFirstName() {
+        return this.firstName;
     }
     
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    
+    public String getPhotoName() {
+        return photoName;
+    }
+    
+    public void setPhotoName(String photoName) {
+        this.photoName = photoName;
     }
     
     public String getAge() {
@@ -60,5 +82,15 @@ public class UserEntity {
     
     public void setAnnualIncome(String annualIncome) {
         this.annualIncome = annualIncome;
+    }
+    
+    public List<HobbyEntity> getHobbyList() {
+        return this.hobbyList;
+    }
+    public void setHobbyList(String hobbyName, String hobbyImage) {
+         
+        HobbyEntity hobby = new HobbyEntity(hobbyName, hobbyImage);
+        
+        this.hobbyList.add(hobby);
     }
 }

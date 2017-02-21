@@ -1,6 +1,8 @@
 package com.solt_inc.model.entity;
 
-public class HobbyEntity {
+import java.io.Serializable;
+
+public class HobbyEntity implements Serializable {
     
     private String hobbyName;
     private String hobbyImage;
@@ -8,7 +10,10 @@ public class HobbyEntity {
     public HobbyEntity() {
     }
     
-    public HobbyEntity(String name) {
+    public HobbyEntity(String hobbyName, String hobbyImage) {
+        
+        this.hobbyName = hobbyName;
+        this.hobbyImage = hobbyImage;
         
     }
     
