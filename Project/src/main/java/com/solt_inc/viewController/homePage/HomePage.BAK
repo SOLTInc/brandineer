@@ -7,10 +7,10 @@
   <body>
     <form wicket:id="detail">
       <span>ID</span><input type="text" wicket:id="id" />
-      <input type="submit" value="Ú×">
+      <input type="submit" value="è©³ç´°">
     </form>
     <form wicket:id="registration">
-      <input type="submit" value="V‹K“o˜^">
+      <input type="submit" value="æ–°è¦ç™»éŒ²">
     </form>
   </body>
 </html>

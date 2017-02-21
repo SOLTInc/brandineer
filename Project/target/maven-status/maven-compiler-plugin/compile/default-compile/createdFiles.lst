@@ -1,0 +1,14 @@
+com\solt_inc\viewController\homePage\HomePage$1.class
+com\solt_inc\viewController\profilePage\ProfilePage.class
+com\solt_inc\model\dao\ConnectionManager.class
+com\solt_inc\viewController\registrationProfile\RegistrationUserPage.class
+com\solt_inc\model\entity\UserEntity.class
+com\solt_inc\viewController\homePage\HomePage.class
+com\solt_inc\viewController\registrationProfile\RegistrationUserPage$1.class
+com\solt_inc\viewController\homePage\HomePage$2.class
+com\solt_inc\viewController\profilePage\ProfilePage$2.class
+com\solt_inc\model\dao\HobbyDao.class
+com\solt_inc\viewController\profilePage\ProfilePage$1.class
+com\solt_inc\model\dao\UserDao.class
+com\solt_inc\model\entity\HobbyEntity.class
+com\solt_inc\WicketApplication.class
