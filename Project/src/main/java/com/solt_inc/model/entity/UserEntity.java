@@ -13,8 +13,7 @@ public class UserEntity implements Serializable {
     private String jobCategory;
     private String location;
     private String annualIncome;
-    private List<HobbyEntity> hobbyList;
-    
+
     public UserEntity() {
     }
     
@@ -82,15 +81,5 @@ public class UserEntity implements Serializable {
     
     public void setAnnualIncome(String annualIncome) {
         this.annualIncome = annualIncome;
-    }
-    
-    public List<HobbyEntity> getHobbyList() {
-        return this.hobbyList;
-    }
-    public void setHobbyList(String hobbyName, String hobbyImage) {
-         
-        HobbyEntity hobby = new HobbyEntity(hobbyName, hobbyImage);
-        
-        this.hobbyList.add(hobby);
     }
 }
