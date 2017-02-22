@@ -2,6 +2,7 @@ package com.solt_inc.model.dto;
 
 import java.io.Serializable;
 import java.util.List;
+import com.solt_inc.model.entity.*;
 
 public class UserDto implements Serializable {
     
