@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 <head>
-<style>
-.feedbackPanelINFO {
-    color: green;
-}
-.feedbackPanelERROR {
-    color: red;
-}
-</style>
 </head>
 <body>
-    <h1>Wicket file upload example</h1>
 
-    <div wicket:id="feedback"></div>
-    <wicket:panel>
+  <wicket:panel>
+  fileName :
+  &nbsp;
+  <span wicket:id="fileName"></span>
+  <br />
+  finelPath :
+  &nbsp;
+  <span wicket:id="filePath"></span>
+
     <form wicket:id="form">
-        <p>
-            <label>Select file :</label>
-            <span wicket:id="dir"></span>
-            <input wicket:id="fileUpload" size="40" type="file"/>
-            <input type="submit" value="Upload" wicket:id="button"/>
-        </p>
+    
+      <img src="" wicket:id="image" width="150" height="120">
+      <input wicket:id="fileUpload" size="40" type="file"/>
+      <a wicket:id="selectFileButton">[[select file]]</a>
+
+      <input type="submit" value="Upload" wicket:id="button"/>
+
     </form>
-    </wicket:panel>
+  </wicket:panel>
 
 </body>
 </html>

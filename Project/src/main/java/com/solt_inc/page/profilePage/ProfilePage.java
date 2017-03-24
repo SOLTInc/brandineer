@@ -25,59 +25,63 @@ import com.solt_inc.page.profilePage.panel.profile.ProfilePanel;
 import com.solt_inc.page.profilePage.panel.skillSet.SkillSetPanel;
 
 public class ProfilePage extends WebPage {
-    
-    protected UserSession       session;
-    private Form<?>             form;
-    private IModel<String>      followImagePath;
-    private Link<Void>          mailLink;
-    private WebMarkupContainer  mailIcon;
-    private Link<Void>          followLink;
-    private WebMarkupContainer  followIcon;
-    private ProfilePanel        profile;
-    private List<ITab>          tabs;
-    private Button              backButton;
-    
+
+    protected UserSession session;
+    private Form<?> form;
+    private IModel<Integer> userId;
+    private IModel<String> followImagePath;
+    private Link<Void> mailLink;
+    private WebMarkupContainer mailIcon;
+    private Link<Void> followLink;
+    private WebMarkupContainer followIcon;
+    private ProfilePanel profilePanel;
+    private AjaxTabbedPanel<ITab> tabsPanel;
+    private List<ITab> tabs;
+    private Button backButton;
+
     public ProfilePage(IModel<Integer> userId) {
-        
+
         super(userId);
-        this.settings(userId);
-        
+
+        this.userId = userId;
+        this.settings();
+
         mailLink.add(mailIcon);
         form.add(mailLink);
         followLink.add(followIcon);
         form.add(followLink);
-        form.add(profile);
-        form.add(new AjaxTabbedPanel<ITab>("tabs", tabs));
+        form.add(profilePanel);
+        form.add(tabsPanel);
         form.add(backButton);
         add(form);
     }
-    
-    private void settings(IModel<Integer> userId) {
-        
+
+    private void settings() {
+
         this.form = new Form("form");
-        
+
         this.mailLink = new Link<Void>("mail") {
             @Override
             public void onClick() {
                 setResponsePage(MailPage.class);
             }
-         };
+        };
         this.mailIcon = new WebMarkupContainer("mailIcon");
         this.mailIcon.add(new AttributeModifier("src", getString("path.icon.mail")));
-        
+
         this.followImagePath = new Model<String>() {
             @Override
             public String getObject() {
-                
+
                 String followIcon;
-                session = (UserSession)Session.get();
-                if(session.isFollower(userId)) {
+                session = (UserSession) Session.get();
+                if (session.isFollower(userId)) {
                     followIcon = "path.icon.follow";
                 } else {
                     followIcon = "path.icon.unfollow";
                 }
                 return followIcon;
-                
+
             }
         };
         this.followLink = new Link<Void>("follow") {
@@ -88,36 +92,37 @@ public class ProfilePage extends WebPage {
         };
         this.followIcon = new WebMarkupContainer("followIcon");
         this.followIcon.add(new AttributeModifier("src", getString(followImagePath.getObject())));
-        
-        this.profile = new ProfilePanel("profile", userId);
-        
+
+        this.profilePanel = new ProfilePanel("profilePanel", userId);
         this.tabs = new ArrayList<ITab>();
-        tabs.add(new ProfileTab(new Model<String>("hobby"), userId) {
+        tabs.add(new ProfileTab(new Model<String>("Profile"), userId) {
             @Override
             public Panel getPanel(String panelId) {
-                return new HobbyPanel(panelId, this.getUser());
+                return new HobbyPanel(panelId, userId);
             }
         });
-        tabs.add(new ProfileTab(new Model<String>("portfolio"), userId) {
+        tabs.add(new ProfileTab(new Model<String>("SillSet"), userId) {
             @Override
             public Panel getPanel(String panelId) {
-                return new SkillSetPanel(panelId,this.getUser());
+                return new SkillSetPanel(panelId, userId);
             }
         });
-        
+        this.tabsPanel = new AjaxTabbedPanel<ITab>("tabs", tabs);
+
         this.backButton = new Button("back") {
-            
+
             @Override
             public void onSubmit() {
                 setResponsePage(HomePage.class);
             }
         };
     }
+
     public abstract class ProfileTab implements ITab {
-        
+
         private IModel<String> title;
         private IModel<Integer> userId;
-        
+
         public ProfileTab(IModel<String> title, IModel<Integer> userId) {
             this.title = title;
             this.userId = userId;
@@ -131,19 +136,11 @@ public class ProfilePage extends WebPage {
 
         @Override
         abstract public WebMarkupContainer getPanel(String containerId);
+
         @Override
         public boolean isVisible() {
             // TODO 自動生成されたメソッド・スタブ
             return true;
         }
-        
-        public IModel<Integer> getUser() {
-            return this.userId;
-        }
-        
-        public void setUser(IModel<Integer> userId) {
-            this.userId = userId;
-        }
-        
     }
 }

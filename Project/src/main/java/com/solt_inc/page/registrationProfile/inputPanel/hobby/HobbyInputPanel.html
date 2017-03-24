@@ -2,16 +2,42 @@
 <html xmlns:wicket="http://wicket.apache.org">
   <body>    
     <wicket:panel>
-    <form wicket:id="form">
-      <table>
-        <tr>
-          <td>hobby_name<input type="text" wicket:id="hobby_name"></td>
-        </tr>
-        <tr>
-          <td>hobby_image<input type="text" wicket:id="hobby_image"></td>
-        </tr>
-      </table>
-    </form>
+      <form wicket:id="form">
+        <div wicket:id="wmc">
+         
+          <table wicket:id="hobbyList">
+            <tr>
+              <td>
+                <br/>
+                <span  wicket:id="title">hobby No.0</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                hobby_name :
+                <input type="text" wicket:id="hobbyName">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                hobby_Description :
+                <textarea wicket:id="hobbyDescription">
+                </textarea>
+              </td>
+            </tr>
+             
+            <tr>
+              <td>
+                <span wicket:id="hobbyImage">hobby_image</span>
+              </td>
+            </tr>
+           
+          </table>
+        </div>
+        <a wicket:id="addHobbyList">
+        [add Hobby]
+        </a>
+      </form>
     </wicket:panel>
   </body>
 </html>

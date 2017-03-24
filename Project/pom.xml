@@ -41,7 +41,7 @@
 		</license>
 	</licenses>
 	<properties>
-		<wicket.version>7.0.0</wicket.version>
+		<wicket.version>8.0.0-M4</wicket.version>
 		<jetty9.version>9.3.12.v20160915</jetty9.version>
 		<log4j.version>2.7</log4j.version>
 		<junit.version>4.12</junit.version>

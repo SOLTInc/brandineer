@@ -7,84 +7,148 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.IModel;
-
 import com.solt_inc.model.entity.UserEntity;
 
 public class UserDao {
 
-    public IModel<UserEntity> getUserProfile(int id) {
-        
+    public UserEntity getUser(int userId) {
+
+        UserEntity user = new UserEntity();
+
         ConnectionManager cm = ConnectionManager.getInstance();
         String sql = "SELECT * FROM project_db.user WHERE ID = ?";
-        
-        UserEntity user = new UserEntity();
-        IModel<UserEntity> userModel;
-        
-        try(Connection con = cm.getConnection();
-                PreparedStatement pstmt = con.prepareStatement(sql)) {
-            
-            pstmt.setInt(1, id);
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
-            
-            if(rs.next()) {
+
+            if (rs.next()) {
+
                 user.setId(rs.getInt("ID"));
                 user.setFirstName(rs.getString("FIRST_NAME"));
                 user.setLastName(rs.getString("LAST_NAME"));
-                user.setPhotoName(rs.getString("ICON_PATH"));
-                user.setAge(rs.getString("AGE"));
+                user.setPhotoName(rs.getString("PHOTO_NAME"));
+                user.setSqlBirthday(rs.getDate("BIRTHDAY"));
                 user.setJobCategory(rs.getString("JOB_CATEGORY"));
                 user.setLocation(rs.getString("LOCATION"));
-                user.setAnnualIncome(rs.getString("ANNUAL_INCOME"));				
+                user.setCompany(rs.getString("COMPANY"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        userModel = new CompoundPropertyModel<UserEntity>(user);
-        return userModel;
+        return user;
     }
-        
-    public int insert(UserEntity user) {
 
+    public boolean insert(UserEntity user) {
+
+        // UserEntity user = userModel.getObject();
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "INSERT INTO project_db.user"
-                + " (FIRST_NAME, LAST_NAME, ICON_PATH, AGE, JOB_CATEGORY, LOCATION, ANNUAL_INCOME)"
-                + " VALUES (?, ?, ?, ?, ?, ?)";
-        int result = 0;
-        
-        try(Connection con = cm.getConnection();
-                PreparedStatement pstmt = con.prepareStatement(sql)) {
 
-            pstmt.setString(1, user.getFirstName());
-            pstmt.setString(2, user.getLastName());
-            pstmt.setString(3, user.getPhotoName());
-            pstmt.setString(4, user.getAge());
-            pstmt.setString(5, user.getJobCategory());
-            pstmt.setString(6, user.getLocation());
-            pstmt.setString(7, user.getAnnualIncome());
+        StringBuffer sql = new StringBuffer();
+        int count = 0;
+        sql.append("INSERT INTO project_db.user(");
+        if (user.getFirstName() != null) {
+            sql.append("FIRST_NAME,");
+            count++;
+        }
+        if (user.getLastName() != null) {
+            sql.append("LAST_NAME,");
+            count++;
+        }
+        if (user.getPhotoName() != null) {
+            sql.append("PHOTO_NAME,");
+            count++;
+        }
+        if (user.getBirthday() != null) {
+            sql.append("BIRTHDAY,");
+            count++;
+        }
+        if (user.getCompany() != null) {
+            sql.append("COMPANY,");
+            count++;
+        }
+        if (user.getJobCategory() != null) {
+            sql.append("JOB_CATEGORY,");
+            count++;
+        }
+        if (user.getLocation() != null) {
+            sql.append("LOCATION,");
+            count++;
+        }
+        sql.delete(sql.length() - 1, sql.length());
+        sql.append(") VALUES (");
+        for (int i = 0; i < count; i++) {
+            sql.append("?,");
+        }
+        sql.delete(sql.length() - 1, sql.length());
+        sql.append(")");
+        // String sql = "INSERT INTO project_db.user"
+        // + " (FIRST_NAME, LAST_NAME, PHOTO_NAME, BIRTHDAY, COMPANY,
+        // JOB_CATEGORY, LOCATION)"
+        // + " VALUES (?, ?, ?, ?, ?, ?)";
+        int result = 0;
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql.toString())) {
+
+            // pstmt.setString(1, user.getFirstName());
+            // pstmt.setString(2, user.getLastName());
+            // pstmt.setString(3, user.getPhotoName());
+            // pstmt.setDate(4, user.getSqlBirthday());
+            // pstmt.setString(5, user.getCompany());
+            // pstmt.setString(6, user.getJobCategory());
+            // pstmt.setString(7, user.getLocation());
+            count = 0;
+            if (user.getFirstName() != null) {
+                count++;
+                pstmt.setString(count, user.getFirstName());
+            }
+            if (user.getLastName() != null) {
+                count++;
+                pstmt.setString(count, user.getLastName());
+            }
+            if (user.getPhotoName() != null) {
+                count++;
+                pstmt.setString(count, user.getPhotoName());
+            }
+            if (user.getBirthday() != null) {
+                count++;
+                pstmt.setDate(count, user.getSqlBirthday());
+            }
+            if (user.getCompany() != null) {
+                count++;
+                pstmt.setString(count, user.getCompany());
+            }
+            if (user.getJobCategory() != null) {
+                count++;
+                pstmt.setString(count, user.getJobCategory());
+            }
+            if (user.getLocation() != null) {
+                count++;
+                pstmt.setString(count, user.getLocation());
+            }
+
             result = pstmt.executeUpdate();
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
-        return result;
+
+        return result == 0 ? false : true;
     }
-    
-    public List<Integer> getAllUserId() {
-        
+
+    public List<Integer> getAllUsersId() {
+
         List<Integer> userIdList = new ArrayList<Integer>();
-        
+
         ConnectionManager cm = ConnectionManager.getInstance();
         String sql = "SELECT ID FROM project_db.user";
-        
-        try(Connection con = cm.getConnection();
-                PreparedStatement pstmt = con.prepareStatement(sql)) {
-            
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
             ResultSet rs = pstmt.executeQuery();
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 int userId = rs.getInt("ID");
                 userIdList.add(userId);
             }
@@ -92,6 +156,27 @@ public class UserDao {
             e.printStackTrace();
         }
         return userIdList;
+    }
+
+    public int getUserId(String firstName) {
+
+        int userId = 0;
+
+        ConnectionManager cm = ConnectionManager.getInstance();
+        String sql = "SELECT Id FROM project_db.user WHERE FIRST_NAME = ?";
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+            pstmt.setString(1, firstName);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                userId = rs.getInt("ID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userId;
     }
 
 }

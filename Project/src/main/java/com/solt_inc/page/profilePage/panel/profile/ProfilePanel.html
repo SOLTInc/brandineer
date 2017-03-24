@@ -3,29 +3,44 @@
   <body>    
     <wicket:panel>
     <form wicket:id="form">
-      <span wicket:id="firstName"> in FirstName </span>&nbsp;<span wicket:id="lastName"> in LastName </span>'s profile
+      <span wicket:id="firstName"> in FirstName </span>
+      &nbsp;
+      <span wicket:id="lastName"> in LastName </span>'s profile
         <table>
-         <tr>
-          <td><img wicket:id="photo" width="150" height="120" /></td>
-          <td>
-            <table>
-              <tr>
-                <td>age:<span wicket:id="age"> in age </span></td>
-              </tr>
-              <tr>
-                <td>job_category:<span wicket:id="jobCategory"> in job category </span></td>
-              </tr>
-              <tr>
-                <td>location:<span wicket:id="location"> in location </span></td>
-              </tr>
-              <tr>
-                <td>annual_income:<span wicket:id="annualIncome"> in annual income </span></td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
-    </form>
+          <tr>
+            <td><img wicket:id="photo" width="150" height="120" /></td>
+            <td>
+              <table>
+                <tr>
+                  <td>
+                    age:
+                    <span wicket:id="age"> in age </span>
+                    (<span wicket:id="birthday">in birthday </span>)
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    company:
+                    <span wicket:id="company"> in company </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    job_category:
+                    <span wicket:id="jobCategory"> in job category </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    location:
+                    <span wicket:id="location"> in location </span>
+                  </td>
+                </tr>
+             </table>
+            </td>
+          </tr>
+        </table>
+       </form>
     </wicket:panel>
   </body>
 </html>
