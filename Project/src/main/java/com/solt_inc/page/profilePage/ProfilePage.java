@@ -36,6 +36,7 @@ public class ProfilePage extends WebPage {
     private AjaxTabbedPanel<ITab> tabsPanel;
     private List<ITab> tabs;
     private Button backButton;
+    private Link<?> backLink;
 
     public ProfilePage(IModel<Integer> userId) {
 
@@ -50,7 +51,7 @@ public class ProfilePage extends WebPage {
         add(followLink);
         add(profilePanel);
         add(tabsPanel);
-        add(backButton);
+        add(backLink);
     }
 
     private void settings() {
@@ -96,7 +97,7 @@ public class ProfilePage extends WebPage {
 
         this.profilePanel = new ProfilePanel("profilePanel", userId);
         this.tabs = new ArrayList<ITab>();
-        tabs.add(new ProfileTab(new Model<String>("Profile"), userId) {
+        tabs.add(new ProfileTab(new Model<String>("hobby"), userId) {
             @Override
             public Panel getPanel(String panelId) {
                 return new HobbyPanel(panelId, userId);
@@ -110,14 +111,7 @@ public class ProfilePage extends WebPage {
         });
         this.tabsPanel = new AjaxTabbedPanel<ITab>("tabs", tabs);
 
-        this.backButton = new Button("back") {
-
-            @Override
-            public void onSubmit() {
-                setResponsePage(HomePage.class);
-            }
-        };
-        Link backLink = new Link<Void>("backlink") {
+        backLink = new Link<Void>("backLink") {
 
             @Override
             public void onClick() {
@@ -125,7 +119,6 @@ public class ProfilePage extends WebPage {
             }
 
         };
-        add(backLink);
     }
 
     public abstract class ProfileTab implements ITab {
