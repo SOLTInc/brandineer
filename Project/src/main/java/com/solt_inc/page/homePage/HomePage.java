@@ -13,7 +13,7 @@ import com.solt_inc.model.dao.UserDao;
 import com.solt_inc.model.entity.UserEntity;
 import com.solt_inc.page.profilePage.ProfilePage;
 import com.solt_inc.page.registrationProfile.RegistrationUserPage;
-import com.solt_inc.test.page.TestPage;
+import com.solt_inc.rtest.page.TestTopPage;
 
 public class HomePage extends WebPage {
 
@@ -45,7 +45,7 @@ public class HomePage extends WebPage {
     private Form<?> testForm = new Form("test") {
         @Override
         protected void onSubmit() {
-            setResponsePage(TestPage.class);
+            setResponsePage(TestTopPage.class);
         }
     };
 
