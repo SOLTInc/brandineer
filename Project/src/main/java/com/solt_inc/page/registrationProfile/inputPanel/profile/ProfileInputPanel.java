@@ -9,8 +9,8 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
-import com.solt_inc.component.commonPanel.dateField.DateFieldPanel;
-import com.solt_inc.component.commonPanel.fileUpload.FileUploadPanel;
+import com.solt_inc.component.panel.dateField.DateFieldPanel;
+import com.solt_inc.component.panel.fileUpload.FileUploadPanel;
 import com.solt_inc.model.dto.UserDto;
 import com.solt_inc.model.entity.UserEntity;
 

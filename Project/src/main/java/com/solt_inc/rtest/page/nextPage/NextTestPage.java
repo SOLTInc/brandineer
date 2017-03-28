@@ -1,4 +1,4 @@
-package com.solt_inc.test.page.nextPage;
+package com.solt_inc.rtest.page.nextPage;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -9,7 +9,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
-import com.solt_inc.test.page.TestPage;
+import com.solt_inc.rtest.page.testPage.TestPage;
 
 public class NextTestPage extends WebPage {
     private static final long serialVersionUID = 7514382722447820L;

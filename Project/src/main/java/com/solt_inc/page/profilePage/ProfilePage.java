@@ -11,7 +11,6 @@ import org.apache.wicket.extensions.markup.html.tabs.ITab;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Button;
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
@@ -27,7 +26,6 @@ import com.solt_inc.page.profilePage.panel.skillSet.SkillSetPanel;
 public class ProfilePage extends WebPage {
 
     protected UserSession session;
-    private Form<?> form;
     private IModel<Integer> userId;
     private IModel<String> followImagePath;
     private Link<Void> mailLink;
@@ -47,18 +45,15 @@ public class ProfilePage extends WebPage {
         this.settings();
 
         mailLink.add(mailIcon);
-        form.add(mailLink);
+        add(mailLink);
         followLink.add(followIcon);
-        form.add(followLink);
-        form.add(profilePanel);
-        form.add(tabsPanel);
-        form.add(backButton);
-        add(form);
+        add(followLink);
+        add(profilePanel);
+        add(tabsPanel);
+        add(backButton);
     }
 
     private void settings() {
-
-        this.form = new Form("form");
 
         this.mailLink = new Link<Void>("mail") {
             @Override

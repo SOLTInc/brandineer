@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -24,7 +23,6 @@ public class ProfilePanel extends Panel {
     private IModel<String> company;
     private IModel<String> jobCategory;
     private IModel<String> location;
-    private Form<?> form;
     private WebMarkupContainer photo;
 
     public ProfilePanel(String id, IModel<Integer> userId) {
@@ -36,51 +34,49 @@ public class ProfilePanel extends Panel {
         this.settings();
 
         if (this.firstName != null) {
-            form.add(new Label("firstName", firstName));
+            add(new Label("firstName", firstName));
         } else {
-            form.add(new Label("firtsName").setVisible(false));
+            add(new Label("firtsName").setVisible(false));
         }
         if (this.lastName != null) {
-            form.add(new Label("lastName", lastName));
+            add(new Label("lastName", lastName));
         } else {
-            form.add(new Label("lastName").setVisible(false));
+            add(new Label("lastName").setVisible(false));
         }
         if (this.photo != null) {
-            form.add(photo);
+            add(photo);
         } else {
-            form.add(new Label("photo").setVisible(false));
+            add(new Label("photo").setVisible(false));
         }
         if (this.age != null) {
-            form.add(new Label("age", age));
+            add(new Label("age", age));
         } else {
-            form.add(new Label("age").setVisible(false));
+            add(new Label("age").setVisible(false));
         }
         if (this.birthday != null) {
-            form.add(new Label("birthday", birthday));
+            add(new Label("birthday", birthday));
         } else {
-            form.add(new Label("birthday").setVisible(false));
+            add(new Label("birthday").setVisible(false));
         }
         if (this.company != null) {
-            form.add(new Label("company", company));
+            add(new Label("company", company));
         } else {
-            form.add(new Label("company").setVisible(false));
+            add(new Label("company").setVisible(false));
         }
         if (this.jobCategory != null) {
-            form.add(new Label("jobCategory", jobCategory));
+            add(new Label("jobCategory", jobCategory));
         } else {
-            form.add(new Label("jobCategory").setVisible(false));
+            add(new Label("jobCategory").setVisible(false));
         }
         if (this.location != null) {
-            form.add(new Label("location", location));
+            add(new Label("location", location));
         } else {
-            form.add(new Label("location").setVisible(false));
+            add(new Label("location").setVisible(false));
         }
-        add(form);
     }
 
     private void settings() {
         UserEntity userEntity = userModel.getObject();
-        this.form = new Form("form");
         this.firstName = new Model<String>(userEntity.getFirstName());
         this.lastName = new Model<String>(userEntity.getLastName());
         this.age = new Model<Integer>(userEntity.getAge());

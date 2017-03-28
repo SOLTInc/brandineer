@@ -1,4 +1,4 @@
-package com.solt_inc.component.commonPanel.dateField;
+package com.solt_inc.component.panel.dateField;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

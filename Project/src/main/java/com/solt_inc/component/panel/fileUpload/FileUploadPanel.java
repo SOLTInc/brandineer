@@ -1,4 +1,4 @@
-package com.solt_inc.component.commonPanel.fileUpload;
+package com.solt_inc.component.panel.fileUpload;
 
 import java.io.File;
 
