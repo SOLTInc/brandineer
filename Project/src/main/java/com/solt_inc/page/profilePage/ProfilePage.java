@@ -62,7 +62,10 @@ public class ProfilePage extends WebPage {
             }
         };
         this.mailIcon = new WebMarkupContainer("mailIcon");
-        this.mailIcon.add(new AttributeModifier("src", getString("path.icon.mail")));
+        // this.mailIcon.add(new AttributeModifier("src",
+        // getString("path.icon.mail")));
+
+        this.mailIcon.add(new AttributeModifier("src", "/img/icon/mail.png"));
 
         this.followImagePath = new Model<String>() {
             @Override
@@ -86,7 +89,10 @@ public class ProfilePage extends WebPage {
             }
         };
         this.followIcon = new WebMarkupContainer("followIcon");
-        this.followIcon.add(new AttributeModifier("src", getString(followImagePath.getObject())));
+        // this.followIcon.add(new AttributeModifier("src",
+        // getString(followImagePath.getObject())));
+
+        this.followIcon.add(new AttributeModifier("src", "/img/icon/follow.png"));
 
         this.profilePanel = new ProfilePanel("profilePanel", userId);
         this.tabs = new ArrayList<ITab>();
@@ -111,6 +117,15 @@ public class ProfilePage extends WebPage {
                 setResponsePage(HomePage.class);
             }
         };
+        Link backLink = new Link<Void>("backlink") {
+
+            @Override
+            public void onClick() {
+                setResponsePage(HomePage.class);
+            }
+
+        };
+        add(backLink);
     }
 
     public abstract class ProfileTab implements ITab {
