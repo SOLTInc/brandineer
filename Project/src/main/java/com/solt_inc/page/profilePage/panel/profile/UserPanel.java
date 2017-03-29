@@ -17,13 +17,29 @@ public class UserPanel extends Panel {
     private static final long serialVersionUID = 7514416342722447820L;
 
     private IModel<UserEntity> userModel = new Model<UserEntity>();
-    private IModel<String> firstName = new PropertyModel<String>(userModel, "firstName");
-    private IModel<String> lastName = new PropertyModel<String>(userModel, "lastName");
-    private IModel<Integer> age = new PropertyModel<Integer>(userModel, "age");
-    private IModel<LocalDate> birthday = new PropertyModel<LocalDate>(userModel, "birthday");
-    private IModel<String> company = new PropertyModel<String>(userModel, "company");
-    private IModel<String> jobCategory = new PropertyModel<String>(userModel, "jobCategory");
-    private IModel<String> location = new PropertyModel<String>(userModel, "location");
+    private IModel<String> firstNameModel = new PropertyModel<String>(userModel, "firstName");
+    private IModel<String> lastNameModel = new PropertyModel<String>(userModel, "lastName");
+    private IModel<String> photoNameModel = new PropertyModel<String>(userModel, "photoName");
+    private IModel<Integer> ageModel = new PropertyModel<Integer>(userModel, "age");
+    private IModel<LocalDate> birthdayModel = new PropertyModel<LocalDate>(userModel, "birthday");
+    private IModel<String> companyModel = new PropertyModel<String>(userModel, "company");
+    private IModel<String> jobCategoryModel = new PropertyModel<String>(userModel, "jobCategory");
+    private IModel<String> locationModel = new PropertyModel<String>(userModel, "location");
+
+    private Label firstName = new Label("firstName", firstNameModel);
+
+    private Label lastName = new Label("lastName", lastNameModel);
+
+    private Label age = new Label("age", ageModel);
+
+    private Label birthday = new Label("birthday", birthdayModel);
+
+    private Label company = new Label("company", companyModel);
+
+    private Label jobCategory = new Label("jobCategory", jobCategoryModel);
+
+    private Label location = new Label("location", locationModel);
+
     private WebMarkupContainer photo = new WebMarkupContainer("photo");
 
     public UserPanel(String id, IModel<Integer> userId) {
@@ -32,61 +48,45 @@ public class UserPanel extends Panel {
         UserDao userDao = new UserDao();
         UserEntity userEntity = userDao.getUser(userId.getObject());
         this.userModel.setObject(userEntity);
-        this.settings();
 
-        if (this.firstName != null) {
-            add(new Label("firstName", firstName));
-        } else {
-            add(new Label("firtsName").setVisible(false));
+        if (firstNameModel == null) {
+            firstName.setVisible(false);
         }
-        if (this.lastName != null) {
-            add(new Label("lastName", lastName));
-        } else {
-            add(new Label("lastName").setVisible(false));
-        }
-        if (this.photo != null) {
-            add(photo);
-        } else {
-            add(new Label("photo").setVisible(false));
-        }
-        if (this.age != null) {
-            add(new Label("age", age));
-        } else {
-            add(new Label("age").setVisible(false));
-        }
-        if (this.birthday != null) {
-            add(new Label("birthday", birthday));
-        } else {
-            add(new Label("birthday").setVisible(false));
-        }
-        if (this.company != null) {
-            add(new Label("company", company));
-        } else {
-            add(new Label("company").setVisible(false));
-        }
-        if (this.jobCategory != null) {
-            add(new Label("jobCategory", jobCategory));
-        } else {
-            add(new Label("jobCategory").setVisible(false));
-        }
-        if (this.location != null) {
-            add(new Label("location", location));
-        } else {
-            add(new Label("location").setVisible(false));
-        }
+        add(firstName);
 
-        photo.add(new AttributeModifier("src", getString("user.profile.photo.path") + userEntity.getPhotoName()));
-    }
+        if (lastNameModel == null) {
+            lastName.setVisible(false);
+        }
+        add(lastName);
 
-    private void settings() {
-        UserEntity userEntity = userModel.getObject();
-        // this.firstName = new Model<String>(userEntity.getFirstName());
-        this.lastName = new Model<String>(userEntity.getLastName());
-        this.age = new Model<Integer>(userEntity.getAge());
-        this.birthday = new Model<LocalDate>(userEntity.getBirthday());
-        this.company = new Model<String>(userEntity.getCompany());
-        this.jobCategory = new Model<String>(userEntity.getJobCategory());
-        this.location = new Model<String>(userEntity.getLocation());
+        photo.add(new AttributeModifier("src", getString("user.profile.photo.path") + photoNameModel.getObject()));
+        add(photo);
+
+        if (this.ageModel == null) {
+            age.setVisible(false);
+        }
+        add(age);
+
+        if (this.birthdayModel == null) {
+            birthday.setVisible(false);
+        }
+        add(birthday);
+
+        if (companyModel == null) {
+            company.setVisible(false);
+        }
+        add(company);
+
+        if (jobCategory == null) {
+            jobCategory.setVisible(false);
+        }
+        add(jobCategory);
+
+        if (location == null) {
+            location.setVisible(false);
+        }
+        add(location);
 
     }
+
 }
