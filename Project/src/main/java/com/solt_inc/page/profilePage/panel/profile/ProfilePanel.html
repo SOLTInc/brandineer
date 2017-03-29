@@ -2,43 +2,15 @@
 <html xmlns:wicket="http://wicket.apache.org">
   <body>    
     <wicket:panel>
-      <span wicket:id="firstName"> in FirstName </span>
-      &nbsp;
-      <span wicket:id="lastName"> in LastName </span>'s profile
-        <table>
-          <tr>
-            <td><img wicket:id="photo" width="150" height="120" /></td>
-            <td>
-              <table>
-                <tr>
-                  <td>
-                    age:
-                    <span wicket:id="age"> in age </span>
-                    (<span wicket:id="birthday">in birthday </span>)
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    company:
-                    <span wicket:id="company"> in company </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    job_category:
-                    <span wicket:id="jobCategory"> in job category </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    location:
-                    <span wicket:id="location"> in location </span>
-                  </td>
-                </tr>
-             </table>
-            </td>
-          </tr>
-        </table>
+            <span class="fa-stack fa-4x">
+                <i style="color:white" class="fa fa-circle fa-stack-2x"></i>
+                <img wicket:id="photo" class="fa fa-stack-2x img-circle"/>
+            </span><br/>
+            <h2><span wicket:id="firstName"> in FirstName </span>
+      &nbsp;<span wicket:id="lastName"> in LastName </span>(<span wicket:id="age"> in age </span>) <span style="display:none" wicket:id="birthday">in birthday </span></h2>
+            <h3><span wicket:id="jobCategory"> in job category </span>, <span wicket:id="company"> in company </span>, <span wicket:id="location"> in location </span></h3>
+            <br>
+            <a href="#about" class="btn btn-dark btn-lg">Mind</a>
     </wicket:panel>
   </body>
 </html>
