@@ -36,7 +36,7 @@ public class HobbyPanel extends Panel {
         HobbyDao hobbyDao = new HobbyDao();
         HobbyImageDao hobbyImageDao = new HobbyImageDao();
 
-        List<HobbyEntity> userHobbyList = hobbyDao.getUserHobby(userId);
+        List<HobbyEntity> userHobbyList = hobbyDao.getUserHobby(userId.getObject());
         for (HobbyEntity entity : userHobbyList) {
 
             HobbyDto hobbyDto = new HobbyDto();

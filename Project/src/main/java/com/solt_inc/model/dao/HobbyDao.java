@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.wicket.model.IModel;
-
 import com.solt_inc.model.entity.HobbyEntity;
 
 public class HobbyDao {
@@ -45,7 +43,7 @@ public class HobbyDao {
         return hobbyList;
     }
 
-    public List<HobbyEntity> getUserHobby(IModel<Integer> userId) {
+    public List<HobbyEntity> getUserHobby(int userId) {
 
         ConnectionManager cm = ConnectionManager.getInstance();
         String sql = "SELECT * FROM hobby WHERE USER_ID = ?";
@@ -54,7 +52,7 @@ public class HobbyDao {
 
         try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 
-            pstmt.setInt(1, userId.getObject());
+            pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
