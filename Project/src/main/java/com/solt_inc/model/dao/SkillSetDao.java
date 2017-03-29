@@ -16,7 +16,7 @@ public class SkillSetDao {
     public List<SkillSetEntity> getAllSkillSets() {
 
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT * FROM skill";
+        String sql = "SELECT * FROM skillset";
 
         List<SkillSetEntity> skillList = new ArrayList<SkillSetEntity>();
 
@@ -51,7 +51,7 @@ public class SkillSetDao {
     public List<SkillSetEntity> getSkillSet(IModel<Integer> userId) {
 
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT * FROM skill WHERE USER_ID = ?";
+        String sql = "SELECT * FROM skillset WHERE USER_ID = ?";
 
         List<SkillSetEntity> skillList = new ArrayList<SkillSetEntity>();
 

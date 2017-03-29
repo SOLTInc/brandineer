@@ -20,8 +20,9 @@ public class HomePage extends WebPage {
     private static final long serialVersionUID = 1L;
 
     private IModel<Integer> userId = new Model<Integer>(1);
-    // private List<Integer> userIdList = new ArrayList<Integer>();
     private IModel<List<Integer>> userIdList = new ListModel<Integer>();
+
+    private FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
 
     private Form<?> detailForm = new Form<Void>("detail") {
         @Override
@@ -31,6 +32,8 @@ public class HomePage extends WebPage {
             setResponsePage(profilePage);
         }
     };
+
+    private DropDownChoice<Integer> idList = new DropDownChoice<Integer>("userIdList", userId, userIdList);
 
     private Form<?> registrationForm = new Form<Void>("registration") {
         @Override
@@ -46,13 +49,12 @@ public class HomePage extends WebPage {
         }
     };
 
-    private DropDownChoice<Integer> idList = new DropDownChoice<Integer>("idList", userId, this.userIdList);
-
     public HomePage() {
 
-        add(new FeedbackPanel("feedBack"));
+        add(feedbackPanel);
         add(detailForm);
-        this.setUserId();
+        UserDao userDao = new UserDao();
+        userIdList.setObject(userDao.getAllUsersId());
         idList.setRequired(true);
         detailForm.add(idList);
         add(registrationForm);
@@ -60,9 +62,4 @@ public class HomePage extends WebPage {
 
     }
 
-    private void setUserId() {
-
-        UserDao userDao = new UserDao();
-        this.userIdList.setObject(userDao.getAllUsersId());
-    }
 }

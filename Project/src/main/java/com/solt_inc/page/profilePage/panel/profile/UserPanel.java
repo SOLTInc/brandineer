@@ -12,10 +12,10 @@ import org.apache.wicket.model.Model;
 import com.solt_inc.model.dao.UserDao;
 import com.solt_inc.model.entity.UserEntity;
 
-public class ProfilePanel extends Panel {
+public class UserPanel extends Panel {
     private static final long serialVersionUID = 7514416342722447820L;
 
-    private IModel<UserEntity> userModel;
+    private IModel<UserEntity> userModel = new Model<UserEntity>();
     private IModel<String> firstName;
     private IModel<String> lastName;
     private IModel<Integer> age;
@@ -23,14 +23,14 @@ public class ProfilePanel extends Panel {
     private IModel<String> company;
     private IModel<String> jobCategory;
     private IModel<String> location;
-    private WebMarkupContainer photo;
+    private WebMarkupContainer photo = new WebMarkupContainer("photo");
 
-    public ProfilePanel(String id, IModel<Integer> userId) {
+    public UserPanel(String id, IModel<Integer> userId) {
 
         super(id, userId);
         UserDao userDao = new UserDao();
         UserEntity userEntity = userDao.getUser(userId.getObject());
-        this.userModel = new Model<UserEntity>(userEntity);
+        this.userModel.setObject(userEntity);
         this.settings();
 
         if (this.firstName != null) {
@@ -73,6 +73,8 @@ public class ProfilePanel extends Panel {
         } else {
             add(new Label("location").setVisible(false));
         }
+
+        photo.add(new AttributeModifier("src", getString("user.profile.photo.path") + userEntity.getPhotoName()));
     }
 
     private void settings() {
@@ -84,9 +86,6 @@ public class ProfilePanel extends Panel {
         this.company = new Model<String>(userEntity.getCompany());
         this.jobCategory = new Model<String>(userEntity.getJobCategory());
         this.location = new Model<String>(userEntity.getLocation());
-
-        this.photo = new WebMarkupContainer("photo");
-        this.photo.add(new AttributeModifier("src", getString("user.profile.photo.path") + userEntity.getPhotoName()));
 
     }
 }
