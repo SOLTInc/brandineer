@@ -8,6 +8,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 
 import com.solt_inc.model.dao.UserDao;
 import com.solt_inc.model.entity.UserEntity;
@@ -16,13 +17,13 @@ public class UserPanel extends Panel {
     private static final long serialVersionUID = 7514416342722447820L;
 
     private IModel<UserEntity> userModel = new Model<UserEntity>();
-    private IModel<String> firstName;
-    private IModel<String> lastName;
-    private IModel<Integer> age;
-    private IModel<LocalDate> birthday;
-    private IModel<String> company;
-    private IModel<String> jobCategory;
-    private IModel<String> location;
+    private IModel<String> firstName = new PropertyModel<String>(userModel, "firstName");
+    private IModel<String> lastName = new PropertyModel<String>(userModel, "lastName");
+    private IModel<Integer> age = new PropertyModel<Integer>(userModel, "age");
+    private IModel<LocalDate> birthday = new PropertyModel<LocalDate>(userModel, "birthday");
+    private IModel<String> company = new PropertyModel<String>(userModel, "company");
+    private IModel<String> jobCategory = new PropertyModel<String>(userModel, "jobCategory");
+    private IModel<String> location = new PropertyModel<String>(userModel, "location");
     private WebMarkupContainer photo = new WebMarkupContainer("photo");
 
     public UserPanel(String id, IModel<Integer> userId) {
@@ -79,7 +80,7 @@ public class UserPanel extends Panel {
 
     private void settings() {
         UserEntity userEntity = userModel.getObject();
-        this.firstName = new Model<String>(userEntity.getFirstName());
+        // this.firstName = new Model<String>(userEntity.getFirstName());
         this.lastName = new Model<String>(userEntity.getLastName());
         this.age = new Model<Integer>(userEntity.getAge());
         this.birthday = new Model<LocalDate>(userEntity.getBirthday());

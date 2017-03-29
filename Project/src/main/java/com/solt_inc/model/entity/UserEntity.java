@@ -12,6 +12,7 @@ public class UserEntity implements Serializable {
     private String lastName;
     private String photoName;
     private LocalDate birthday;
+    private int age;
     private String company;
     private String jobCategory;
     private String location;
@@ -104,12 +105,16 @@ public class UserEntity implements Serializable {
     }
 
     public Integer getAge() {
-        int age;
-        // LocalDate birthday = LocalDate.parse(getBirthday().toString());
-        LocalDate birthday = LocalDate.of(2015, 1, 1);
-        LocalDate today = LocalDate.now();
-        age = Period.between(birthday, today).getYears();
+        if (this.age == 0 && this.birthday != null) {
+            LocalDate birthday = LocalDate.parse(this.birthday.toString());
+            LocalDate today = LocalDate.now();
+            this.age = Period.between(birthday, today).getYears();
+        }
 
-        return age;
+        return this.age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
