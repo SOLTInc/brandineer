@@ -14,7 +14,7 @@ public class HobbyDao {
     public int getHobbyId(String hobbyName) {
 
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT ID FROM hobby WHERE HOBBY_NAME = ? ORDER BY DATE_MODEFIED DESC";
+        String sql = "SELECT ID FROM hobby WHERE HOBBY_NAME = ? ORDER BY DATA_MODEFIED DESC";
 
         int hobbyId = -1;
 

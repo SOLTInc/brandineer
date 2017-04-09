@@ -95,58 +95,7 @@
                     <h2>My Hobbys</h2>
                     <hr class="small">
                     <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-futbol-o fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Soccer</strong>
-                                </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-film fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Movies</strong>
-                                </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-coffee fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Cafe</strong>
-                                </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-cutlery fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Restaurant</strong>
-                                </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
+					    <div wicket:id="hobbyPanel"></div> 
                     </div>
                     <!-- /.row (nested) -->
                 </div>
@@ -172,13 +121,8 @@
                     <h2>My Portfolios</h2>
                     <hr class="small">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
-                                </a>
-                            </div>
-                        </div>
+					    <div wicket:id="skillSetPanel"></div> 
+<!--
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#">
@@ -200,6 +144,7 @@
                                 </a>
                             </div>
                         </div>
+-->
                     </div>
                     <!-- /.row (nested) -->
                     <a href="#" class="btn btn-dark">View More Items</a>
@@ -366,8 +311,6 @@
   
 
    
-    <div wicket:id="hobbyPanel"></div> 
-    <div wicket:id="skillSetPanel"></div> 
     <a wicket:id="backLink">Back</a>
   </body>
 </html>

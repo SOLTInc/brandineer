@@ -13,6 +13,28 @@ import com.solt_inc.model.entity.SkillSetEntity;
 
 public class SkillSetDao {
 
+    public int getSkillSetId(String skillSetName) {
+
+        ConnectionManager cm = ConnectionManager.getInstance();
+        String sql = "SELECT ID FROM skillset WHERE SKILLSET_NAME = ? ORDER BY DATA_MODEFIED DESC";
+
+        int skillSetId = -1;
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+            pstmt.setString(1, skillSetName);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                skillSetId = rs.getInt("ID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return skillSetId;
+    }
+
     public List<SkillSetEntity> getAllSkillSets() {
 
         ConnectionManager cm = ConnectionManager.getInstance();

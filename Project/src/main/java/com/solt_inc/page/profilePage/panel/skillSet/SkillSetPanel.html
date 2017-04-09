@@ -2,14 +2,14 @@
 <html xmlns:wicket="http://wicket.apache.org">
   <body>    
     <wicket:panel>
-      <table wicket:id="skillSet">
-        <tr>
-          <td wicket:id="skillSetImageList"><img wicket:id=skillSetImage /></td>
-        </tr>
-        <tr>
-          <td><span wicket:id=skillSetName>skill_name</span></td>
-        </tr>
-      </table>
+      <div class="col-md-6" wicket:id="skillSet">
+        <div class="portfolio-item" wicket:id="skillSetImageList">
+          <a href="#">
+            <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg" wicket:id=skillSetImage><br/>
+            <span wicket:id=skillSetName>skill_name</span>
+          </a>
+        </div>
+      </div>
     </wicket:panel>
   </body>
 </html>
