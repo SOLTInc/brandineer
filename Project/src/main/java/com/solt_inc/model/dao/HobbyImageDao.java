@@ -37,12 +37,11 @@ public class HobbyImageDao {
         return hobbyImageList;
     }
 
-    public HobbyImageEntity getHobbyImage(int hobbyId) {
+    public List<HobbyImageEntity> getHobbyImage(int hobbyId) {
 
+        List<HobbyImageEntity> hobbyImageList = new ArrayList<HobbyImageEntity>();
         ConnectionManager cm = ConnectionManager.getInstance();
         String sql = "SELECT * FROM hobby_image WHERE HOBBY_ID = ?";
-
-        HobbyImageEntity hobbyImage = new HobbyImageEntity();
 
         try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 
@@ -51,9 +50,12 @@ public class HobbyImageDao {
 
             while (rs.next()) {
 
+                HobbyImageEntity hobbyImage = new HobbyImageEntity();
                 hobbyImage.setId(rs.getInt("ID"));
                 hobbyImage.setHobbyId(rs.getInt("HOBBY_ID"));
                 hobbyImage.setImageName(rs.getString("IMAGE_NAME"));
+
+                hobbyImageList.add(hobbyImage);
 
             }
 
@@ -61,6 +63,27 @@ public class HobbyImageDao {
             e.printStackTrace();
         }
 
-        return hobbyImage;
+        return hobbyImageList;
+    }
+
+    public boolean insert(int userId, HobbyImageEntity hobbyImage) {
+
+        int result = 0;
+        ConnectionManager cm = ConnectionManager.getInstance();
+
+        String sql = "INSERT INTO project_db.hobby_image(HOBBY_ID, IMAGE_NAME) VALUE( ? , ? )";
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql.toString())) {
+
+            pstmt.setInt(1, userId);
+            pstmt.setString(2, hobbyImage.getImageName());
+
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result == 0 ? false : true;
     }
 }

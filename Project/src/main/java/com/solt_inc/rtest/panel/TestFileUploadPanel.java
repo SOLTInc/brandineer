@@ -32,11 +32,49 @@ public class TestFileUploadPanel extends Panel {
     private IModel<List<FileUpload>> fileList;
     private Label filePathLabel;
     private WebMarkupContainer imageComponent;
+    private AjaxButton uploadButton = new AjaxButton("uploadButton") {
+        @Override
+        public void onSubmit(AjaxRequestTarget target) {
+
+            final FileUpload uploadedFile = fileUpload.getFileUpload();
+            if (uploadedFile != null) {
+
+                folderModel.getObject().mkdirs();
+
+                ImageFile newFile = new ImageFile(folderModel.getObject(), uploadedFile.getClientFileName());
+
+                if (newFile.exists()) {
+                    newFile.delete();
+                }
+
+                try {
+                    newFile.createNewFile();
+                    uploadedFile.writeTo(newFile);
+
+                    fileModel.setObject(newFile);
+
+                    image.add(new AttributeModifier("src", fileModel.getObject().getImagePath()));
+
+                    info("saved file: "
+                            // + UPLOAD_FOLDER
+                            + newFile.getImagePath());
+                    target.add(image);
+                    target.add(filePathLabel);
+                    send(imageComponent, Broadcast.BREADTH, newFile);
+                    target.add(imageComponent);
+                } catch (Exception e) {
+                    throw new IllegalStateException("Error");
+                }
+            }
+        }
+    };
+
     // private String UPLOAD_FOLDER = "C:\\test\\";
+
+    private FileUploadForm form = new FileUploadForm("form");
 
     public TestFileUploadPanel(String id, IModel<ImageFile> fileModel, IModel<UploadFolder> folderModel,
             WebMarkupContainer imageComponent) {
-
         super(id);
         this.fileModel = fileModel;
         this.folderModel = folderModel;
@@ -53,7 +91,6 @@ public class TestFileUploadPanel extends Panel {
         filePathLabel.setOutputMarkupId(true);
         queue(filePathLabel);
 
-        FileUploadForm form = new FileUploadForm("form");
         queue(form);
 
         this.image = ImageSetting("image");
@@ -64,31 +101,32 @@ public class TestFileUploadPanel extends Panel {
         this.fileList = new ListModel<FileUpload>();
         this.fileUpload = new FileUploadField("fileUpload", fileList);
         // fileUpload.setOutputMarkupId(true);
-        this.fileUpload.add(new AjaxFormComponentUpdatingBehavior("blue") {
+        this.fileUpload.add(new AjaxFormComponentUpdatingBehavior("change") {
+            @Override
+            public boolean getUpdateModel() {
+                return true;
+            }
 
             @Override
             protected void onUpdate(AjaxRequestTarget target) {
-                // try {
-                // Thread.sleep(2000);
-                // } catch (InterruptedException e) {
-                // e.printStackTrace();
-                // }
-                List<FileUpload> testlist = fileUpload.getConvertedInput();
+                target.appendJavaScript("alert('send!!');");
+
+                uploadButton.onSubmit();
+                FileUpload uploadFile = fileUpload.getFileUpload();
+
                 String test = "noimage";
-                if (testlist != null) {
-                    for (FileUpload data : testlist) {
-                        if (data.getClientFileName() != null) {
-                            test = data.getClientFileName();
-                        }
-                    }
+                this.getAttributes();
+
+                if (uploadFile != null) {
+                    target.appendJavaScript("alert('success file uploaded!!');");
+
                     fileModel.setObject(new ImageFile(folderModel.getObject() + test));
                     fileNameModel.setObject(test);
                     // uploadFile();
-                    target.appendJavaScript("alert('send!!');");
-                    send(imageComponent, Broadcast.EXACT, this.uploadFile());
-                    // send(imageComponent, Broadcast.EXACT, target);
-                    // send(imageComponent, Broadcast.EXACT, this.fileName);
-                    // target.add(fileUpload);
+                    ImageFile imageFile = new ImageFile(folderModel.getObject(), "test");
+
+                    send(imageComponent, Broadcast.BREADTH, imageFile);
+                    target.add(imageComponent);
                 } else {
                     fileNameModel.setObject("file is filure....");
 
@@ -129,7 +167,6 @@ public class TestFileUploadPanel extends Panel {
         // form.add(selectFileButton);
         queue(selectFileButton);
 
-        AjaxButton uploadButton = createUploadButton("button");
         // form.add(uploadButton);
         queue(uploadButton);
 
@@ -164,46 +201,6 @@ public class TestFileUploadPanel extends Panel {
         }
         image.add(new AttributeModifier("src", fileModel.getObject().getImagePath()));
         return image;
-    }
-
-    private AjaxButton createUploadButton(String id) {
-        AjaxButton uploadButton = new AjaxButton(id) {
-            @Override
-            public void onSubmit(AjaxRequestTarget target) {
-
-                final FileUpload uploadedFile = fileUpload.getFileUpload();
-                if (uploadedFile != null) {
-
-                    folderModel.getObject().mkdirs();
-
-                    ImageFile newFile = new ImageFile(folderModel.getObject(), uploadedFile.getClientFileName());
-
-                    if (newFile.exists()) {
-                        newFile.delete();
-                    }
-
-                    try {
-                        newFile.createNewFile();
-                        uploadedFile.writeTo(newFile);
-
-                        fileModel.setObject(newFile);
-
-                        image.add(new AttributeModifier("src", fileModel.getObject().getImagePath()));
-
-                        info("saved file: "
-                                // + UPLOAD_FOLDER
-                                + newFile.getImagePath());
-                        target.add(image);
-                        target.add(filePathLabel);
-                    } catch (Exception e) {
-                        throw new IllegalStateException("Error");
-                    }
-                }
-            }
-        };
-
-        return uploadButton;
-
     }
 
     public IModel<ImageFile> getFile() {

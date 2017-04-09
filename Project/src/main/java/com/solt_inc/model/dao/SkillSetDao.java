@@ -108,6 +108,18 @@ public class SkillSetDao {
             sql.append("PROJECT_DESCRIPTION,");
             count++;
         }
+        if (skillSet.getProcessStart() != -1) {
+            sql.append("PROCESS_START,");
+            count++;
+        }
+        if (skillSet.getProcessEnd() != -1) {
+            sql.append("PROCESS_END,");
+            count++;
+        }
+        if (skillSet.getProgrammingLanguage() != null) {
+            sql.append("PROGRAMMING_LANGUAGE,");
+            count++;
+        }
         if (skillSet.getDB() != null) {
             sql.append("DB,");
             count++;
@@ -144,6 +156,18 @@ public class SkillSetDao {
             if (skillSet.getProjectDescription() != null) {
                 count++;
                 pstmt.setString(count, skillSet.getProjectDescription());
+            }
+            if (skillSet.getProcessStart() != -1) {
+                count++;
+                pstmt.setInt(count, skillSet.getProcessStart());
+            }
+            if (skillSet.getProcessEnd() != -1) {
+                count++;
+                pstmt.setInt(count, skillSet.getProcessEnd());
+            }
+            if (skillSet.getProgrammingLanguage() != null) {
+                count++;
+                pstmt.setString(count, skillSet.getProgrammingLanguage());
             }
             if (skillSet.getDB() != null) {
                 count++;

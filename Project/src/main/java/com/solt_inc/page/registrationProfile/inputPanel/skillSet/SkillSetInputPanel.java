@@ -1,5 +1,6 @@
 package com.solt_inc.page.registrationProfile.inputPanel.skillSet;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,15 +11,17 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.IChoiceRenderer;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.LambdaModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.util.ListModel;
 
+import com.solt_inc.component.panel.dateField.DateFieldPanel;
 import com.solt_inc.model.dao.DevelopmentProcessDao;
 import com.solt_inc.model.dto.SkillSetDto;
 import com.solt_inc.model.entity.DevelopmentProcessEntity;
@@ -26,155 +29,123 @@ import com.solt_inc.model.entity.SkillSetEntity;
 
 public class SkillSetInputPanel extends Panel {
 
-    private List<SkillSetDto> skillSet;
-    private IModel<List<SkillSetDto>> skillSetListModel;
-    private ListView<SkillSetDto> skillSetList;
+    private IModel<List<SkillSetDto>> skillSetListModel = new ListModel<SkillSetDto>(new ArrayList<SkillSetDto>());
+
+    private Form<?> form = new Form<Void>("form");
+    private WebMarkupContainer wmc = new WebMarkupContainer("wmc");
+    private AjaxButton addSkillSetButton = new AjaxButton("addSkillSet") {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public void onSubmit(final AjaxRequestTarget target) {
+
+            if (skillSetListModel == null) {
+                List<SkillSetDto> skillSetDtoList = new ArrayList<SkillSetDto>();
+                skillSetListModel = new ListModel<SkillSetDto>(skillSetDtoList);
+            }
+
+            List<SkillSetDto> skillSetDtoList = skillSetListModel.getObject();
+            skillSetDtoList.add(new SkillSetDto());
+
+            skillSetList.setList(skillSetDtoList);
+
+            target.add(wmc);
+
+        }
+
+    };
+    private SkillSetListView skillSetList = new SkillSetListView("skillSetList", skillSetListModel);
 
     public SkillSetInputPanel(String id, IModel<List<SkillSetDto>> skillSetListModel1) {
 
         super(id, skillSetListModel1);
-
         this.skillSetListModel = skillSetListModel1;
 
-        Form<?> form = new Form<Void>("form");
-        add(form);
-
-        WebMarkupContainer wmc = new WebMarkupContainer("wmc");
-        form.add(wmc);
+        queue(form);
         wmc.setOutputMarkupId(true);
+        skillSetList.setReuseItems(true);
+        wmc.queue(skillSetList);
 
-        this.skillSetListModel = new ListModel<SkillSetDto>();
-        this.skillSetList = this.createListView();
-        wmc.add(this.skillSetList);
+        form.queue(wmc);
+        form.queue(addSkillSetButton);
+    }
 
-        AjaxButton addSkillSetButton = new AjaxButton("addSkillSet") {
-            @Override
-            public void onSubmit(final AjaxRequestTarget target) {
+    class SkillSetListView extends ListView<SkillSetDto> {
 
-                if (skillSet == null) {
-                    skillSet = new ArrayList<SkillSetDto>();
-                } else {
-                    skillSet = skillSetListModel.getObject();
-                }
+        private static final long serialVersionUID = 6483489885119506981L;
 
-                SkillSetDto skillSetDto = new SkillSetDto();
-                SkillSetEntity skillSetEntity = new SkillSetEntity();
+        public SkillSetListView(String id, IModel<? extends List<SkillSetDto>> model) {
+            super(id, model);
+        }
+
+        @Override
+        protected void populateItem(ListItem<SkillSetDto> item) {
+            SkillSetDto skillSetDto = (SkillSetDto) item.getModelObject();
+            SkillSetEntity skillSetEntity;
+            if (skillSetDto.getSkillSetEntity() != null) {
+                skillSetEntity = skillSetDto.getSkillSetEntity();
+            } else {
+                skillSetEntity = new SkillSetEntity();
                 skillSetDto.setSkillSetEntity(skillSetEntity);
-                DevelopmentProcessEntity processStartEntity = new DevelopmentProcessEntity();
-                skillSetDto.setProcessStartEntity(processStartEntity);
-                DevelopmentProcessEntity processEndEntity = new DevelopmentProcessEntity();
-                skillSetDto.setProcessEndEntity(processEndEntity);
-                skillSet.add(skillSetDto);
-                skillSetListModel.setObject(skillSet);
-
-                target.add(wmc);
-
             }
-        };
-        form.add(addSkillSetButton);
-    }
-
-    private ListView<SkillSetDto> createListView() {
-
-        List<DevelopmentProcessEntity> processList;
-        DevelopmentProcessDao developmentProcessDao = new DevelopmentProcessDao();
-
-        processList = developmentProcessDao.getProcessList();
-
-        skillSetList = new ListView<SkillSetDto>("skillSetList", this.skillSetListModel) {
-            @Override
-            protected void populateItem(ListItem<SkillSetDto> item) {
-
-                SkillSetDto skillSetDto = (SkillSetDto) item.getModelObject();
-                SkillSetEntity skillSetEntity = skillSetDto.getSkillSetEntity();
-                DevelopmentProcessEntity processStartEntity = skillSetDto.getProcessStartEntity();
-                DevelopmentProcessEntity processEndEntity = skillSetDto.getProcessEndEntity();
-
-                List<Integer> years = new ArrayList<Integer>();
-                for (int year = 1; year <= 12; year++) {
-                    years.add(year);
-                }
-                List<Integer> months = new ArrayList<Integer>();
-                for (int month = 1; month <= 31; month++) {
-                    months.add(month);
-                }
-
-                Label title = new Label("title", new Model<String>("SkillSet No." + (item.getIndex() + 1)));
-                item.add(title);
-
-                IModel<Integer> projectStartYearModel = new Model<Integer>();
-                DropDownChoice<Integer> projectStartYear = new DropDownChoice<Integer>("projectStartYear",
-                        projectStartYearModel, years);
-                item.add(projectStartYear);
-                IModel<Integer> projectStartMonthModel = new Model<Integer>();
-                DropDownChoice<Integer> projectStartMonth = new DropDownChoice<Integer>("projectStartMonth",
-                        projectStartMonthModel, months);
-                item.add(projectStartMonth);
-
-                IModel<Integer> projectEndYearModel = new Model<Integer>();
-                DropDownChoice<Integer> projectEndYear = new DropDownChoice<Integer>("projectEndYear",
-                        projectEndYearModel, years);
-                item.add(projectEndYear);
-                IModel<Integer> projectEndMonthModel = new Model<Integer>();
-                DropDownChoice<Integer> projectEndMonth = new DropDownChoice<Integer>("projectEndMonth",
-                        projectEndMonthModel, months);
-                item.add(projectEndMonth);
-
-                IModel<String> projectNameModel = new PropertyModel<String>(skillSetEntity, "projectName");
-                TextField<String> projectName = new TextField<String>("projectName", projectNameModel);
-                item.add(projectName);
-
-                IModel<String> projectDescriptionModel = new PropertyModel<String>(skillSetEntity,
-                        "projectDescription");
-                TextField<String> projectDescription = new TextField<String>("projectDescription",
-                        projectDescriptionModel);
-                item.add(projectDescription);
-
-                // if (skillSetEntity.getProcessStart() != 0 &&
-                // processStartEntity.getId() == 0) {
-                // processStartEntity =
-                // DevelopmentProcessDao.getProcess(skillSetEntity.getProcessStart());
-                // }
-                IModel<DevelopmentProcessEntity> processStartModel = new Model<DevelopmentProcessEntity>(
-                        processStartEntity);
-                DropDownChoice<DevelopmentProcessEntity> processStartList = new DropDownChoice<DevelopmentProcessEntity>(
-                        "processStart", processStartModel, processList, new ChoiceRenderer("processName", "id"));
-                item.add(processStartList);
-
-                // if (skillSetEntity.getProcessEnd() != 0 &&
-                // processEndEntity.getId() == 0) {
-                // processEndEntity =
-                // DevelopmentProcessDao.getProcess(skillSetEntity.getProcessEnd());
-                //
-                // }
-                IModel<DevelopmentProcessEntity> processEndModel = new Model<DevelopmentProcessEntity>(
-                        processEndEntity);
-                DropDownChoice<DevelopmentProcessEntity> processEndList = new DropDownChoice<DevelopmentProcessEntity>(
-                        "processEnd", processEndModel, processList, new ChoiceRenderer("processName", "id"));
-                item.add(processEndList);
-
-                IModel<String> usedProgrammingLanguageModel = new PropertyModel<String>(skillSetEntity, "DB");
-                TextField<String> usedProgrammingLanguage = new TextField<String>("programmingLanguage",
-                        usedProgrammingLanguageModel);
-                item.add(usedProgrammingLanguage);
-
-                IModel<String> usedDBModel = new PropertyModel<String>(skillSetEntity, "DB");
-                TextField<String> usedDB = new TextField<String>("usedDB", usedDBModel);
-                item.add(usedDB);
-
-                IModel<String> usedIDEModel = new PropertyModel<String>(skillSetEntity, "IDE");
-                TextField<String> usedIDE = new TextField<String>("usedIDE", usedIDEModel);
-                item.add(usedIDE);
-
+            if (skillSetDto.getProcessStartEntity() == null) {
+                skillSetDto.setProcessStartEntity(new DevelopmentProcessEntity());
             }
-        };
-        return skillSetList;
+            if (skillSetDto.getProcessEndEntity() == null) {
+                skillSetDto.setProcessEndEntity(new DevelopmentProcessEntity());
+            }
+            DevelopmentProcessDao processDao = new DevelopmentProcessDao();
+            List<DevelopmentProcessEntity> processList = processDao.getProcessList();
+            IModel<List<DevelopmentProcessEntity>> processListModel = new ListModel<DevelopmentProcessEntity>(
+                    processList);
+            IChoiceRenderer<DevelopmentProcessEntity> processRender = new ChoiceRenderer<DevelopmentProcessEntity>(
+                    "processName", "id");
 
-    }
+            IModel<LocalDate> projectStartModel = LambdaModel.of(skillSetEntity::getProjectStart,
+                    skillSetEntity::setProjectStart);
+            IModel<LocalDate> projectEndModel = LambdaModel.of(skillSetEntity::getProjectEnd,
+                    skillSetEntity::setProjectEnd);
+            IModel<String> projectNameModel = LambdaModel.of(skillSetEntity::getProjectName,
+                    skillSetEntity::setProjectName);
+            IModel<String> projectDescriptionModel = LambdaModel.of(skillSetEntity::getProjectDescription,
+                    skillSetEntity::setProjectDescription);
+            IModel<DevelopmentProcessEntity> processStartModel = LambdaModel.of(skillSetDto::getProcessStartEntity,
+                    skillSetDto::setProcessStartEntity);
+            IModel<DevelopmentProcessEntity> processEndModel = LambdaModel.of(skillSetDto::getProcessEndEntity,
+                    skillSetDto::setProcessEndEntity);
+            IModel<String> programmingLanguageModel = LambdaModel.of(skillSetEntity::getProgrammingLanguage,
+                    skillSetEntity::setProgrammingLanguage);
+            IModel<String> dbModel = LambdaModel.of(skillSetEntity::getDB, skillSetEntity::setDB);
+            IModel<String> ideModel = LambdaModel.of(skillSetEntity::getIDE, skillSetEntity::setIDE);
 
-    public IModel<List<SkillSetDto>> getSkillSetListModel() {
+            Label title = new Label("title", Model.of("SkillSet No." + (item.getIndex() + 1)));
+            DateFieldPanel projectStartPanel = new DateFieldPanel("projectStartPanel", projectStartModel);
+            DateFieldPanel projectEndPanel = new DateFieldPanel("projectEndPanel", projectEndModel);
+            TextField<String> projectName = new TextField<String>("projectName", projectNameModel);
+            TextField<String> projectDescription = new TextField<String>("projectDescription", projectDescriptionModel);
+            DropDownChoice<DevelopmentProcessEntity> processStart = new DropDownChoice<DevelopmentProcessEntity>(
+                    "processStart", processStartModel, processListModel, processRender);
+            DropDownChoice<DevelopmentProcessEntity> processEnd = new DropDownChoice<DevelopmentProcessEntity>(
+                    "processEnd", processEndModel, processListModel, processRender);
 
-        return this.skillSetListModel;
+            TextField<String> programmingLanguage = new TextField<String>("programmingLanguage",
+                    programmingLanguageModel);
+            TextField<String> usedDB = new TextField<String>("usedDB", dbModel);
+            TextField<String> usedIDE = new TextField<String>("usedIDE", ideModel);
+
+            item.add(title);
+            item.add(projectStartPanel);
+            item.add(projectEndPanel);
+            item.add(projectName);
+            item.add(projectDescription);
+            item.add(processStart);
+            item.add(processEnd);
+            item.add(programmingLanguage);
+            item.add(usedDB);
+            item.add(usedIDE);
+
+        }
+
     }
 
 }

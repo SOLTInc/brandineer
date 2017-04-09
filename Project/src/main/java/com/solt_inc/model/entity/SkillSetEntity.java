@@ -4,16 +4,20 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotNull;
+
 public class SkillSetEntity implements Serializable {
 
     private int id;
     private int userId;
     private LocalDate projectStart;
     private LocalDate projectEnd;
+    @NotNull
     private String projectName;
     private String projectDescription;
-    private int processStart;
-    private int processEnd;
+    private int processStart = -1;
+    private int processEnd = -1;
+    private String programmingLanguage;
     private String DB;
     private String IDE;
 
@@ -40,8 +44,6 @@ public class SkillSetEntity implements Serializable {
     public void setIDE(String iDE) {
         IDE = iDE;
     }
-
-    private String programmingLanguage;
 
     public int getId() {
         return id;

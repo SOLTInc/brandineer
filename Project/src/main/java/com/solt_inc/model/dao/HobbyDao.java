@@ -11,9 +11,26 @@ import com.solt_inc.model.entity.HobbyEntity;
 
 public class HobbyDao {
 
-    public List<HobbyEntity> getHobby(int id) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+    public int getHobbyId(String hobbyName) {
+
+        ConnectionManager cm = ConnectionManager.getInstance();
+        String sql = "SELECT ID FROM hobby WHERE HOBBY_NAME = ? ORDER BY DATE_MODEFIED DESC";
+
+        int hobbyId = -1;
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+            pstmt.setString(1, hobbyName);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                hobbyId = rs.getInt("ID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return hobbyId;
     }
 
     public List<HobbyEntity> getAllHobbys() {
@@ -33,6 +50,7 @@ public class HobbyDao {
                 hobby.setId(rs.getInt("ID"));
                 hobby.setUserId(rs.getInt("USER_ID"));
                 hobby.setHobbyName(rs.getString("HOBBY_NAME"));
+                hobby.setHobbyIcon(rs.getString("HOBBY_ICON"));
                 hobby.setDescription(rs.getString("DESCRIPTION"));
 
                 hobbyList.add(hobby);
@@ -61,6 +79,7 @@ public class HobbyDao {
                 hobby.setId(rs.getInt("ID"));
                 hobby.setUserId(rs.getInt("USER_ID"));
                 hobby.setHobbyName(rs.getString("HOBBY_NAME"));
+                hobby.setHobbyIcon(rs.getString("HOBBY_ICON"));
                 hobby.setDescription(rs.getString("DESCRIPTION"));
 
                 hobbyList.add(hobby);
@@ -80,8 +99,10 @@ public class HobbyDao {
         StringBuffer sql = new StringBuffer();
         int count = 1;
         sql.append("INSERT INTO project_db.hobby(" + "USER_ID,");
-        if (hobby.getHobbyName() != null) {
-            sql.append("hobby_name,");
+        sql.append("hobby_name,");
+        count++;
+        if (hobby.getHobbyIcon() != null) {
+            sql.append("HOBBY_ICON,");
             count++;
         }
         if (hobby.getDescription() != null) {
@@ -101,10 +122,13 @@ public class HobbyDao {
 
             pstmt.setInt(1, userId);
             count = 1;
-            if (hobby.getHobbyName() != null) {
+            count++;
+            pstmt.setString(count, hobby.getHobbyName());
+            if (hobby.getHobbyIcon() != null) {
                 count++;
-                pstmt.setString(count, hobby.getHobbyName());
+                pstmt.setString(count, hobby.getHobbyIcon());
             }
+
             if (hobby.getDescription() != null) {
                 count++;
                 pstmt.setString(count, hobby.getDescription());

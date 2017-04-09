@@ -1,6 +1,8 @@
 package com.solt_inc.model.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.solt_inc.model.entity.HobbyEntity;
 import com.solt_inc.model.entity.HobbyImageEntity;
@@ -8,7 +10,7 @@ import com.solt_inc.model.entity.HobbyImageEntity;
 public class HobbyDto implements Serializable {
 
     private HobbyEntity hobbyEntity;
-    private HobbyImageEntity hobbyImageEntity;
+    private List<HobbyImageEntity> hobbyImageEntityList = new ArrayList<HobbyImageEntity>();
 
     public HobbyEntity getHobbyEntity() {
         return hobbyEntity;
@@ -18,11 +20,12 @@ public class HobbyDto implements Serializable {
         this.hobbyEntity = hobbyEntity;
     }
 
-    public HobbyImageEntity getHobbyImageEntity() {
-        return hobbyImageEntity;
+    public List<HobbyImageEntity> getHobbyImageEntityList() {
+
+        return hobbyImageEntityList;
     }
 
-    public void setHobbyImageEntity(HobbyImageEntity hobbyImageEntity) {
-        this.hobbyImageEntity = hobbyImageEntity;
+    public void setHobbyImageEntityList(List<HobbyImageEntity> hobbyImageEntityList) {
+        this.hobbyImageEntityList = hobbyImageEntityList;
     }
 }

@@ -2,12 +2,24 @@ package com.solt_inc.model.entity;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+
 public class HobbyEntity implements Serializable {
 
     private int id;
     private int userId;
+    @NotNull
     private String hobbyName;
+    private String hobbyIcon;
     private String description;
+
+    public String getHobbyIcon() {
+        return hobbyIcon;
+    }
+
+    public void setHobbyIcon(String hobbyIcon) {
+        this.hobbyIcon = hobbyIcon;
+    }
 
     public int getId() {
         return id;

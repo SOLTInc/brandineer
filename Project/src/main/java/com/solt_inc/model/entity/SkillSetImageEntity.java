@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
-public class HobbyImageEntity implements Serializable {
+public class SkillSetImageEntity implements Serializable {
 
     private int id;
-    private int hobbyId;
+    private int SkillSetId;
     @NotNull
     private String imageName;
 
@@ -19,12 +19,12 @@ public class HobbyImageEntity implements Serializable {
         this.id = id;
     }
 
-    public int getHobbyId() {
-        return hobbyId;
+    public int getSkillSetId() {
+        return SkillSetId;
     }
 
-    public void setHobbyId(int hobbyId) {
-        this.hobbyId = hobbyId;
+    public void setSkillSetId(int SkillSetId) {
+        this.SkillSetId = SkillSetId;
     }
 
     public String getImageName() {

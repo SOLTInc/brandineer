@@ -5,10 +5,14 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
 
+import javax.validation.constraints.NotNull;
+
 public class UserEntity implements Serializable {
 
     private int id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
     private String photoName;
     private LocalDate birthday;

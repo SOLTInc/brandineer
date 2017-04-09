@@ -3,6 +3,7 @@ package com.solt_inc;
 import java.io.File;
 
 import org.apache.wicket.Session;
+import org.apache.wicket.bean.validation.BeanValidationConfiguration;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -54,6 +55,7 @@ public class WicketApplication extends WebApplication {
     public void init() {
         super.init();
 
+        new BeanValidationConfiguration().configure(this);
         // uploadFolder = new Folder(this.getSystemProperty("java.io.tmpdir"),
         // "wickekt-uploads");
         uploadFolder = new UploadFolder(this.getContextPath(), "img/");
