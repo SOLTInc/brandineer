@@ -27,7 +27,7 @@ public class ProfileInputPanel extends Panel {
     private static final long serialVersionUID = 7514416342722447820L;
 
     private final Folder UPLOAD_FOLDER = new UploadFolder(((WicketApplication) Application.get()).getUploadFolder(),
-            "test" + File.separator);
+            "user" + File.separator + "profile" + File.separator + "photo" + File.separator);
     private final IModel<Folder> uploadFolderModel = Model.of(UPLOAD_FOLDER);
     private IModel<ImageFile> fileModel = Model.of();
 

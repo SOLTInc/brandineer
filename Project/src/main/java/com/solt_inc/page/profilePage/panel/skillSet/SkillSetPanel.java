@@ -50,8 +50,8 @@ public class SkillSetPanel extends Panel {
                 }
 
             };
-            item.queue(skillSetImageListView);
-            item.queue(new Label("skillSetName", skillSetEntity.getProjectName()));
+            item.add(skillSetImageListView);
+            item.add(new Label("skillSetName", skillSetEntity.getProjectName()));
         }
     };
 
@@ -62,7 +62,7 @@ public class SkillSetPanel extends Panel {
         setData(userId);
 
         skillSetListView.setDefaultModelObject(skillSetDtoList);
-        queue(skillSetListView);
+        add(skillSetListView);
     }
 
     private void setData(IModel<Integer> userId) {

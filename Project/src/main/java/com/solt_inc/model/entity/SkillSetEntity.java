@@ -74,7 +74,9 @@ public class SkillSetEntity implements Serializable {
     }
 
     public void setSqlProjectStart(Date projectStart) {
-        this.projectStart = projectStart.toLocalDate();
+        if (projectStart != null) {
+            this.projectStart = projectStart.toLocalDate();
+        }
     }
 
     public LocalDate getProjectEnd() {
@@ -90,7 +92,9 @@ public class SkillSetEntity implements Serializable {
     }
 
     public void setSqlProjectEnd(Date projectEnd) {
-        this.projectEnd = projectEnd.toLocalDate();
+        if (projectEnd != null) {
+            this.projectEnd = projectEnd.toLocalDate();
+        }
     }
 
     public String getProjectDescription() {
