@@ -68,7 +68,9 @@ public class UserEntity implements Serializable {
     }
 
     public void setSqlBirthday(Date birthday) {
-        this.birthday = birthday.toLocalDate();
+        if (birthday != null) {
+            this.birthday = birthday.toLocalDate();
+        }
     }
 
     public Date getSqlBirthday() {
