@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.wicket.Application;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -101,39 +102,59 @@ public class HobbyInputPanel extends Panel {
             HobbyEntity hobbyEntity = hobbyDto.getHobbyEntity();
 
             Label title = new Label("title", Model.of("Hobby No." + (item.getIndex() + 1)));
-            item.add(title);
+            item.queue(title);
+
+            AjaxLink<?> removeLink = new AjaxLink<Void>("removeLink") {
+
+                @Override
+                public void onClick(AjaxRequestTarget target) {
+
+                    item.modelChanging();
+                    getList().remove(item.getIndex());
+                    HobbyListView.this.modelChanged();
+                    HobbyListView.this.removeAll();
+
+                    target.add(wmc);
+                }
+
+            };
+            item.queue(removeLink);
 
             IModel<String> hobbyNameModel = LambdaModel.of(hobbyEntity::getHobbyName, hobbyEntity::setHobbyName);
             TextField<String> hobbyName = new TextField<String>("hobbyName", hobbyNameModel);
-            item.add(hobbyName);
+            item.queue(hobbyName);
 
             IModel<String> hobbyDescriptionModel = LambdaModel.of(hobbyEntity::getDescription,
                     hobbyEntity::setDescription);
             TextArea<String> hobbyDescription = new TextArea<String>("hobbyDescription", hobbyDescriptionModel);
-            item.add(hobbyDescription);
+            item.queue(hobbyDescription);
 
             WebMarkupContainer imageListContainer = new WebMarkupContainer("imageListContainer");
             imageListContainer.setOutputMarkupId(true);
-            item.add(imageListContainer);
+            item.queue(imageListContainer);
 
             IModel<ImageFile> hobbyImageModel = Model.of();
             List<HobbyImageEntity> hobbyImageEntityList = hobbyDto.getHobbyImageEntityList();
             IModel<List<HobbyImageEntity>> hobbyImageEntityListModel = new ListModel<HobbyImageEntity>(
                     hobbyImageEntityList);
-            ListView<HobbyImageEntity> imageListView = new ImageListView("imageList", hobbyImageEntityListModel);
+            ListView<HobbyImageEntity> imageListView = new ImageListView("imageList", hobbyImageEntityListModel,
+                    imageListContainer);
             imageListView.setReuseItems(true);
-            imageListContainer.add(imageListView);
+            imageListContainer.queue(imageListView);
 
             FileUploadPanel hobbyImagePanel = new FileUploadPanel("uploadButtonPanel", hobbyImageModel,
                     uploadFolderModel, imageListContainer);
-            item.add(hobbyImagePanel);
+            item.queue(hobbyImagePanel);
         }
     }
 
     private class ImageListView extends ListView<HobbyImageEntity> {
 
-        public ImageListView(String id, IModel<List<HobbyImageEntity>> model) {
+        private WebMarkupContainer parentConteiner;
+
+        public ImageListView(String id, IModel<List<HobbyImageEntity>> model, WebMarkupContainer parentContainer) {
             super(id, model);
+            this.parentConteiner = parentContainer;
         }
 
         @Override
@@ -143,7 +164,24 @@ public class HobbyInputPanel extends Panel {
             WebMarkupContainer hobbyImage = new WebMarkupContainer("hobbyImage");
             hobbyImage
                     .add(new AttributeModifier("src", UPLOAD_FOLDER.getUploadPath() + hobbyImageEntity.getImageName()));
-            item.add(hobbyImage);
+
+            AjaxLink<?> imgDeleteLink = new AjaxLink<Void>("imgDeleteLink") {
+
+                @Override
+                public void onClick(AjaxRequestTarget target) {
+
+                    item.modelChanging();
+
+                    getList().remove(item.getIndex());
+
+                    ImageListView.this.modelChanged();
+                    ImageListView.this.removeAll();
+                    target.add(parentConteiner);
+                }
+            };
+
+            item.queue(hobbyImage);
+            item.queue(imgDeleteLink);
 
         }
 

@@ -48,11 +48,11 @@ public class FileUploadPanel extends Panel {
                 } catch (IOException e) {
                     e.printStackTrace();
 
-                    throw new IllegalStateException("Error");
+                    // throw new IllegalStateException("Error");
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    throw new IllegalStateException("Error");
+                    // throw new IllegalStateException("Error");
                 }
 
                 fileModel.setObject(newFile);

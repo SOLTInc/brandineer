@@ -21,6 +21,7 @@ import org.apache.wicket.model.LambdaModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.util.ListModel;
 
+import com.solt_inc.component.file.ImageFile;
 import com.solt_inc.component.panel.dateField.DateFieldPanel;
 import com.solt_inc.model.dao.DevelopmentProcessDao;
 import com.solt_inc.model.dto.SkillSetDto;
@@ -101,6 +102,7 @@ public class SkillSetInputPanel extends Panel {
             IChoiceRenderer<DevelopmentProcessEntity> processRender = new ChoiceRenderer<DevelopmentProcessEntity>(
                     "processName", "id");
 
+            IModel<Integer> listIndexModel = Model.of(item.getIndex());
             IModel<LocalDate> projectStartModel = LambdaModel.of(skillSetEntity::getProjectStart,
                     skillSetEntity::setProjectStart);
             IModel<LocalDate> projectEndModel = LambdaModel.of(skillSetEntity::getProjectEnd,
@@ -118,6 +120,28 @@ public class SkillSetInputPanel extends Panel {
             IModel<String> dbModel = LambdaModel.of(skillSetEntity::getDB, skillSetEntity::setDB);
             IModel<String> ideModel = LambdaModel.of(skillSetEntity::getIDE, skillSetEntity::setIDE);
 
+            TextField<Integer> listIndex = new TextField<Integer>("listIndex", listIndexModel);
+            item.queue(listIndex);
+
+            AjaxButton removeLink = new AjaxButton("removeLink") {
+
+                @Override
+                public void onSubmit(AjaxRequestTarget target) {
+
+                    item.modelChanging();
+                    getList().remove(item.getIndex());
+                    SkillSetListView.this.modelChanged();
+                    SkillSetListView.this.removeAll();
+
+                    target.add(wmc);
+
+                }
+
+            };
+
+            IModel<List<ImageFile>> imageListModel = new ListModel<ImageFile>();
+            // ImageListViewPanel imageListViewPanel = new
+            // ImageListViewPanel("imageListPanel", imageListModel);
             Label title = new Label("title", Model.of("SkillSet No." + (item.getIndex() + 1)));
             DateFieldPanel projectStartPanel = new DateFieldPanel("projectStartPanel", projectStartModel);
             DateFieldPanel projectEndPanel = new DateFieldPanel("projectEndPanel", projectEndModel);
@@ -133,16 +157,18 @@ public class SkillSetInputPanel extends Panel {
             TextField<String> usedDB = new TextField<String>("usedDB", dbModel);
             TextField<String> usedIDE = new TextField<String>("usedIDE", ideModel);
 
-            item.add(title);
-            item.add(projectStartPanel);
-            item.add(projectEndPanel);
-            item.add(projectName);
-            item.add(projectDescription);
-            item.add(processStart);
-            item.add(processEnd);
-            item.add(programmingLanguage);
-            item.add(usedDB);
-            item.add(usedIDE);
+            item.queue(title);
+            item.queue(removeLink);
+
+            item.queue(projectStartPanel);
+            item.queue(projectEndPanel);
+            item.queue(projectName);
+            item.queue(projectDescription);
+            item.queue(processStart);
+            item.queue(processEnd);
+            item.queue(programmingLanguage);
+            item.queue(usedDB);
+            item.queue(usedIDE);
 
         }
 
