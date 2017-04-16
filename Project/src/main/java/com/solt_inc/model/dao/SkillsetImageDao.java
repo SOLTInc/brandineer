@@ -27,7 +27,7 @@ public class SkillsetImageDao {
 
                 skillSetImage.setId(rs.getInt("ID"));
                 skillSetImage.setSkillSetId(rs.getInt("SKILLSET_ID"));
-                skillSetImage.setImageName(rs.getString("IMAGE_NAME"));
+                skillSetImage.setImageFile(rs.getString("IMAGE_NAME"));
 
                 skillSetImageList.add(skillSetImage);
             }
@@ -53,7 +53,7 @@ public class SkillsetImageDao {
                 SkillSetImageEntity skillSetImage = new SkillSetImageEntity();
                 skillSetImage.setId(rs.getInt("ID"));
                 skillSetImage.setSkillSetId(rs.getInt("SKILLSET_ID"));
-                skillSetImage.setImageName(rs.getString("IMAGE_NAME"));
+                skillSetImage.setImageFile(rs.getString("IMAGE_NAME"));
 
                 skillSetImageList.add(skillSetImage);
 

@@ -34,18 +34,19 @@ import com.solt_inc.model.entity.HobbyImageEntity;
 
 public class HobbyInputPanel extends Panel {
 
-    private final UploadFolder UPLOAD_FOLDER = new UploadFolder(
+	private static final long serialVersionUID = 1L;
+	private final UploadFolder UPLOAD_FOLDER = new UploadFolder(
             ((WicketApplication) Application.get()).getUploadFolder(),
             "user" + File.separator + "hobby" + File.separator + "image" + File.separator);
-    private final IModel<Folder> uploadFolderModel = Model.of(UPLOAD_FOLDER);
 
     private List<HobbyDto> hobbyDtoList = new ArrayList<HobbyDto>();
     private IModel<List<HobbyDto>> hobbyListModel = new ListModel<HobbyDto>(hobbyDtoList);
 
     private Form<?> form = new Form<Void>("form") {
-        @Override
-        public void onSubmit() {
 
+		private static final long serialVersionUID = 1L;
+		@Override
+        public void onSubmit() {
         }
 
     };
@@ -87,7 +88,12 @@ public class HobbyInputPanel extends Panel {
 
     private class HobbyListView extends ListView<HobbyDto> {
 
-        public HobbyListView(String id, IModel<List<HobbyDto>> model) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public HobbyListView(String id, IModel<List<HobbyDto>> model) {
             super(id, model);
         }
 
@@ -106,7 +112,12 @@ public class HobbyInputPanel extends Panel {
 
             AjaxLink<?> removeLink = new AjaxLink<Void>("removeLink") {
 
-                @Override
+                /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
                 public void onClick(AjaxRequestTarget target) {
 
                     item.modelChanging();
@@ -133,7 +144,6 @@ public class HobbyInputPanel extends Panel {
             imageListContainer.setOutputMarkupId(true);
             item.queue(imageListContainer);
 
-            IModel<ImageFile> hobbyImageModel = Model.of();
             List<HobbyImageEntity> hobbyImageEntityList = hobbyDto.getHobbyImageEntityList();
             IModel<List<HobbyImageEntity>> hobbyImageEntityListModel = new ListModel<HobbyImageEntity>(
                     hobbyImageEntityList);
@@ -142,15 +152,16 @@ public class HobbyInputPanel extends Panel {
             imageListView.setReuseItems(true);
             imageListContainer.queue(imageListView);
 
-            FileUploadPanel hobbyImagePanel = new FileUploadPanel("uploadButtonPanel", hobbyImageModel,
-                    uploadFolderModel, imageListContainer);
+            FileUploadPanel hobbyImagePanel = new FileUploadPanel("uploadButtonPanel",
+                    UPLOAD_FOLDER, imageListContainer);
             item.queue(hobbyImagePanel);
         }
     }
 
     private class ImageListView extends ListView<HobbyImageEntity> {
 
-        private WebMarkupContainer parentConteiner;
+		private static final long serialVersionUID = 1L;
+		private WebMarkupContainer parentConteiner;
 
         public ImageListView(String id, IModel<List<HobbyImageEntity>> model, WebMarkupContainer parentContainer) {
             super(id, model);
@@ -167,7 +178,9 @@ public class HobbyInputPanel extends Panel {
 
             AjaxLink<?> imgDeleteLink = new AjaxLink<Void>("imgDeleteLink") {
 
-                @Override
+				private static final long serialVersionUID = 1L;
+
+				@Override
                 public void onClick(AjaxRequestTarget target) {
 
                     item.modelChanging();

@@ -1,5 +1,6 @@
 package com.solt_inc.component.panel.listView.imageListView;
 
+
 import java.util.List;
 
 import org.apache.wicket.AttributeModifier;
@@ -15,13 +16,15 @@ import org.apache.wicket.model.IModel;
 
 import com.solt_inc.component.file.ImageFile;
 
-class ImageListViewPanel extends Panel {
+public class ImageListViewPanel extends Panel {
 
-    public ImageListViewPanel(String id, IModel<List<ImageFile>> model) {
-        super(id, model);
+	private static final long serialVersionUID = 1L;
+
+	public ImageListViewPanel(String id, IModel<List<ImageFile>> imageFileModel) {
+        super(id, imageFileModel);
         Form<?> form = new Form<Void>("form");
-        WebMarkupContainer wmc = new WebMarkupContainer("imageListConteiner");
-        ImageListView imageListView = new ImageListView("imageList", model, wmc);
+        WebMarkupContainer wmc = new WebMarkupContainer("imageListContainer");
+        ImageListView imageListView = new ImageListView("imageList", imageFileModel, wmc);
 
         queue(form);
         wmc.setOutputMarkupId(true);
@@ -32,7 +35,8 @@ class ImageListViewPanel extends Panel {
 
     private class ImageListView extends ListView<ImageFile> {
 
-        private WebMarkupContainer parentConteiner;
+		private static final long serialVersionUID = 1L;
+		private WebMarkupContainer parentConteiner;
 
         public ImageListView(String id, IModel<List<ImageFile>> model, WebMarkupContainer parentContainer) {
             super(id, model);
@@ -48,7 +52,9 @@ class ImageListViewPanel extends Panel {
 
             AjaxLink<?> imgDeleteLink = new AjaxLink<Void>("imgDeleteLink") {
 
-                @Override
+				private static final long serialVersionUID = 1L;
+
+				@Override
                 public void onClick(AjaxRequestTarget target) {
 
                     item.modelChanging();
@@ -60,10 +66,8 @@ class ImageListViewPanel extends Panel {
                     target.add(parentConteiner);
                 }
             };
-
             item.queue(imageConteiner);
             item.queue(imgDeleteLink);
-
         }
 
         @Override
@@ -72,7 +76,7 @@ class ImageListViewPanel extends Panel {
             Object payload = event.getPayload();
             if (payload instanceof ImageFile) {
                 ImageFile imageFile = (ImageFile) payload;
-                this.getList().add(imageFile);
+                getList().add(imageFile);
             }
         }
     }

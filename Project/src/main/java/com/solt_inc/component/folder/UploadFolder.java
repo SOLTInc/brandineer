@@ -9,7 +9,9 @@ import com.solt_inc.WicketApplication;
 
 public class UploadFolder extends Folder {
 
-    public UploadFolder(Folder parent, String child) {
+	private static final long serialVersionUID = 1L;
+
+	public UploadFolder(Folder parent, String child) {
         super(parent, child);
     }
 

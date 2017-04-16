@@ -15,6 +15,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import com.solt_inc.model.dao.HobbyDao;
 import com.solt_inc.model.dao.HobbyImageDao;
 import com.solt_inc.model.dao.SkillSetDao;
+import com.solt_inc.model.dao.SkillsetImageDao;
 import com.solt_inc.model.dao.UserDao;
 import com.solt_inc.model.dto.HobbyDto;
 import com.solt_inc.model.dto.SkillSetDto;
@@ -22,6 +23,7 @@ import com.solt_inc.model.dto.UserDto;
 import com.solt_inc.model.entity.HobbyEntity;
 import com.solt_inc.model.entity.HobbyImageEntity;
 import com.solt_inc.model.entity.SkillSetEntity;
+import com.solt_inc.model.entity.SkillSetImageEntity;
 import com.solt_inc.model.entity.UserEntity;
 import com.solt_inc.page.homePage.HomePage;
 import com.solt_inc.page.registrationProfile.inputPanel.hobby.HobbyInputPanel;
@@ -62,6 +64,7 @@ public class RegistrationUserPage extends WebPage {
                 SkillSetDao skillSetDao = new SkillSetDao();
                 for (SkillSetDto skillSetDto : skillSetListModel.getObject()) {
                     SkillSetEntity skillSetEntity = skillSetDto.getSkillSetEntity();
+                    List<SkillSetImageEntity> skillsetImageEntityList = skillSetDto.getSkillSetImageEntityList();
                     if (skillSetDto.getProcessStartEntity() != null) {
                         int processStart = skillSetDto.getProcessStartEntity().getId();
                         skillSetEntity.setProcessStart(processStart);
@@ -71,6 +74,14 @@ public class RegistrationUserPage extends WebPage {
                         skillSetEntity.setProcessEnd(processEnd);
                     }
                     insertFlg = skillSetDao.insert(userId, skillSetEntity);
+                    int skillsetId = skillSetDao.getSkillSetId(skillSetEntity.getProjectName());
+                    if(skillsetImageEntityList.size() != 0) {
+                    	SkillsetImageDao skillsetImageDao = new SkillsetImageDao();
+                    	for(SkillSetImageEntity entity: skillsetImageEntityList) {
+                    	    skillsetImageDao.insert(skillsetId, entity);
+                    	}
+                    }
+ 
                 }
             }
 

@@ -16,7 +16,7 @@ public class SkillSetDao {
     public int getSkillSetId(String skillSetName) {
 
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT ID FROM skillset WHERE SKILLSET_NAME = ? ORDER BY DATA_MODEFIED DESC";
+        String sql = "SELECT ID FROM skillset WHERE PROJECT_NAME = ? ORDER BY DATA_MODEFIED DESC";
 
         int skillSetId = -1;
 

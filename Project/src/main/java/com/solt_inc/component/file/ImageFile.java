@@ -7,7 +7,9 @@ import com.solt_inc.WicketApplication;
 
 public class ImageFile extends File {
 
-    public ImageFile(File parent, String child) {
+	private static final long serialVersionUID = 1L;
+
+	public ImageFile(File parent, String child) {
         super(parent, child);
     }
 

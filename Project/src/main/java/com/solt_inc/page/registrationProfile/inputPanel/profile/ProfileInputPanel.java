@@ -28,7 +28,6 @@ public class ProfileInputPanel extends Panel {
 
     private final Folder UPLOAD_FOLDER = new UploadFolder(((WicketApplication) Application.get()).getUploadFolder(),
             "user" + File.separator + "profile" + File.separator + "photo" + File.separator);
-    private final IModel<Folder> uploadFolderModel = Model.of(UPLOAD_FOLDER);
     private IModel<ImageFile> fileModel = Model.of();
 
     private IModel<UserDto> userDtoModel;
@@ -44,7 +43,9 @@ public class ProfileInputPanel extends Panel {
     private IModel<String> locationModel = LambdaModel.of(userEntity::getLocation, userEntity::setLocation);
 
     private Form<?> form = new Form<Void>("form") {
-        @Override
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void onSubmit() {
 
             if (fileModel.getObject() != null) {
@@ -59,16 +60,22 @@ public class ProfileInputPanel extends Panel {
     private TextField<String> lastName = new TextField<String>("lastName", lastNameModel);
     // private Image photo = new Image("photo", photoNameModel);
     private WebMarkupContainer photo = new WebMarkupContainer("photo") {
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void onEvent(IEvent<?> event) {
             Object payload = event.getPayload();
             if (payload instanceof ImageFile) {
                 ImageFile imageFile = (ImageFile) payload;
+                photoNameModel.setObject(imageFile.getName());
                 add(new AttributeModifier("src", imageFile.getImagePath()));
             }
         }
     };
-    private FileUploadPanel fileUploadPanel = new FileUploadPanel("fileUpload", fileModel, uploadFolderModel, photo);
+    private FileUploadPanel fileUploadPanel = new FileUploadPanel("fileUpload", UPLOAD_FOLDER, photo);
     private DateFieldPanel dateFieldPanel = new DateFieldPanel("birthday", birthdayModel);
 
     private TextField<String> company = new TextField<String>("company", companyModel);

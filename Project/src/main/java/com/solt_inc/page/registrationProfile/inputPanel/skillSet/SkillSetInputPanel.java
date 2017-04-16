@@ -4,8 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
+import org.apache.wicket.Application;
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
+import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
@@ -20,19 +26,35 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LambdaModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.util.ListModel;
+import org.apache.wicket.util.file.File;
+import org.apache.wicket.util.file.Folder;
 
+import com.solt_inc.WicketApplication;
 import com.solt_inc.component.file.ImageFile;
+import com.solt_inc.component.folder.UploadFolder;
 import com.solt_inc.component.panel.dateField.DateFieldPanel;
+import com.solt_inc.component.panel.fileUpload.FileUploadPanel;
+import com.solt_inc.component.panel.listView.imageListView.ImageListViewPanel;
+
 import com.solt_inc.model.dao.DevelopmentProcessDao;
 import com.solt_inc.model.dto.SkillSetDto;
 import com.solt_inc.model.entity.DevelopmentProcessEntity;
 import com.solt_inc.model.entity.SkillSetEntity;
+import com.solt_inc.model.entity.SkillSetImageEntity;
 
 public class SkillSetInputPanel extends Panel {
 
-    private IModel<List<SkillSetDto>> skillSetListModel = new ListModel<SkillSetDto>(new ArrayList<SkillSetDto>());
+	private static final long serialVersionUID = 1L;
+
+	private IModel<List<SkillSetDto>> skillSetListModel = new ListModel<SkillSetDto>(new ArrayList<SkillSetDto>());
+    IModel<List<ImageFile>> skillsetImageListModel;
+	
+	private final UploadFolder UPLOAD_FOLDER = new UploadFolder(
+			((WicketApplication)Application.get()).getUploadFolder(),
+			"user" + File.separator + "skillset" + File.separator +"image" + File.separator);
 
     private Form<?> form = new Form<Void>("form");
+
     private WebMarkupContainer wmc = new WebMarkupContainer("wmc");
     private AjaxButton addSkillSetButton = new AjaxButton("addSkillSet") {
         private static final long serialVersionUID = 1L;
@@ -51,10 +73,9 @@ public class SkillSetInputPanel extends Panel {
             skillSetList.setList(skillSetDtoList);
 
             target.add(wmc);
-
         }
-
     };
+
     private SkillSetListView skillSetList = new SkillSetListView("skillSetList", skillSetListModel);
 
     public SkillSetInputPanel(String id, IModel<List<SkillSetDto>> skillSetListModel1) {
@@ -101,8 +122,10 @@ public class SkillSetInputPanel extends Panel {
                     processList);
             IChoiceRenderer<DevelopmentProcessEntity> processRender = new ChoiceRenderer<DevelopmentProcessEntity>(
                     "processName", "id");
+            
+            List<SkillSetImageEntity> imageEntityList = skillSetDto.getSkillSetImageEntityList();
+            IModel<List<SkillSetImageEntity>> skillsetImageListModel = new ListModel<SkillSetImageEntity>(imageEntityList);
 
-            IModel<Integer> listIndexModel = Model.of(item.getIndex());
             IModel<LocalDate> projectStartModel = LambdaModel.of(skillSetEntity::getProjectStart,
                     skillSetEntity::setProjectStart);
             IModel<LocalDate> projectEndModel = LambdaModel.of(skillSetEntity::getProjectEnd,
@@ -120,28 +143,21 @@ public class SkillSetInputPanel extends Panel {
             IModel<String> dbModel = LambdaModel.of(skillSetEntity::getDB, skillSetEntity::setDB);
             IModel<String> ideModel = LambdaModel.of(skillSetEntity::getIDE, skillSetEntity::setIDE);
 
-            TextField<Integer> listIndex = new TextField<Integer>("listIndex", listIndexModel);
-            item.queue(listIndex);
 
-            AjaxButton removeLink = new AjaxButton("removeLink") {
-
-                @Override
-                public void onSubmit(AjaxRequestTarget target) {
-
+            AjaxLink<?> removeLink = new AjaxLink<Void>("removeLink") {
+				private static final long serialVersionUID = 1L;
+				@Override
+                public void onClick(AjaxRequestTarget target) {
                     item.modelChanging();
                     getList().remove(item.getIndex());
                     SkillSetListView.this.modelChanged();
                     SkillSetListView.this.removeAll();
-
                     target.add(wmc);
-
                 }
-
             };
-
-            IModel<List<ImageFile>> imageListModel = new ListModel<ImageFile>();
-            // ImageListViewPanel imageListViewPanel = new
-            // ImageListViewPanel("imageListPanel", imageListModel);
+            WebMarkupContainer imageListContainer = new WebMarkupContainer("imageListContainer");
+            ListView<SkillSetImageEntity> imageListView = new ImageListView("imageList", skillsetImageListModel, imageListContainer);
+            FileUploadPanel fileUploadPanel = new FileUploadPanel("fileUploadPanel", UPLOAD_FOLDER, imageListContainer);
             Label title = new Label("title", Model.of("SkillSet No." + (item.getIndex() + 1)));
             DateFieldPanel projectStartPanel = new DateFieldPanel("projectStartPanel", projectStartModel);
             DateFieldPanel projectEndPanel = new DateFieldPanel("projectEndPanel", projectEndModel);
@@ -159,7 +175,10 @@ public class SkillSetInputPanel extends Panel {
 
             item.queue(title);
             item.queue(removeLink);
-
+            imageListContainer.setOutputMarkupId(true);
+            item.queue(imageListContainer);
+            imageListContainer.queue(imageListView);
+            item.queue(fileUploadPanel);
             item.queue(projectStartPanel);
             item.queue(projectEndPanel);
             item.queue(projectName);
@@ -169,9 +188,62 @@ public class SkillSetInputPanel extends Panel {
             item.queue(programmingLanguage);
             item.queue(usedDB);
             item.queue(usedIDE);
+        }
+
+     private class ImageListView extends ListView<SkillSetImageEntity> {
+
+		private static final long serialVersionUID = 1L;
+		private WebMarkupContainer parentConteiner;
+
+        public ImageListView(String id, IModel<List<SkillSetImageEntity>> model, WebMarkupContainer parentContainer) {
+            super(id, model);
+            this.parentConteiner = parentContainer;
+        }
+
+        @Override
+        protected void populateItem(ListItem<SkillSetImageEntity> item) {
+            SkillSetImageEntity skillsetImageEntity = (SkillSetImageEntity) item.getModelObject();
+
+            WebMarkupContainer skillsetImage = new WebMarkupContainer("skillsetImage");
+            skillsetImage
+                    .add(new AttributeModifier("src", UPLOAD_FOLDER.getUploadPath() + skillsetImageEntity.getImageName()));
+
+            AjaxLink<?> imgDeleteLink = new AjaxLink<Void>("imgDeleteLink") {
+
+                /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
+                public void onClick(AjaxRequestTarget target) {
+
+                    item.modelChanging();
+
+                    getList().remove(item.getIndex());
+
+                    ImageListView.this.modelChanged();
+                    ImageListView.this.removeAll();
+                    target.add(parentConteiner);
+                }
+            };
+
+            item.queue(skillsetImage);
+            item.queue(imgDeleteLink);
 
         }
 
-    }
+        @Override
+        public void onEvent(IEvent<?> event) {
 
+            Object payload = event.getPayload();
+            if (payload instanceof ImageFile) {
+                ImageFile imageFile = (ImageFile) payload;
+                SkillSetImageEntity skillsetImageEntity = new SkillSetImageEntity();
+                skillsetImageEntity.setImageName(imageFile.getName());
+                this.getList().add(skillsetImageEntity);
+            }
+        }
+    }
+   }
 }

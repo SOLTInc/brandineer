@@ -20,23 +20,22 @@ import com.solt_inc.component.file.ImageFile;
 
 public class FileUploadPanel extends Panel {
 
-    private IModel<ImageFile> fileModel;
-    private IModel<Folder> folderModel;
+	private static final long serialVersionUID = 1L;
+    private Folder uploadFolder;
     private IModel<List<FileUpload>> uploadFileListModel = new ListModel<FileUpload>();
     private WebMarkupContainer targetComponent;
 
     private Form<?> form = new Form<Void>("form");
     private FileUploadField fileUpload = new FileUploadField("fileUpload", uploadFileListModel);
     private AjaxButton uploadButton = new AjaxButton("uploadButton") {
-        @Override
-        public void onSubmit(AjaxRequestTarget target) {
+		private static final long serialVersionUID = 1L;
 
+		@Override
+        public void onSubmit(AjaxRequestTarget target) {
             final FileUpload uploadedFile = fileUpload.getFileUpload();
             if (uploadedFile != null) {
-
-                folderModel.getObject().mkdirs();
-
-                ImageFile newFile = new ImageFile(folderModel.getObject(), uploadedFile.getClientFileName());
+                uploadFolder.mkdirs();
+                ImageFile newFile = new ImageFile(uploadFolder, uploadedFile.getClientFileName());
 
                 if (newFile.exists()) {
                     newFile.delete();
@@ -47,15 +46,12 @@ public class FileUploadPanel extends Panel {
                     uploadedFile.writeTo(newFile);
                 } catch (IOException e) {
                     e.printStackTrace();
-
                     // throw new IllegalStateException("Error");
-
                 } catch (Exception e) {
                     e.printStackTrace();
                     // throw new IllegalStateException("Error");
                 }
 
-                fileModel.setObject(newFile);
 
                 info("saved file: "
                         // + UPLOAD_FOLDER
@@ -67,12 +63,11 @@ public class FileUploadPanel extends Panel {
         }
     };
 
-    public FileUploadPanel(String id, IModel<ImageFile> fileModel, IModel<Folder> folderModel,
+    public FileUploadPanel(String id, Folder uploadFolder,
             WebMarkupContainer targetComponent) {
 
         super(id);
-        this.fileModel = fileModel;
-        this.folderModel = folderModel;
+        this.uploadFolder = uploadFolder;
         this.targetComponent = targetComponent;
 
         form.setMultiPart(true);
