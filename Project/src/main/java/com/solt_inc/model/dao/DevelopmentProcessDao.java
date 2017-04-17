@@ -38,14 +38,16 @@ public class DevelopmentProcessDao {
         return processList;
     }
 
-    public static DevelopmentProcessEntity getProcess(int processStart) {
+    public DevelopmentProcessEntity getProcess(int processId) {
 
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT * FROM development_process WHERE = ?";
+        String sql = "SELECT * FROM development_process WHERE ID = ?";
 
         DevelopmentProcessEntity processEntity = new DevelopmentProcessEntity();
 
         try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+        	
+        	pstmt.setInt(1, processId);
 
             ResultSet rs = pstmt.executeQuery();
 

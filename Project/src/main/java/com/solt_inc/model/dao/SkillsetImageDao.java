@@ -27,7 +27,7 @@ public class SkillsetImageDao {
 
                 skillSetImage.setId(rs.getInt("ID"));
                 skillSetImage.setSkillSetId(rs.getInt("SKILLSET_ID"));
-                skillSetImage.setImageFile(rs.getString("IMAGE_NAME"));
+                skillSetImage.setImageName(rs.getString("IMAGE_NAME"));
 
                 skillSetImageList.add(skillSetImage);
             }
@@ -53,7 +53,7 @@ public class SkillsetImageDao {
                 SkillSetImageEntity skillSetImage = new SkillSetImageEntity();
                 skillSetImage.setId(rs.getInt("ID"));
                 skillSetImage.setSkillSetId(rs.getInt("SKILLSET_ID"));
-                skillSetImage.setImageFile(rs.getString("IMAGE_NAME"));
+                skillSetImage.setImageName(rs.getString("IMAGE_NAME"));
 
                 skillSetImageList.add(skillSetImage);
 
@@ -85,5 +85,25 @@ public class SkillsetImageDao {
         }
 
         return result == 0 ? false : true;
+    }
+    
+    public boolean delete(int skillsetId) {
+         int result = 0;
+        ConnectionManager cm = ConnectionManager.getInstance();
+
+        String sql = "DELETE FROM project_db.skillSet_image WHERE SKILLSET_ID = ?";
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql.toString())) {
+
+            pstmt.setInt(1, skillsetId);
+
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result == 0 ? false : true;
+    	
     }
 }

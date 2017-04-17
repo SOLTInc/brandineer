@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+  <body>    
+
+    <wicket:panel>
+      <form wicket:id="form">
+        <div wicket:id="wmc">
+          <table wicket:id="skillSetList">
+
+            <tr>
+              <td>
+                <br/>
+                <span wicket:id="title">SkillSet no.0 </span>
+                <a wicket:id="removeLink">[x]</a>
+              </td>
+            </tr>
+           
+            <tr>
+              <td>
+                <div wicket:id="imageListContainer">
+                  <div wicket:id="imageList">
+                    <img wicket:id="skillsetImage" src="/img/icon/no_image.png" width="150" height="120">
+                    <a wicket:id="imgDeleteLink">[x]</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <!-- 
+                <div wicket:id="imageListPanel"></div>
+                -->
+                <div wicket:id="fileUploadPanel"></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div wicket:id="projectStartPanel"></div>
+                <div wicket:id="projectEndPanel"></div>
+              </td>
+            </tr>
+         
+            <tr>
+              <td>
+                project_name :
+                <input type="text" wicket:id="projectName">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                project_description :
+                <input type="text" wicket:id="projectDescription">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                process_start :
+                <select wicket:id="processStart">
+                  <option>process_start</option>
+                </select>
+                &nbsp;-&nbsp;
+                process_end :
+                <select wicket:id="processEnd">
+                  <option>process_end</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                proguramming_language :
+                <input type="text" wicket:id="programmingLanguage">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                DB :
+                <input type="text" wicket:id="usedDB">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                IDE :
+                <input type="text" wicket:id="usedIDE">
+              </td>
+            </tr>
+          </table>
+        </div>
+        <a wicket:id="addSkillSet">[add Skill Set]</a>
+      </form>
+    </wicket:panel>
+
+  </body>
+</html>

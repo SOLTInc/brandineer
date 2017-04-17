@@ -75,15 +75,12 @@ public class UserEntity implements Serializable {
 
     public Date getSqlBirthday() {
 
-        return Date.valueOf(this.birthday);
-        // Calendar cal = Calendar.getInstance();
-        // cal.setTime(this.birthday);
-        // cal.set(Calendar.HOUR_OF_DAY, 0);
-        // cal.set(Calendar.MINUTE, 0);
-        // cal.set(Calendar.SECOND, 0);
-        // cal.set(Calendar.MILLISECOND, 0);
-        // java.sql.Date birthday = new java.sql.Date(cal.getTimeInMillis());
-        // return birthday;
+    	Date date = null;
+    	if(this.birthday != null) {
+            date =  Date.valueOf(this.birthday);
+    	}
+    	return date;
+
     }
 
     public String getJobCategory() {

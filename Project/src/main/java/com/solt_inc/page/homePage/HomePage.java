@@ -11,6 +11,7 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.model.util.ListModel;
 
 import com.solt_inc.model.dao.UserDao;
+import com.solt_inc.page.editProfile.EditProfilePage;
 import com.solt_inc.page.profilePage.ProfilePage;
 import com.solt_inc.page.registrationProfile.RegistrationUserPage;
 import com.solt_inc.rtest.page.TestTopPage;
@@ -33,12 +34,22 @@ public class HomePage extends WebPage {
         }
     };
 
-    private DropDownChoice<Integer> idList = new DropDownChoice<Integer>("userIdList", userId, userIdList);
+   private DropDownChoice<Integer> idList = new DropDownChoice<Integer>("userIdList", userId, userIdList);
+
+   private DropDownChoice<Integer> editIdList = new DropDownChoice<Integer>("userIdList", userId, userIdList);
 
     private Form<?> registrationForm = new Form<Void>("registration") {
         @Override
         protected void onSubmit() {
             setResponsePage(RegistrationUserPage.class);
+        }
+    };
+
+    private Form<?> editForm = new Form<Void>("edit") {
+        @Override
+        protected void onSubmit() {
+        	EditProfilePage editPage = new EditProfilePage(userId);
+            setResponsePage(editPage);
         }
     };
 
@@ -58,6 +69,9 @@ public class HomePage extends WebPage {
         idList.setRequired(true);
         detailForm.add(idList);
         add(registrationForm);
+        add(editForm);
+        editIdList.setRequired(true);
+        editForm.add(editIdList);
         add(testForm);
 
     }

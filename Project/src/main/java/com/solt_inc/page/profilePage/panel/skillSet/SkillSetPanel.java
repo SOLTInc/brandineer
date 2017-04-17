@@ -70,7 +70,7 @@ public class SkillSetPanel extends Panel {
         SkillSetDao skillSetDao = new SkillSetDao();
         SkillsetImageDao skillSetImageDao = new SkillsetImageDao();
 
-        List<SkillSetEntity> skillSetList = skillSetDao.getSkillSet(userId);
+        List<SkillSetEntity> skillSetList = skillSetDao.getSkillSet(userId.getObject());
         for (SkillSetEntity skillSet : skillSetList) {
 
             SkillSetDto skillSetDto = new SkillSetDto();

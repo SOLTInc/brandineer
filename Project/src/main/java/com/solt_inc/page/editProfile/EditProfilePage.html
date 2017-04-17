@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+  <head>
+    <meta charset="utf-8">
+    <title>RegistrationUser</title>
+  </head>
+  <body>
+    <div wicket:id="feedback">error_message</div>
+    <form wicket:id="form">
+      <div wicket:id="profilePanel">
+        Display the ProfileInputPanel
+      </div>
+
+      <div wicket:id="skillSetPanel">
+        Display the SkillSetInputPanel
+      </div>
+
+      <div wicket:id="hobbyPanel">
+        Display the HobbyInputPanel
+      </div>
+
+      <input type="submit" wicket:id="editButton" value="edit"/>
+      <input type="submit" wicket:id="cancelButton" value="Cancel" />
+    </form>
+  </body>
+</html>

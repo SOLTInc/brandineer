@@ -18,9 +18,9 @@ public class SkillSetDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private final UploadFolder UPLOAD_FOLDER_PATH = new UploadFolder(
-			((WicketApplication)Application.get()).getUploadFolder(),
-			"user" + File.separator + "skillset" + File.separator +"image" + File.separator);
+//	private final UploadFolder UPLOAD_FOLDER_PATH = new UploadFolder(
+//			((WicketApplication)Application.get()).getUploadFolder(),
+//			"user" + File.separator + "skillset" + File.separator +"image" + File.separator);
 
 
 	private SkillSetEntity skillSetEntity;
@@ -60,25 +60,26 @@ public class SkillSetDto implements Serializable {
         this.processEndEntity = processEndEntity;
     }
     
-    public List<ImageFile> getImageFileList() {
-    	List<ImageFile> imageFileList = new ArrayList<ImageFile>();
-    	
-    	for(SkillSetImageEntity skillsetImageEntity: skillSetImageEntityList) {
-    		imageFileList.add(new ImageFile(UPLOAD_FOLDER_PATH, skillsetImageEntity.getImageName()));
-    	}
-    	return imageFileList;
-    }
-    public void setImageFileList(List<ImageFile> imageFileList) {
-    	
-    	if(skillSetImageEntityList.size() != 0) {
-    		skillSetImageEntityList.clear();
-    	}
-    	for(ImageFile imageFile: imageFileList) {
-    		SkillSetImageEntity skillsetImageEntity = new SkillSetImageEntity();
-    		skillsetImageEntity.setImageFile(imageFile);
-    		this.skillSetImageEntityList.add(skillsetImageEntity);
-    	}
-    	
-    }
+//    public List<ImageFile> getImageFileList() {
+//    	List<ImageFile> imageFileList = new ArrayList<ImageFile>();
+//    	
+//    	for(SkillSetImageEntity skillsetImageEntity: skillSetImageEntityList) {
+//    		imageFileList.add(new ImageFile(UPLOAD_FOLDER_PATH, skillsetImageEntity.getImageName()));
+//    	}
+//    	return imageFileList;
+//    }
+
+//    public void setImageFileList(List<ImageFile> imageFileList) {
+//    	
+//    	if(skillSetImageEntityList.size() != 0) {
+//    		skillSetImageEntityList.clear();
+//    	}
+//    	for(ImageFile imageFile: imageFileList) {
+//    		SkillSetImageEntity skillsetImageEntity = new SkillSetImageEntity();
+//    		skillsetImageEntity.setImageFile(imageFile);
+//    		this.skillSetImageEntityList.add(skillsetImageEntity);
+//    	}
+//    	
+//    }
 
 }

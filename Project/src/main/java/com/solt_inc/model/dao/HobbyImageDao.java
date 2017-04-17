@@ -86,4 +86,23 @@ public class HobbyImageDao {
 
         return result == 0 ? false : true;
     }
+    public boolean delete(int hobbyId) {
+
+        int result = 0;
+        ConnectionManager cm = ConnectionManager.getInstance();
+
+        String sql = "DELETE FROM project_db.hobby_image WHERE HOBBY_ID = ?";
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+            pstmt.setInt(1, hobbyId);
+
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result == 0 ? false : true;
+    }
 }

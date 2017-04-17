@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+  <body>    
+    <wicket:panel>
+      <form wicket:id="form">
+        <div wicket:id="wmc">
+         
+          <table wicket:id="hobbyList">
+            <tr>
+              <td>
+                <br/>
+                <span  wicket:id="title">hobby No.0</span>
+                <a wicket:id="removeLink">x</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                hobby_name :
+                <input type="text" wicket:id="hobbyName">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                hobby_Description :
+                <textarea wicket:id="hobbyDescription">
+                </textarea>
+              </td>
+            </tr>
+             
+             <tr>
+              <td>
+
+                <div wicket:id="imageListContainer">
+                  <div wicket:id="imageList">
+                    <img wicket:id="hobbyImage" src="/img/icon/no_image.png" width="150" height="120">
+                    <a wicket:id="imgDeleteLink">[x]</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span wicket:id="uploadButtonPanel">in uploadbutton</span>
+              </td>
+            </tr>
+           
+          </table>
+        </div>
+        <a wicket:id="addHobbyList">
+        [add Hobby]
+        </a>
+      </form>
+    </wicket:panel>
+  </body>
+</html>

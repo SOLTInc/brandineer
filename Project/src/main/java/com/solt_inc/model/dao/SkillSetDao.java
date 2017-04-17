@@ -70,7 +70,7 @@ public class SkillSetDao {
         return skillList;
     }
 
-    public List<SkillSetEntity> getSkillSet(IModel<Integer> userId) {
+    public List<SkillSetEntity> getSkillSet(int userId) {
 
         ConnectionManager cm = ConnectionManager.getInstance();
         String sql = "SELECT * FROM skillset WHERE USER_ID = ?";
@@ -79,7 +79,7 @@ public class SkillSetDao {
 
         try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 
-            pstmt.setInt(1, userId.getObject());
+            pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -90,6 +90,7 @@ public class SkillSetDao {
                 skill.setSqlProjectStart(rs.getDate("PROJECT_START"));
                 skill.setSqlProjectEnd(rs.getDate("PROJECT_END"));
                 skill.setProjectName(rs.getString("PROJECT_NAME"));
+                skill.setProjectDescription(rs.getString("PROJECT_DESCRIPTION"));
                 skill.setProcessStart(rs.getInt("PROCESS_START"));
                 skill.setProcessEnd(rs.getInt("PROCESS_END"));
                 skill.setProgrammingLanguage(rs.getString("PROGRAMMING_LANGUAGE"));
@@ -208,5 +209,48 @@ public class SkillSetDao {
 
         return result == 0 ? false : true;
     }
+
+	public boolean update(int userId, SkillSetEntity skillSet) {
+	
+        // UserEntity skillSet = skillSetModel.getObject();
+        ConnectionManager cm = ConnectionManager.getInstance();
+
+        String sql = "UPDATE project_db.skillSet "
+        		+ "SET"
+                + " PROJECT_START = ?,"
+                + " PROJECT_END = ?,"
+                + " PROJECT_NAME = ?,"
+                + " PROJECT_DESCRIPTION = ?,"
+                + " PROCESS_START = ?,"
+                + " PROCESS_END = ?,"
+                + " PROGRAMMING_LANGUAGE = ?,"
+                + " DB = ?,"
+                + " IDE = ?"
+                + " "
+                + "WHERE USER_ID = ?";
+
+        int result = 0;
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+            pstmt.setDate(1, skillSet.getSqlProjectStart());
+            pstmt.setDate(2, skillSet.getSqlProjectEnd());
+            pstmt.setString(3, skillSet.getProjectName());
+            pstmt.setString(4, skillSet.getProjectDescription());
+            pstmt.setInt(5, skillSet.getProcessStart());
+            pstmt.setInt(6, skillSet.getProcessEnd());
+            pstmt.setString(7, skillSet.getProgrammingLanguage());
+            pstmt.setString(8, skillSet.getDB());
+            pstmt.setString(9, skillSet.getIDE());
+            pstmt.setInt(10, userId);
+
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result == 0 ? false : true;
+	}
 
 }

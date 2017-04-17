@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+  <body>    
+    <wicket:panel>
+    <form wicket:id="form">
+      <table>
+        <tr>
+          <td>First Name: <input type="text" wicket:id="firstName"></td>
+          <td>Last Name: <input type="text" wicket:id="lastName"></td>
+        </tr>
+        <tr>
+          <td><img wicket:id="photo" src="/img/icon/no_image.png" width="150" height="120"></td>
+        </tr>
+        <tr>
+          <td>
+            <span wicket:id="fileUpload">
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td>birthday:<span wicket:id="birthday"></span></td>
+        </tr>
+        <tr>
+          <td>company:<input type="text" wicket:id="company"></td>
+        </tr>
+        <tr>
+          <td>job_category:<input type="text" wicket:id="jobCategory"></td>
+        </tr>
+        <tr>
+          <td>location:<input type="text" wicket:id="location"></td>
+        </tr>
+
+     </table>
+    </form>
+    </wicket:panel>
+  </body>
+</html>

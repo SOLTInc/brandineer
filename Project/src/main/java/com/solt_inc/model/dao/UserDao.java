@@ -179,4 +179,42 @@ public class UserDao {
         return userId;
     }
 
+	public boolean update(int userId, UserEntity user) {
+
+        ConnectionManager cm = ConnectionManager.getInstance();
+
+        String sql = "UPDATE project_db.user "
+        		+ "SET "
+        		+ " FIRST_NAME = ?,"
+                + " LAST_NAME = ?,"
+                + " PHOTO_NAME = ?,"
+                + " BIRTHDAY = ?,"
+                + " COMPANY = ?,"
+                + " JOB_CATEGORY = ?,"
+                + " LOCATION = ?"
+                +" "
+                + "WHERE ID = ?";
+
+        int result = 0;
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+                pstmt.setString(1, user.getFirstName());
+                pstmt.setString(2, user.getLastName());
+                pstmt.setString(3, user.getPhotoName());
+                pstmt.setDate(4, user.getSqlBirthday());
+                pstmt.setString(5, user.getCompany());
+                pstmt.setString(6, user.getJobCategory());
+                pstmt.setString(7, user.getLocation());
+                pstmt.setInt(8, userId);
+
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result == 0 ? false : true;
+    }
+
 }

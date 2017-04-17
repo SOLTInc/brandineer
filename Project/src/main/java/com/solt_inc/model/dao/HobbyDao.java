@@ -141,4 +141,34 @@ public class HobbyDao {
 
         return result == 0 ? false : true;
     }
+
+	public boolean update(int userId, HobbyEntity hobby) {
+
+        ConnectionManager cm = ConnectionManager.getInstance();
+
+        String sql = "UPDATE project_db.hobby "
+        	       + "SET"
+                   + " HOBBY_NAME = ?,"
+                   + " HOBBY_ICON = ?,"
+                   + " DESCRIPTION = ?"
+                   + " " 
+                   + "WHERE USER_ID = ?";
+
+        int result = 0;
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql.toString())) {
+
+            pstmt.setString(1, hobby.getHobbyName());
+            pstmt.setString(2, hobby.getHobbyIcon());
+            pstmt.setString(3, hobby.getDescription());
+            pstmt.setInt(4, userId);
+
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result == 0 ? false : true;
+	}
 }
