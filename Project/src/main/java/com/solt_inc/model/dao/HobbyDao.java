@@ -14,7 +14,21 @@ public class HobbyDao {
     public int getHobbyId(String hobbyName) {
 
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT ID FROM hobby WHERE HOBBY_NAME = ? ORDER BY DATA_MODEFIED DESC";
+        String sql = "SELECT"
+        		   + " ID"
+        		   + " "
+        		   + "FROM"
+        		   + " hobby"
+        		   + " "
+        		   + "WHERE"
+         		   + " HOBBY_NAME = ?"
+         		   + " AND "
+        		   + " (DELETE_FLG != 1"
+        		   + " or"
+        		   + " DELETE_FLG is null)"
+        		   + " "
+        		   + "ORDER BY"
+        		   + " DATA_MODEFIED DESC";
 
         int hobbyId = -1;
 
@@ -36,7 +50,16 @@ public class HobbyDao {
     public List<HobbyEntity> getAllHobbys() {
 
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT * FROM hobby";
+        String sql = "SELECT"
+        		   + " *"
+        		   + " "
+        		   + "FROM"
+        		   + " hobby"
+        		   + " "
+        		   + "WHERE"
+        		   + " (DELETE_FLG != 1"
+        		   + " or"
+        		   + " DELETE_FLG is null)";
 
         List<HobbyEntity> hobbyList = new ArrayList<HobbyEntity>();
 
@@ -64,7 +87,19 @@ public class HobbyDao {
     public List<HobbyEntity> getUserHobby(int userId) {
 
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT * FROM hobby WHERE USER_ID = ?";
+        String sql = "SELECT"
+        		   + " *"
+        		   + " "
+        		   + "FROM"
+        		   + " hobby"
+        		   + " "
+        		   + "WHERE"
+        		   + " USER_ID = ?"
+        		   + " and "
+        		   + " (DELETE_FLG != 1"
+        		   + " or "
+        		   + " DELETE_FLG is null)"
+        		   ;
 
         List<HobbyEntity> hobbyList = new ArrayList<HobbyEntity>();
 
@@ -142,7 +177,7 @@ public class HobbyDao {
         return result == 0 ? false : true;
     }
 
-	public boolean update(int userId, HobbyEntity hobby) {
+	public boolean update(int hobbyId, HobbyEntity hobby) {
 
         ConnectionManager cm = ConnectionManager.getInstance();
 
@@ -150,9 +185,10 @@ public class HobbyDao {
         	       + "SET"
                    + " HOBBY_NAME = ?,"
                    + " HOBBY_ICON = ?,"
-                   + " DESCRIPTION = ?"
+                   + " DESCRIPTION = ?,"
+                   + " DELETE_FLG = 0"
                    + " " 
-                   + "WHERE USER_ID = ?";
+                   + "WHERE ID = ?";
 
         int result = 0;
 
@@ -161,7 +197,7 @@ public class HobbyDao {
             pstmt.setString(1, hobby.getHobbyName());
             pstmt.setString(2, hobby.getHobbyIcon());
             pstmt.setString(3, hobby.getDescription());
-            pstmt.setInt(4, userId);
+            pstmt.setInt(4, hobbyId);
 
             result = pstmt.executeUpdate();
 
@@ -170,5 +206,31 @@ public class HobbyDao {
         }
 
         return result == 0 ? false : true;
+	}
+
+	public boolean delete(int userId) {
+		// TODO Auto-generated method stub
+        ConnectionManager cm = ConnectionManager.getInstance();
+
+        String sql = "UPDATE project_db.hobby "
+        		+ "SET"
+                + " DELETE_FLG = 1"
+                + " "
+                + "WHERE USER_ID = ?";
+
+        int result = 0;
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userId);
+
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result == 0 ? false : true;
+		
 	}
 }

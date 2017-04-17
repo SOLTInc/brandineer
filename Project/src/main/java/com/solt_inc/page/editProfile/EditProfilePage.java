@@ -121,6 +121,8 @@ public class EditProfilePage extends WebPage {
     	boolean updateFlg = true;
 
         SkillSetDao skillSetDao = new SkillSetDao();
+        
+        skillSetDao.delete(userId);
 
         for (SkillSetDto skillSetDto : skillsetDtoList) {
             SkillSetEntity skillSetEntity = skillSetDto.getSkillSetEntity();
@@ -132,18 +134,30 @@ public class EditProfilePage extends WebPage {
                 int processEnd = skillSetDto.getProcessEndEntity().getId();
                 skillSetEntity.setProcessEnd(processEnd);
             }
-            updateFlg = skillSetDao.update(userId, skillSetEntity);
+            if(skillSetEntity.getId() != 0) {
+                updateFlg = skillSetDao.update(skillSetEntity.getId(), skillSetEntity);
+            } else {
+            	updateFlg = skillSetDao.insert(userId, skillSetEntity);
+            }
+            if(!updateFlg) {
+            	System.out.println("skillset can not update");
+            	break;	
+            }
             int skillsetId = skillSetDao.getSkillSetId(skillSetEntity.getProjectName());
 
             List<SkillSetImageEntity> skillsetImageEntityList = skillSetDto.getSkillSetImageEntityList();
-            if(skillsetImageEntityList.size() != 0) {
+            if(skillsetId != -1 && skillsetImageEntityList.size() != 0 && updateFlg) {
             	SkillsetImageDao skillsetImageDao = new SkillsetImageDao();
             	skillsetImageDao.delete(skillsetId);
             	for(SkillSetImageEntity entity: skillsetImageEntityList) {
-                    skillsetImageDao.insert(skillsetId, entity);
+                    updateFlg = skillsetImageDao.insert(skillsetId, entity);
+                    if(!updateFlg) {
+                    	System.out.println("sillsetImage can not update");
+                    	break;
+                    }
                 }
             }
- 
+
         }
         return updateFlg;
    	
@@ -153,10 +167,22 @@ public class EditProfilePage extends WebPage {
     	boolean updateFlg = true;
 
         HobbyDao hobbyDao = new HobbyDao();
+        
+        hobbyDao.delete(userId);
 
         for(HobbyDto hobbyDto : hobbyListModel.getObject()) {
             HobbyEntity hobbyEntity = hobbyDto.getHobbyEntity();
-            updateFlg = hobbyDao.update(userId, hobbyEntity);
+
+            if(hobbyEntity.getId() != 0) {
+                updateFlg = hobbyDao.update(hobbyEntity.getId(), hobbyEntity);
+            } else {
+            	updateFlg = hobbyDao.insert(userId, hobbyEntity);
+            }
+        	if(!updateFlg) {
+        		System.out.println("hobby can not update");
+        		break;
+        	}
+ 
             int hobbyId = hobbyDao.getHobbyId(hobbyEntity.getHobbyName());
             if (hobbyId != -1 && updateFlg && hobbyDto.getHobbyImageEntityList() != null) {
 
@@ -165,6 +191,10 @@ public class EditProfilePage extends WebPage {
                 List<HobbyImageEntity> hobbyImageList = hobbyDto.getHobbyImageEntityList();
                 for (HobbyImageEntity hobbyImage : hobbyImageList) {
                     updateFlg = hobbyImageDao.insert(hobbyId, hobbyImage);
+                    if(!updateFlg) {
+                       	System.out.println("hobbyImage can not update");
+                       	break;
+                    }
                 }
             }
         }

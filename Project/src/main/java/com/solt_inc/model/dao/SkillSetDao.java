@@ -16,7 +16,21 @@ public class SkillSetDao {
     public int getSkillSetId(String skillSetName) {
 
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT ID FROM skillset WHERE PROJECT_NAME = ? ORDER BY DATA_MODEFIED DESC";
+        String sql = "SELECT"
+        		+ " ID"
+        		+ " "
+        		+ "FROM"
+        		+ " skillset"
+        		+ " "
+        		+ "WHERE"
+        		+ " PROJECT_NAME = ?"
+        		+ " and "
+        		+ " (DELETE_FLG != 1"
+        		+ " or"
+        		+ " DELETE_FLG is null)"
+        		+ " "
+        		+ "ORDER BY"
+        		+ " DATA_MODEFIED DESC";
 
         int skillSetId = -1;
 
@@ -38,7 +52,16 @@ public class SkillSetDao {
     public List<SkillSetEntity> getAllSkillSets() {
 
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT * FROM skillset";
+        String sql = "SELECT"
+        		+ " *"
+        		+ " "
+        		+ "FROM"
+        		+ " skillset"
+        		+ " "
+        		+ "WHERE"
+        		+ " (DELETE_FLG != 1"
+        		+ " or"
+        		+ " DELETE_FLG is null)";
 
         List<SkillSetEntity> skillList = new ArrayList<SkillSetEntity>();
 
@@ -73,7 +96,18 @@ public class SkillSetDao {
     public List<SkillSetEntity> getSkillSet(int userId) {
 
         ConnectionManager cm = ConnectionManager.getInstance();
-        String sql = "SELECT * FROM skillset WHERE USER_ID = ?";
+        String sql = "SELECT"
+        		+ " *"
+        		+ " "
+        		+ "FROM"
+        		+ " skillset"
+        		+ " "
+        		+ "WHERE"
+        		+ " USER_ID = ?"
+        		+ " and "
+        		+ " (DELETE_FLG != 1"
+        		+ " or"
+        		+ " DELETE_FLG is null)";
 
         List<SkillSetEntity> skillList = new ArrayList<SkillSetEntity>();
 
@@ -210,7 +244,7 @@ public class SkillSetDao {
         return result == 0 ? false : true;
     }
 
-	public boolean update(int userId, SkillSetEntity skillSet) {
+	public boolean update(int skillsetId, SkillSetEntity skillSet) {
 	
         // UserEntity skillSet = skillSetModel.getObject();
         ConnectionManager cm = ConnectionManager.getInstance();
@@ -225,9 +259,10 @@ public class SkillSetDao {
                 + " PROCESS_END = ?,"
                 + " PROGRAMMING_LANGUAGE = ?,"
                 + " DB = ?,"
-                + " IDE = ?"
+                + " IDE = ?,"
+                + " DELETE_FLG = 0"
                 + " "
-                + "WHERE USER_ID = ?";
+                + "WHERE ID = ?";
 
         int result = 0;
 
@@ -242,7 +277,7 @@ public class SkillSetDao {
             pstmt.setString(7, skillSet.getProgrammingLanguage());
             pstmt.setString(8, skillSet.getDB());
             pstmt.setString(9, skillSet.getIDE());
-            pstmt.setInt(10, userId);
+            pstmt.setInt(10, skillsetId);
 
             result = pstmt.executeUpdate();
 
@@ -253,4 +288,28 @@ public class SkillSetDao {
         return result == 0 ? false : true;
 	}
 
+	public boolean delete(int userId) {
+	        // UserEntity skillSet = skillSetModel.getObject();
+        ConnectionManager cm = ConnectionManager.getInstance();
+
+        String sql = "UPDATE project_db.skillSet "
+        		+ "SET"
+                + " DELETE_FLG = 1"
+                + " "
+                + "WHERE USER_ID = ?";
+
+        int result = 0;
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userId);
+
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result == 0 ? false : true;
+	}
 }

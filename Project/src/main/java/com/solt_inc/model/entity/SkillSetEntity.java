@@ -8,7 +8,9 @@ import javax.validation.constraints.NotNull;
 
 public class SkillSetEntity implements Serializable {
 
-    private int id;
+	private static final long serialVersionUID = 1L;
+
+	private int id;
     private int userId;
     private LocalDate projectStart;
     private LocalDate projectEnd;
@@ -70,7 +72,11 @@ public class SkillSetEntity implements Serializable {
     }
 
     public Date getSqlProjectStart() {
-        return Date.valueOf(this.projectStart);
+    	Date date = null;
+    	if(this.projectStart != null) {
+        date = Date.valueOf(this.projectStart);
+    	}
+    	return date;
     }
 
     public void setSqlProjectStart(Date projectStart) {
@@ -88,7 +94,11 @@ public class SkillSetEntity implements Serializable {
     }
 
     public Date getSqlProjectEnd() {
-        return Date.valueOf(this.projectEnd);
+    	Date date = null;
+    	if(projectEnd != null) {
+            date = Date.valueOf(this.projectEnd);
+    	}
+    	return date;
     }
 
     public void setSqlProjectEnd(Date projectEnd) {
