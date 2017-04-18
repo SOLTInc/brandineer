@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import com.solt_inc.model.entity.FollowEntity;
+
 
 public class FollowDao {
 
@@ -27,6 +29,65 @@ public class FollowDao {
 
         return followId == 0 ? false : true;
 
+    }
+
+    public boolean insert(FollowEntity follow) {
+
+        // UserEntity user = userModel.getObject();
+        ConnectionManager cm = ConnectionManager.getInstance();
+
+        StringBuffer sql = new StringBuffer();
+        int count = 0;
+        sql.append("INSERT INTO project_db.follow(");
+
+            sql.append("USER_ID,");
+            count++;
+        
+
+            sql.append("FOLLOW_ID,");
+            count++;
+        
+        
+        sql.delete(sql.length() - 1, sql.length());
+        sql.append(") VALUES (");
+        for (int i = 0; i < count; i++) {
+            sql.append("?,");
+        }
+        sql.delete(sql.length() - 1, sql.length());
+        sql.append(")");
+        // String sql = "INSERT INTO project_db.user"
+        // + " (FIRST_NAME, LAST_NAME, PHOTO_NAME, BIRTHDAY, COMPANY,
+        // JOB_CATEGORY, LOCATION)"
+        // + " VALUES (?, ?, ?, ?, ?, ?)";
+        int result = 0;
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql.toString())) {
+
+            // pstmt.setString(1, user.getFirstName());
+            // pstmt.setString(2, user.getLastName());
+            // pstmt.setString(3, user.getPhotoName());
+            // pstmt.setDate(4, user.getSqlBirthday());
+            // pstmt.setString(5, user.getCompany());
+            // pstmt.setString(6, user.getJobCategory());
+            // pstmt.setString(7, user.getLocation());
+            count = 0;
+                count++;
+                pstmt.setInt(count, follow.getUserId());
+            
+
+                count++;
+                pstmt.setInt(count, follow.getFollowId());
+            
+            
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+      //      e.printStackTrace();
+		throw new Error(e);
+
+        }
+
+        return result == 0 ? false : true;
     }
 
 }

@@ -15,6 +15,10 @@ import com.solt_inc.page.mailPage.MailPage;
 import com.solt_inc.page.profilePage.panel.hobby.HobbyPanel;
 import com.solt_inc.page.profilePage.panel.profile.UserPanel;
 import com.solt_inc.page.profilePage.panel.skillSet.SkillSetPanel;
+import com.solt_inc.model.dao.FollowDao;
+import com.solt_inc.model.dto.FollowDto;
+import com.solt_inc.model.entity.FollowEntity;
+
 
 public class ProfilePage extends WebPage {
 
@@ -33,7 +37,23 @@ public class ProfilePage extends WebPage {
     private Link<Void> followLink = new Link<Void>("follow") {
         @Override
         public void onClick() {
-            setResponsePage(MailPage.class);
+		boolean updateFlg = true;
+
+            if (updateFlg) {
+            	System.out.println("updateFollow");
+            	updateFlg = updateFollow(userId.getObject());
+            	System.out.println(updateFlg);
+            }
+
+            if (updateFlg) {	
+           	 ProfilePage profilePage = new ProfilePage(userId);
+           	 setResponsePage(profilePage);
+            } else {
+                error("insert error");
+            }
+
+
+
         }
     };
 
@@ -73,5 +93,16 @@ public class ProfilePage extends WebPage {
         skillSetPanel = new SkillSetPanel("skillSetPanel", this.userId);
         add(skillSetPanel);
     }
+    private boolean updateFollow(int userId) {
+    	boolean updateFlg = true;
 
+        FollowDao followDao = new FollowDao();
+
+        FollowEntity followEntity = new FollowEntity();
+	followEntity.setFollowId(userId);
+	followEntity.setUserId(userId);
+        updateFlg = followDao.insert(followEntity);
+
+        return updateFlg;
+    }
 }
