@@ -6,6 +6,7 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
@@ -13,8 +14,16 @@ import org.apache.wicket.model.PropertyModel;
 import com.solt_inc.model.dao.UserDao;
 import com.solt_inc.model.entity.UserEntity;
 
+import com.solt_inc.model.dao.FollowDao;
+import com.solt_inc.model.dto.FollowDto;
+import com.solt_inc.model.entity.FollowEntity;
+
+import com.solt_inc.page.profilePage.ProfilePage;
+
 public class UserPanel extends Panel {
     private static final long serialVersionUID = 7514416342722447820L;
+
+    private IModel<Integer> userId = new Model<Integer>(0);
 
     private IModel<UserEntity> userModel = new Model<UserEntity>();
     private IModel<String> firstNameModel = new PropertyModel<String>(userModel, "firstName");
@@ -25,6 +34,8 @@ public class UserPanel extends Panel {
     private IModel<String> companyModel = new PropertyModel<String>(userModel, "company");
     private IModel<String> jobCategoryModel = new PropertyModel<String>(userModel, "jobCategory");
     private IModel<String> locationModel = new PropertyModel<String>(userModel, "location");
+
+    //private WebMarkupContainer followIcon = new WebMarkupContainer("followIcon");
 
     private Label firstName = new Label("firstName", firstNameModel);
 
@@ -40,14 +51,41 @@ public class UserPanel extends Panel {
 
     private Label location = new Label("location", locationModel);
 
+    private Link<Void> followLink = new Link<Void>("follow") {
+        @Override
+        public void onClick() {
+		boolean updateFlg = true;
+
+            if (updateFlg) {
+            	System.out.println("updateFollow");
+            	updateFlg = updateFollow(userId.getObject());
+            	System.out.println(updateFlg);
+            }
+
+            if (updateFlg) {	
+           	 ProfilePage profilePage = new ProfilePage(userId);
+           	 setResponsePage(profilePage);
+            } else {
+                error("insert error");
+            }
+        }
+    };
+
     private WebMarkupContainer photo = new WebMarkupContainer("photo");
 
     public UserPanel(String id, IModel<Integer> userId) {
 
         super(id, userId);
+        
+                this.userId = userId;
+
         UserDao userDao = new UserDao();
         UserEntity userEntity = userDao.getUser(userId.getObject());
         this.userModel.setObject(userEntity);
+
+        //followIcon.add(new AttributeModifier("src", "/img/icon/follow.png"));
+        //followLink.add(followIcon);
+        add(followLink);
 
         if (firstNameModel == null) {
             firstName.setVisible(false);
@@ -87,6 +125,21 @@ public class UserPanel extends Panel {
         }
         add(location);
 
+    }
+
+
+
+    private boolean updateFollow(int userId) {
+    	boolean updateFlg = true;
+
+        FollowDao followDao = new FollowDao();
+
+        FollowEntity followEntity = new FollowEntity();
+	followEntity.setFollowId(userId);
+	followEntity.setUserId(userId);
+        updateFlg = followDao.insert(followEntity);
+
+        return updateFlg;
     }
 
 }
