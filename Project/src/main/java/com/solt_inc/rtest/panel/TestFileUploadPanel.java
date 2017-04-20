@@ -1,7 +1,9 @@
 package com.solt_inc.rtest.panel;
 
+import java.util.Arrays;
 import java.util.List;
 
+import org.apache.wicket.Application;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -9,14 +11,22 @@ import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.event.Broadcast;
+import org.apache.wicket.markup.head.HeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.markup.head.OnEventHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.util.ListModel;
+import org.apache.wicket.request.Url;
+import org.apache.wicket.request.resource.ResourceReference;
+import org.apache.wicket.request.resource.UrlResourceReference;
 
 import com.solt_inc.component.file.ImageFile;
 import com.solt_inc.component.folder.UploadFolder;
@@ -80,6 +90,21 @@ public class TestFileUploadPanel extends Panel {
         this.folderModel = folderModel;
         this.imageComponent = imageComponent;
         this.fileNameModel = new Model<String>(this.fileModel.getObject().getName());
+        Link<?> uploadStatingLink = new Link<Void>("uploadStartingLink") {
+
+			@Override
+			public void onClick() {
+			}
+			
+			@Override
+			public void renderHead(IHeaderResponse response) {
+				
+				String javaScript = "$('#"+ fileUpload.getMarkupId() +"').click();";
+				response.render(OnEventHeaderItem.forScript(this.getMarkupId(), "click", javaScript));
+				
+			}
+        	
+        };
         Label fileNameLabel = new Label("fileName", this.fileNameModel);
         fileNameLabel.setOutputMarkupId(true);
         queue(fileNameLabel);
@@ -97,6 +122,7 @@ public class TestFileUploadPanel extends Panel {
         this.image.setOutputMarkupId(true);
         // form.add(image);
         queue(image);
+        form.add(uploadStatingLink);
 
         this.fileList = new ListModel<FileUpload>();
         this.fileUpload = new FileUploadField("fileUpload", fileList);
@@ -206,4 +232,18 @@ public class TestFileUploadPanel extends Panel {
     public IModel<ImageFile> getFile() {
         return this.fileModel;
     }
+
+     Url jqueyuiUrl = Url.parse("https://ajax.googleapis.com/ajax/libs/jqueryui/" +
+                "1.10.2/jquery-ui.min.js");
+    
+    UrlResourceReference jequeryyuiRef = new UrlResourceReference(jqueyuiUrl) {
+        @Override
+        public List<HeaderItem> getDependencies() {
+
+   	        Application application = Application.get();
+             ResourceReference jqueryRef = application.getJavaScriptLibrarySettings().getJQueryReference();
+    	
+        	return Arrays.asList(JavaScriptHeaderItem.forReference(jqueryRef));
+        }
+    };
 }
