@@ -157,6 +157,16 @@ public class UserDao {
         }
         return userIdList;
     }
+ public List<UserEntity> getAllUsers() {
+ 	
+
+        List<Integer> userIdList = getAllUsersId();
+		List<UserEntity> res = new ArrayList<UserEntity>();
+		for (int i = 0; i < userIdList.size(); i++) {
+			res.add(getUser(userIdList.get(i)));
+		}
+		return res;
+    }
 
     public int getUserId(String firstName) {
 

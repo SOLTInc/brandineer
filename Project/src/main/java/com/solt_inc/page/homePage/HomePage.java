@@ -11,6 +11,7 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.model.util.ListModel;
 
 import com.solt_inc.model.dao.UserDao;
+import com.solt_inc.model.entity.UserEntity;
 import com.solt_inc.page.editProfile.EditProfilePage;
 import com.solt_inc.page.profilePage.ProfilePage;
 import com.solt_inc.page.registrationProfile.RegistrationUserPage;
@@ -22,6 +23,7 @@ public class HomePage extends WebPage {
 
     private IModel<Integer> userId = new Model<Integer>(1);
     private IModel<List<Integer>> userIdList = new ListModel<Integer>();
+    private IModel<List<UserEntity>> userList = new ListModel<UserEntity>();
 
     private FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
 
@@ -68,6 +70,10 @@ public class HomePage extends WebPage {
         userIdList.setObject(userDao.getAllUsersId());
         idList.setRequired(true);
         detailForm.add(idList);
+        
+        //userList.setObject(userDao.getAllUsers());
+        //detailForm.add(userList);
+
         add(registrationForm);
         add(editForm);
         editIdList.setRequired(true);
