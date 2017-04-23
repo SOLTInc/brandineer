@@ -2,9 +2,16 @@ package com.solt_inc.page.homePage;
 
 import java.util.List;
 
+import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.Component;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -28,7 +35,10 @@ public class HomePage extends WebPage {
     private FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
 
     private Form<?> detailForm = new Form<Void>("detail") {
-        @Override
+
+		private static final long serialVersionUID = 1L;
+
+		@Override
         protected void onSubmit() {
 
             ProfilePage profilePage = new ProfilePage(userId);
@@ -41,14 +51,20 @@ public class HomePage extends WebPage {
    private DropDownChoice<Integer> editIdList = new DropDownChoice<Integer>("userIdList", userId, userIdList);
 
     private Form<?> registrationForm = new Form<Void>("registration") {
-        @Override
+
+		private static final long serialVersionUID = 1L;
+
+		@Override
         protected void onSubmit() {
             setResponsePage(RegistrationUserPage.class);
         }
     };
 
     private Form<?> editForm = new Form<Void>("edit") {
-        @Override
+
+		private static final long serialVersionUID = 1L;
+
+		@Override
         protected void onSubmit() {
         	EditProfilePage editPage = new EditProfilePage(userId);
             setResponsePage(editPage);
@@ -56,29 +72,88 @@ public class HomePage extends WebPage {
     };
 
     private Form<?> testForm = new Form<Void>("test") {
-        @Override
+
+		private static final long serialVersionUID = 1L;
+
+		@Override
         protected void onSubmit() {
             setResponsePage(TestTopPage.class);
         }
     };
 
     public HomePage() {
+    	
+    	UserDao userDao = new UserDao();
+    	List<UserEntity> userList = userDao.getUserList();
 
-        add(feedbackPanel);
-        add(detailForm);
-        UserDao userDao = new UserDao();
+    	Form<?> form = new Form<Void>("form");
+    	ListView<UserEntity> userListView = new ListView<UserEntity>("userList", userList) {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void populateItem(ListItem<UserEntity> item) {
+				UserEntity user = (UserEntity)item.getModelObject();
+
+				Label firstName = new Label("firstName", user.getFirstName());
+				Label lastName = new Label("lastName", user.getLastName());
+				Label jobCategory = new Label("jobCategory", user.getJobCategory());
+
+				WebMarkupContainer imgContainer = new WebMarkupContainer("photo");
+				imgContainer.add(new AttributeModifier("src","/img/user/profile/photo/" + user.getPhotoName()));
+				
+				Link<?> detailLink =  new Link<Void>("detailLink") {
+
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public void onClick() {
+						setResponsePage(new ProfilePage(Model.of(user.getId())));
+						
+					}
+					
+				};
+
+				Link<?> editLink =  new Link<Void>("editLink") {
+
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public void onClick() {
+						setResponsePage(new EditProfilePage(Model.of(user.getId())));
+						
+					}
+					
+				};
+				
+				item.queue(imgContainer);
+				item.queue(firstName);
+				item.queue(lastName);
+				item.queue(jobCategory);
+				item.queue(detailLink);
+				item.queue(editLink);
+				
+			}
+    		
+    	};
+
+        queue(feedbackPanel);
+//        add(form);
+        queue(userListView);
+
+        queue(detailForm);
         userIdList.setObject(userDao.getAllUsersId());
         idList.setRequired(true);
-        detailForm.add(idList);
+        detailForm.queue(idList);
         
         //userList.setObject(userDao.getAllUsers());
         //detailForm.add(userList);
 
-        add(registrationForm);
-        add(editForm);
+        queue(registrationForm);
+        queue(editForm);
         editIdList.setRequired(true);
-        editForm.add(editIdList);
-        add(testForm);
+        editForm.queue(editIdList);
+        queue(testForm);
 
     }
 

@@ -39,6 +39,36 @@ public class UserDao {
         }
         return user;
     }
+    public List<UserEntity> getUserList() {
+
+    	List<UserEntity> userList = new ArrayList<UserEntity>();
+
+        ConnectionManager cm = ConnectionManager.getInstance();
+        String sql = "SELECT * FROM project_db.user";
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+
+                UserEntity user = new UserEntity();
+                user.setId(rs.getInt("ID"));
+                user.setFirstName(rs.getString("FIRST_NAME"));
+                user.setLastName(rs.getString("LAST_NAME"));
+                user.setPhotoName(rs.getString("PHOTO_NAME"));
+                user.setSqlBirthday(rs.getDate("BIRTHDAY"));
+                user.setJobCategory(rs.getString("JOB_CATEGORY"));
+                user.setLocation(rs.getString("LOCATION"));
+                user.setCompany(rs.getString("COMPANY"));
+                userList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
 
     public boolean insert(UserEntity user) {
 
