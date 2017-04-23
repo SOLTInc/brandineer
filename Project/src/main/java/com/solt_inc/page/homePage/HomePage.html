@@ -57,27 +57,36 @@
     </nav>
     
     
-    
+ <script>
+ function movePage(ind) {
+ 	$(".userIdList").val(""+ind);
+ 	$("#detailSubmit").click();
+ 	}
+ function editPage(ind) {
+ 	$(".userIdList").val(""+ind);
+ 	$("#editSubmit").click();
+ 	}
+ </script>
     
     <section id="ryokuhei" class="ryokuhei" style="display:none">
   <div wicket:id="feedback">
     display on feedBackPanel
   </div>
-    <form wicket:id="detail">
+    <form id="detail" wicket:id="detail">
       <span>ID</span>
-      <select wicket:id="userIdList" >
+      <select class="userIdList" wicket:id="userIdList" >
         <option value="0">userId</option>
         <option value="1">userId</option>
       </select>
-      <input type="submit" value="detail">
+      <input id="detailSubmit" type="submit" value="detail">
     </form>
     <form wicket:id="edit">
       <span>ID</span>
-      <select wicket:id="userIdList" >
+      <select class="userIdList" wicket:id="userIdList" >
         <option value="0">userId</option>
         <option value="1">userId</option>
       </select>
-    <input type="submit" value="edit">
+    <input id="editSubmit" type="submit" value="edit">
     </form>
    <form wicket:id="registration">
       <input type="submit" value="registration">
@@ -112,86 +121,109 @@
 
 
 	<div class="col-md-6" style="border-right:2px solid #444">
-        <div class="portfolio-item">
-          <a href="#">
+        <div class="col-md-12 portfolio-item" style="padding:40px;padding-bottom:0px;">
+          <a href="#" onclick="javascript:movePage(0)">
             <span>
-              <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
+              <img class="img-portfolio img-responsive" src="/img/user/profile/photo/[B@36fce819D5116BBED69CC8A.jpg">
             </span>
           </a>
-        <div class="service-item" style="border-bottom:2px solid #444;padding-bottom:20px;">
-            <h3>Ryokuhei Sato</h3>
-            <h4>Software Enginieer</h4>
-        </div>
+          <div class="col-md-12 service-item" style="border-bottom:2px solid #444;padding-bottom:20px;">
+            <div class="pull-left">
+              <h3><a href="#" onclick="javascript:editPage(0)">Daisuke Kubota</a></h3>
+              <h4>Sales Enginieer</h4>
+            </div>
+            <h3 class="pull-right">1 hour</h3>
+          </div>
         </div>
       </div>
 
+
 	<div class="col-md-6">
-        <div class="portfolio-item">
-          <a href="#">
+        <div class="col-md-12 portfolio-item" style="padding:40px;padding-bottom:0px;">
+          <a href="#" onclick="javascript:movePage(1)">
             <span>
-              <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
+              <img class="img-portfolio img-responsive" src="/img/user/profile/photo/[B@73265408D5116BBED69CC8E.jpg">
             </span>
           </a>
-        <div class="service-item" style="border-bottom:2px solid #444;padding-bottom:20px;">
-            <h3>Ryokuhei Sato</h3>
-            <h4>Software Enginieer</h4>
-        </div>
+          <div class="col-md-12 service-item" style="border-bottom:2px solid #444;padding-bottom:20px;">
+            <div class="pull-left">
+              <h3><a href="#" onclick="javascript:editPage(1)">Shiho Kato</a></h3>
+              <h4>System Enginieer</h4>
+            </div>
+            <h3 class="pull-right">1 hour</h3>
+          </div>
         </div>
       </div>
+
 
 	<div class="col-md-6" style="border-right:2px solid #444">
-        <div class="portfolio-item">
-          <a href="#">
+        <div class="col-md-12 portfolio-item" style="padding:40px;padding-bottom:0px;">
+          <a href="#" onclick="javascript:movePage(2)">
             <span>
-              <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
+              <img class="img-portfolio img-responsive" src="/img/user/profile/photo/[B@41c4bf17D5116BBED69CC89.jpg">
             </span>
           </a>
-        <div class="service-item" style="border-bottom:2px solid #444;padding-bottom:20px;">
-            <h3>Ryokuhei Sato</h3>
-            <h4>Software Enginieer</h4>
-        </div>
+          <div class="col-md-12 service-item" style="border-bottom:2px solid #444;padding-bottom:20px;">
+            <div class="pull-left">
+              <h3><a href="#" onclick="javascript:editPage(2)">Yoshio Kato(Catan)</a></h3>
+              <h4>System Enginieer</h4>
+            </div>
+            <h3 class="pull-right">now</h3>
+          </div>
         </div>
       </div>
 
+
 	<div class="col-md-6">
-        <div class="portfolio-item">
-          <a href="#">
+        <div class="col-md-12 portfolio-item" style="padding:40px;padding-bottom:0px;">
+          <a href="#" onclick="javascript:movePage(3)">
             <span>
-              <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
+              <img class="img-portfolio img-responsive" src="/img/user/profile/photo/[B@b5d4e12D5116BBED69CC8B.jpg">
             </span>
           </a>
-        <div class="service-item" style="border-bottom:2px solid #444;padding-bottom:20px;">
-            <h3>Ryokuhei Sato</h3>
-            <h4>Software Enginieer</h4>
-        </div>
+          <div class="col-md-12 service-item" style="border-bottom:2px solid #444;padding-bottom:20px;">
+            <div class="pull-left">
+              <h3><a href="#" onclick="javascript:editPage(3)">Leona Seki</a></h3>
+              <h4>Application Enginieer</h4>
+            </div>
+            <h3 class="pull-right">3 hour</h3>
+          </div>
         </div>
       </div>
+
 
 	<div class="col-md-6" style="border-right:2px solid #444">
-        <div class="portfolio-item">
-          <a href="#">
+        <div class="col-md-12 portfolio-item" style="padding:40px;padding-bottom:0px;">
+          <a href="#" onclick="javascript:movePage(4)">
             <span>
-              <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
+              <img class="img-portfolio img-responsive" src="/img/user/profile/photo/[B@365c453fD5116BBED69CC96.jpg">
             </span>
           </a>
-        <div class="service-item" style="border-bottom:2px solid #444;padding-bottom:20px;">
-            <h3>Ryokuhei Sato</h3>
-            <h4>Software Enginieer</h4>
-        </div>
+          <div class="col-md-12 service-item" style="border-bottom:2px solid #444;padding-bottom:20px;">
+            <div class="pull-left">
+              <h3><a href="#" onclick="javascript:editPage(4)">Ryokuhei Sato</a></h3>
+              <h4>Software Enginieer</h4>
+            </div>
+            <h3 class="pull-right">1 day</h3>
+          </div>
         </div>
       </div>
 
+
 	<div class="col-md-6">
-        <div class="portfolio-item">
-          <a href="#">
+        <div class="col-md-12 portfolio-item" style="padding:40px;padding-bottom:0px;">
+          <a href="#" onclick="javascript:movePage(5)">
             <span>
-              <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
+              <img class="img-portfolio img-responsive" src="/img/user/profile/photo/[B@65377210D5116BBED69CC88.jpg">
             </span>
           </a>
-        <div class="service-item" style="border-bottom:2px solid #444;padding-bottom:20px;">
-            <h3>Ryokuhei Sato</h3>
-            <h4>Software Enginieer</h4>
-        </div>
+          <div class="col-md-12 service-item" style="border-bottom:2px solid #444;padding-bottom:20px;">
+            <div class="pull-left">
+              <h3><a href="#" onclick="javascript:editPage(5)">Mika Yamasaki</a></h3>
+              <h4>Designer</h4>
+            </div>
+            <h3 class="pull-right">3 weeks</h3>
+          </div>
         </div>
       </div>
 
