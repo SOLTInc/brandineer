@@ -16,6 +16,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.util.ListModel;
+import org.apache.wicket.behavior.AttributeAppender;
 
 import com.solt_inc.model.dao.UserDao;
 import com.solt_inc.model.entity.UserEntity;
@@ -93,6 +94,9 @@ public class HomePage extends WebPage {
 
 			@Override
 			protected void populateItem(ListItem<UserEntity> item) {
+				if (item.getIndex() % 2 == 0) {
+					item.add(new AttributeAppender("class", new Model("right-line"), " "));
+				}
 				UserEntity user = (UserEntity)item.getModelObject();
 
 				Label firstName = new Label("firstName", user.getFirstName());

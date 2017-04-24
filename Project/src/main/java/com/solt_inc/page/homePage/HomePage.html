@@ -21,6 +21,12 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
+<style>
+.right-line > div {
+	border-right:2px solid #444;
+}
+</style>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -118,7 +124,7 @@
 <!-- ここから、User数分ループ -->
 
 <wicket:container wicket:id="userList">
-      <div class="col-md-6" style="border-right:2px solid #444">
+      <div class="col-md-6">
         <div class="col-md-12 portfolio-item" style="padding:40px;padding-bottom:0px;">
           <a wicket:id="detailLink" href="#" onclick="javascript:movePage(0)">
             <span>
