@@ -39,7 +39,7 @@ public class HobbyPanel extends Panel {
 
             WebMarkupContainer hobbyIconContainer = new WebMarkupContainer("hobbyIcon");
             hobbyIconContainer
-                    .add(new AttributeModifier("src", HOBBY_ICON_FOLDER.getUploadPath() + hobbyEntity.getHobbyIcon()));
+                    .add(new AttributeModifier("class", "fa " + hobbyEntity.getHobbyIcon()+" fa-stack-1x text-primary"));
             item.add(hobbyIconContainer);
 
             item.add(new Label("hobbyName", hobbyEntity.getHobbyName()));
