@@ -27,6 +27,7 @@ import org.apache.wicket.util.file.Folder;
 import com.solt_inc.WicketApplication;
 import com.solt_inc.component.file.ImageFile;
 import com.solt_inc.component.folder.UploadFolder;
+import com.solt_inc.component.modalWindow.modalPanel.IconModalPanel;
 import com.solt_inc.component.panel.fileUpload.FileUploadPanel;
 import com.solt_inc.model.dto.HobbyDto;
 import com.solt_inc.model.entity.HobbyEntity;
@@ -130,6 +131,10 @@ public class HobbyInputPanel extends Panel {
 
             };
             item.queue(removeLink);
+
+            IModel<String> iconNameModel = LambdaModel.of(hobbyEntity::getHobbyIcon, hobbyEntity::setHobbyIcon);
+            TextField<String> iconName = new TextField<String>("iconName", iconNameModel);
+            item.queue(iconName);
 
             IModel<String> hobbyNameModel = LambdaModel.of(hobbyEntity::getHobbyName, hobbyEntity::setHobbyName);
             TextField<String> hobbyName = new TextField<String>("hobbyName", hobbyNameModel);

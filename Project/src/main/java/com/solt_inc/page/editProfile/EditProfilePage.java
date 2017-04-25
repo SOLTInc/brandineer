@@ -10,7 +10,6 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.util.ListModel;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.solt_inc.model.dao.HobbyDao;
 import com.solt_inc.model.dao.HobbyImageDao;
@@ -29,9 +28,7 @@ import com.solt_inc.page.editProfile.editPanel.hobby.EditHobbyPanel;
 import com.solt_inc.page.editProfile.editPanel.profile.EditUserPanel;
 import com.solt_inc.page.editProfile.editPanel.skillSet.EditSkillSetPanel;
 import com.solt_inc.page.homePage.HomePage;
-import com.solt_inc.page.registrationProfile.inputPanel.hobby.HobbyInputPanel;
 import com.solt_inc.page.registrationProfile.inputPanel.profile.ProfileInputPanel;
-import com.solt_inc.page.registrationProfile.inputPanel.skillSet.SkillSetInputPanel;
 
 public class EditProfilePage extends WebPage {
     private static final long serialVersionUID = 7514382722447820L;

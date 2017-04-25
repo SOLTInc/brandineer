@@ -23,7 +23,6 @@ import com.solt_inc.model.entity.UserEntity;
 import com.solt_inc.page.editProfile.EditProfilePage;
 import com.solt_inc.page.profilePage.ProfilePage;
 import com.solt_inc.page.registrationProfile.RegistrationUserPage;
-import com.solt_inc.rtest.page.TestTopPage;
 
 public class HomePage extends WebPage {
 
@@ -69,16 +68,6 @@ public class HomePage extends WebPage {
         protected void onSubmit() {
         	EditProfilePage editPage = new EditProfilePage(userId);
             setResponsePage(editPage);
-        }
-    };
-
-    private Form<?> testForm = new Form<Void>("test") {
-
-		private static final long serialVersionUID = 1L;
-
-		@Override
-        protected void onSubmit() {
-            setResponsePage(TestTopPage.class);
         }
     };
 
@@ -157,7 +146,6 @@ public class HomePage extends WebPage {
         queue(editForm);
         editIdList.setRequired(true);
         editForm.queue(editIdList);
-        queue(testForm);
 
     }
 
