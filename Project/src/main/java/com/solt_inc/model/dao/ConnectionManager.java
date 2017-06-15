@@ -11,7 +11,7 @@ public class ConnectionManager {
     
     private static String URL       = "jdbc:mysql://localhost:3306/project_db";
     private static String USER      = "root";
-    private static String PASSWORD = "root";
+    private static String PASSWORD = "rootroot";
     
     private ConnectionManager() {
     }
