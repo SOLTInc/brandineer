@@ -29,23 +29,26 @@ import com.solt_inc.page.editProfile.editPanel.profile.EditUserPanel;
 import com.solt_inc.page.editProfile.editPanel.skillSet.EditSkillSetPanel;
 import com.solt_inc.page.homePage.HomePage;
 import com.solt_inc.page.registrationProfile.inputPanel.profile.ProfileInputPanel;
+import com.solt_inc.page.profilePage.panel.profile.UserPanel;
 
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
+
+ @AuthorizeInstantiation("USER")
 public class EditProfilePage extends WebPage {
     private static final long serialVersionUID = 7514382722447820L;
 
-    private IModel<Integer> userIdModel;
     private IModel<UserDto> userModel = Model.of(new UserDto());
     private IModel<List<HobbyDto>> hobbyListModel = new ListModel<HobbyDto>(new ArrayList<HobbyDto>());
     private IModel<List<SkillSetDto>> skillSetListModel = new ListModel<SkillSetDto>(new ArrayList<SkillSetDto>());
 
     public EditProfilePage(IModel<Integer> userId) {
-    	
-    	userIdModel = userId;
+        UserPanel userPanel = new UserPanel("userPanel", userId);
+        add(userPanel);
 
         FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
-        EditUserPanel editUserPanel = new EditUserPanel("profilePanel", userModel, userIdModel);
-        EditSkillSetPanel editSkillSetPanel = new EditSkillSetPanel("skillSetPanel", skillSetListModel, userIdModel);
-        EditHobbyPanel editHobbyPanel = new EditHobbyPanel("hobbyPanel", hobbyListModel, userIdModel);
+        EditUserPanel editUserPanel = new EditUserPanel("profilePanel", userModel, userId);
+        EditSkillSetPanel editSkillSetPanel = new EditSkillSetPanel("skillSetPanel", skillSetListModel, userId);
+        EditHobbyPanel editHobbyPanel = new EditHobbyPanel("hobbyPanel", hobbyListModel, userId);
         Button editButton = new Button("editButton");
         Form<?> form = new Form<Void>("form") {
 
@@ -58,20 +61,20 @@ public class EditProfilePage extends WebPage {
 
             if (updateFlg) {
             	System.out.println("updateUser");
-            	updateFlg = updateUser(userIdModel.getObject(), userModel.getObject());
+            	updateFlg = updateUser(userId.getObject(), userModel.getObject());
             	System.out.println(updateFlg);
             }
 
             if (updateFlg && skillSetListModel.getObject() != null) {
             	System.out.println("updateSkillSet");
-            	updateFlg = updateSkillSet(userIdModel.getObject(), skillSetListModel.getObject());
+            	updateFlg = updateSkillSet(userId.getObject(), skillSetListModel.getObject());
 
             	System.out.println(updateFlg);
             }
 
             if (updateFlg && hobbyListModel.getObject() != null) {
             	System.out.println("updateHobby");
-            	updateFlg = updateHobby(userIdModel.getObject(), hobbyListModel.getObject());
+            	updateFlg = updateHobby(userId.getObject(), hobbyListModel.getObject());
             	System.out.println(updateFlg);
            }
             if (updateFlg) {

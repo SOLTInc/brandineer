@@ -2,35 +2,44 @@
 <html xmlns:wicket="http://wicket.apache.org">
   <body>    
     <wicket:panel>
+    <script>
+    $(function(){
+    	$(".profile-photo").click(function() {
+			$(this).parent().find("input").click();
+		});
+		$(".profile-photo-upload").hide();
+	});
+    </script>
     <form wicket:id="form">
-      <table>
-        <tr>
-          <td>First Name: <input type="text" wicket:id="firstName"></td>
-          <td>Last Name: <input type="text" wicket:id="lastName"></td>
-        </tr>
-        <tr>
-          <td><img wicket:id="photo" src="/img/icon/no_image.png" width="150" height="120"></td>
-        </tr>
-        <tr>
-          <td>
-            <span wicket:id="fileUpload">
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <td>birthday:<span wicket:id="birthday"></span></td>
-        </tr>
-        <tr>
-          <td>company:<input type="text" wicket:id="company"></td>
-        </tr>
-        <tr>
-          <td>job_category:<input type="text" wicket:id="jobCategory"></td>
-        </tr>
-        <tr>
-          <td>location:<input type="text" wicket:id="location"></td>
-        </tr>
-
-     </table>
+		<div class="col-md-6 form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" class="form-control" wicket:id="firstName">
+        </div>
+		<div class="col-md-6 form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" class="form-control" wicket:id="lastName">
+        </div>
+		<div class="col-md-12 form-group">
+                  <label for="photo">Icon</label><br/>
+                  <img wicket:id="photo" class="profile-photo" src="/img/icon/no_image.png" width="100" height="100" style="border-radius:50px;border:2px solid #fff;cursor:pointer">
+                 <span class="profile-photo-upload" wicket:id="fileUpload"></span>
+        </div>
+		<div class="col-md-6 form-group">
+                  <label for="birthday">Birthday</label>
+				  <span wicket:id="birthday"></span>
+        </div>
+		<div class="col-md-6 form-group">
+                  <label for="company">Company</label>
+                  <input type="text" class="form-control" wicket:id="company">
+        </div>
+		<div class="col-md-6 form-group">
+                  <label for="jobCategory">Job Category</label>
+                  <input type="text" class="form-control" wicket:id="jobCategory">
+        </div>
+		<div class="col-md-6 form-group">
+                  <label for="location">Location</label>
+                  <input type="text" class="form-control" wicket:id="location">
+        </div>
     </form>
     </wicket:panel>
   </body>

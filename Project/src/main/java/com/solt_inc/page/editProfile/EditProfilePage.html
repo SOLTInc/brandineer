@@ -27,7 +27,11 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<style>
+h2 {
+	margin-top: 50px;
+}
+</style>
 </head>
 
 
@@ -56,26 +60,49 @@
         </ul>
     </nav>
     
+        <!-- Header -->
+    <header id="top" class="header">
+        <div wicket:id="userPanel" class="text-vertical-center">
+	<wicket:remove>
+            <span class="fa-stack fa-4x">
+                <i style="color:white" class="fa fa-circle fa-stack-2x"></i>
+                <img class="fa fa-stack-2x img-circle" src="img/donaldtrump.jpg"/>
+            </span><br/>
+            <h2>Kai Takagi</h2>
+            <h3>Software Engineer</h3>
+            <br>
+            <a href="#about" class="btn btn-dark btn-lg">Mind</a>
+	</wicket:remove>
+        </div>
+    </header>
+    
     <section id="about" class="about">
         <div class="container">
             <div class="row">
-                
-    <div wicket:id="feedback">error_message</div>
+				    <div wicket:id="feedback">error_message</div>
     <form wicket:id="form">
+      <h2>Profile</h2>
       <div class="col-md-12" wicket:id="profilePanel">
         Display the ProfileInputPanel
       </div>
+      <div style="clear:both;"></div>
 
-      <div class="col-md-12" wicket:id="skillSetPanel">
+      <h2>Skill Sets</h2>
+      <div class="col-md-12" style="clear:both;" wicket:id="skillSetPanel">
         Display the SkillSetInputPanel
       </div>
+      <div style="clear:both;"></div>
 
+      <h2>Hobbys</h2>
       <div class="col-md-12" wicket:id="hobbyPanel">
         Display the HobbyInputPanel
       </div>
+      <div style="clear:both;"></div>
 
-      <input type="submit" wicket:id="editButton" value="edit"/>
-      <input type="submit" wicket:id="cancelButton" value="Cancel" />
+      <div class="col-md-12" style="margin-top:50px;">
+      <input class="btn btn-info pull-right" type="submit" wicket:id="editButton" value="Submit"/>
+      <input class="btn btn-default pull-right" type="submit" wicket:id="cancelButton" value="Cancel" style="margin-right:10px;" />
+      </div>
     </form>
             </div>
         </div>

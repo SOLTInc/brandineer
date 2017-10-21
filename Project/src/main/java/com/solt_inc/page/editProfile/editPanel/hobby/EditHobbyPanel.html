@@ -5,56 +5,43 @@
       <form wicket:id="form">
         <div wicket:id="wmc">
          
-          <table wicket:id="hobbyList">
-            <tr>
-              <td>
-                <br/>
-                <span  wicket:id="title">hobby No.0</span>
-                <a wicket:id="removeLink">x</a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                icon :
-                <input type="text" wicket:id="iconName">
-              </td>
-            </tr>
-            <tr>
-              <td>
-                hobby_name :
-                <input type="text" wicket:id="hobbyName">
-              </td>
-            </tr>
-            <tr>
-              <td>
-                hobby_Description :
-                <textarea wicket:id="hobbyDescription">
-                </textarea>
-              </td>
-            </tr>
-             
-             <tr>
-              <td>
+          <div style="background-color:#e0e0d0;margin-bottom:10px" class="col-md-12" wicket:id="hobbyList">
+          <h3><span wicket:id="title">Hobby no.0 </span>
+                <a wicket:id="removeLink">[x]</a></h3>
+              <div class="col-md-12 form-group">
+                <label>Hobby Name</label>
+                <input class="form-control" type="text" wicket:id="hobbyName">
+              </div>
+              <div class="col-md-12 form-group">
+                <label>Hobby Description</label>
+                <textarea class="form-control" wicket:id="hobbyDescription"></textarea>
+              </div>
+              <div class="col-md-12 form-group">
+                <label>Icon</label>
+                <input class="form-control" type="text" wicket:id="iconName">
+              </div>
 
-                <div wicket:id="imageListContainer">
-                  <div wicket:id="imageList">
-                    <img wicket:id="hobbyImage" src="/img/icon/no_image.png" width="150" height="120">
-                    <a wicket:id="imgDeleteLink">[x]</a>
+              <div class="col-md-12 form-group">
+                <label>画像（複数登録可）</label>
+                <div>
+                <div class="col-md-12" wicket:id="imageListContainer">
+                  <div class="col-md-4" wicket:id="imageList">
+                    <a class="pull-right" wicket:id="imgDeleteLink">[x]</a>
+                    <img wicket:id="hobbyImage" src="/img/icon/no_image.png" style="border-radius:10px;width:100%">
                   </div>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span wicket:id="uploadButtonPanel">in uploadbutton</span>
-              </td>
-            </tr>
+                <div class="col-md-12" style="margin-top:10px">
+                 <button type="button" style="width:100%" class="profile-photo btn btn-default">+Add</button>
+                 <span class="profile-photo-upload" wicket:id="uploadButtonPanel"></span>
+                </div>
+                </div>
+              </div>
            
-          </table>
+          </div>
         </div>
-        <a wicket:id="addHobbyList">
-        [add Hobby]
-        </a>
+          <div class="col-md-12">
+			 <a class="btn btn-default" style="width:100%" wicket:id="addHobbyList">Add Hobby</a>
+	      </div>
       </form>
     </wicket:panel>
   </body>

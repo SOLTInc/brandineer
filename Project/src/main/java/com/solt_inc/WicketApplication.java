@@ -15,13 +15,16 @@ import com.solt_inc.page.homePage.HomePage;
 import com.solt_inc.page.mailPage.MailPage;
 import com.solt_inc.page.registrationProfile.RegistrationUserPage;
 
+import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
+import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
+import org.apache.wicket.authroles.authentication.pages.SignInPage;
 /**
  * Application object for your web application. If you want to run this
  * application without deploying, run the Start class.
  * 
  * @see com.solt_inc.Start#main(String[])
  */
-public class WicketApplication extends WebApplication {
+public class WicketApplication extends AuthenticatedWebApplication {
 
     private UploadFolder uploadFolder;
     private String contextPath;
@@ -55,6 +58,8 @@ public class WicketApplication extends WebApplication {
     public void init() {
         super.init();
 
+		getDebugSettings().setAjaxDebugModeEnabled(false); 
+
         new BeanValidationConfiguration().configure(this);
         // uploadFolder = new Folder(this.getSystemProperty("java.io.tmpdir"),
         // "wickekt-uploads");
@@ -63,17 +68,13 @@ public class WicketApplication extends WebApplication {
 
         mountPage("/home", HomePage.class);
         // mountPage("/profile", ProfilePage.class);
-        mountPage("/registration", RegistrationUserPage.class);
-        mountPage("/mail", MailPage.class);
+        //mountPage("/registration", RegistrationUserPage.class);
+        //mountPage("/mail", MailPage.class);
 
         getApplicationSettings().setUploadProgressUpdatesEnabled(true);
     }
 
-    @Override
-    public Session newSession(Request request, Response response) {
-        /*** test **/
-        return new UserSession(request, new Model<Integer>(1));
-    }
+
 
     /** 削除予定 **/
     private String getSystemProperty(String key) {
@@ -90,4 +91,12 @@ public class WicketApplication extends WebApplication {
         }
         return contextPath;
     }
+	@Override
+	protected Class<? extends WebPage> getSignInPageClass() {
+		return SignInPage.class;
+	}
+    	@Override
+	protected Class<? extends AuthenticatedWebSession> getWebSessionClass() {
+		return MyAuthenticatedWebSession.class;
+	}
 }
