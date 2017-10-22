@@ -10,6 +10,35 @@ import java.util.List;
 import com.solt_inc.model.entity.UserEntity;
 
 public class UserDao {
+    public UserEntity getUser(String userName, String password) {
+        UserEntity user = new UserEntity();
+
+        ConnectionManager cm = ConnectionManager.getInstance();
+        String sql = "SELECT * FROM project_db.user WHERE USER_NAME = ? AND PASSWORD = ?";
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+            pstmt.setString(1, userName);
+            pstmt.setString(2, password);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                user.setId(rs.getInt("ID"));
+                user.setFirstName(rs.getString("FIRST_NAME"));
+                user.setLastName(rs.getString("LAST_NAME"));
+                user.setPhotoName(rs.getString("PHOTO_NAME"));
+                user.setSqlBirthday(rs.getDate("BIRTHDAY"));
+                user.setJobCategory(rs.getString("JOB_CATEGORY"));
+                user.setLocation(rs.getString("LOCATION"));
+                user.setCompany(rs.getString("COMPANY"));
+            } else {
+            	return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    	}
 
     public UserEntity getUser(int userId) {
 
@@ -78,6 +107,14 @@ public class UserDao {
         StringBuffer sql = new StringBuffer();
         int count = 0;
         sql.append("INSERT INTO project_db.user(");
+        if (user.getUserName() != null) {
+            sql.append("USER_NAME,");
+            count++;
+        }
+        if (user.getPassword() != null) {
+            sql.append("PASSWORD,");
+            count++;
+        }
         if (user.getFirstName() != null) {
             sql.append("FIRST_NAME,");
             count++;
@@ -129,6 +166,14 @@ public class UserDao {
             // pstmt.setString(6, user.getJobCategory());
             // pstmt.setString(7, user.getLocation());
             count = 0;
+            if (user.getUserName() != null) {
+                count++;
+                pstmt.setString(count, user.getUserName());
+            }
+            if (user.getPassword() != null) {
+                count++;
+                pstmt.setString(count, user.getPassword());
+            }
             if (user.getFirstName() != null) {
                 count++;
                 pstmt.setString(count, user.getFirstName());

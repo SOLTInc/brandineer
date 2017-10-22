@@ -66,7 +66,7 @@ public class HomePage extends WebPage {
 
 		@Override
         protected void onSubmit() {
-        	EditProfilePage editPage = new EditProfilePage(userId);
+        	EditProfilePage editPage = new EditProfilePage();
             setResponsePage(editPage);
         }
     };
@@ -113,7 +113,7 @@ public class HomePage extends WebPage {
 
 					@Override
 					public void onClick() {
-						setResponsePage(new EditProfilePage(Model.of(user.getId())));
+						setResponsePage(new EditProfilePage());
 						
 					}
 					

@@ -10,6 +10,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.util.ListModel;
+import org.apache.wicket.Session;
 
 import com.solt_inc.model.dao.HobbyDao;
 import com.solt_inc.model.dao.HobbyImageDao;
@@ -41,7 +42,8 @@ public class EditProfilePage extends WebPage {
     private IModel<List<HobbyDto>> hobbyListModel = new ListModel<HobbyDto>(new ArrayList<HobbyDto>());
     private IModel<List<SkillSetDto>> skillSetListModel = new ListModel<SkillSetDto>(new ArrayList<SkillSetDto>());
 
-    public EditProfilePage(IModel<Integer> userId) {
+    public EditProfilePage() {
+        IModel<java.lang.Integer> userId = Model.of((Integer)Session.get().getAttribute("loginUser"));
         UserPanel userPanel = new UserPanel("userPanel", userId);
         add(userPanel);
 

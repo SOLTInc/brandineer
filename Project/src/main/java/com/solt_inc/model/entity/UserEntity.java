@@ -14,6 +14,12 @@ public class UserEntity implements Serializable {
     private String firstName;
     @NotNull
     private String lastName;
+    //for login
+    @NotNull
+    private String userName;
+    @NotNull
+    private String password;
+
     private String photoName;
     private LocalDate birthday;
     private int age;
@@ -33,6 +39,22 @@ public class UserEntity implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {

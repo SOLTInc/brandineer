@@ -45,16 +45,10 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand">
-                <a href="#top" onclick=$("#menu-close").click();>My Profile</a>
+                <a>Menu</a>
             </li>
             <li>
-                <a href="#about" onclick=$("#menu-close").click();>Like or Minds</a>
-            </li>
-            <li>
-                <a href="#services" onclick=$("#menu-close").click();>Hobbys</a>
-            </li>
-            <li>
-                <a href="#portfolio" onclick=$("#menu-close").click();>Portfolios</a>
+                <a href="#top" onclick="javascript:editPage(0)">My Profile</a>
             </li>
             <li>
                 <a href="#contact" onclick=$("#menu-close").click();>Sign out</a>
@@ -68,8 +62,7 @@
  	$(".userIdList").val(""+ind);
  	$("#detailSubmit").click();
  	}
- function editPage(ind) {
- 	$(".userIdList").val(""+ind);
+ function editPage() {
  	$("#editSubmit").click();
  	}
  </script>
@@ -130,7 +123,8 @@
           </a>
           <div class="pull-left col-md-12 service-item" style="width:100%;border-bottom:2px solid #444;padding-bottom:20px;">
             <div class="pull-left">
-              <h3><a wicket:id="editLink" href="#" onclick="javascript:editPage(0)"><span wicket:id="firstName">Daisuke</span>&nbsp;<span wicket:id="lastName">Kubota</span></a></h3>
+              <h3><a wicket:id="editLink" href="#" onclick="javascript:movePage(0)"></a>
+              <a><span wicket:id="firstName">Daisuke</span>&nbsp;<span wicket:id="lastName">Kubota</span></a></h3>
               <h4 wicket:id="jobCategory">sales Enginieer</h4>
             </div>
             <h3 class="pull-right">1 hour</h3>
