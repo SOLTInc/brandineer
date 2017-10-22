@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import com.solt_inc.model.entity.FollowEntity;
 
 
@@ -31,7 +32,7 @@ public class FollowDao {
 
     }
 
-    public boolean insert(FollowEntity follow) {
+    public boolean insert(FollowEntity follow, int iFollowLevel) {
 
         // UserEntity user = userModel.getObject();
         ConnectionManager cm = ConnectionManager.getInstance();
@@ -42,12 +43,13 @@ public class FollowDao {
 
             sql.append("USER_ID,");
             count++;
-        
 
             sql.append("FOLLOW_ID,");
             count++;
-        
-        
+
+            sql.append("FOLLOW_LEVEL,");
+            count++;
+
         sql.delete(sql.length() - 1, sql.length());
         sql.append(") VALUES (");
         for (int i = 0; i < count; i++) {
@@ -73,12 +75,43 @@ public class FollowDao {
             count = 0;
                 count++;
                 pstmt.setInt(count, follow.getUserId());
-            
+
 
                 count++;
                 pstmt.setInt(count, follow.getFollowId());
-            
-            
+
+                count++;
+                pstmt.setInt(count, iFollowLevel);
+
+
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+      //      e.printStackTrace();
+		throw new Error(e);
+
+        }
+
+        return result == 0 ? false : true;
+    }
+
+    public boolean update(FollowEntity follow, int iFollowLevel) {
+
+        // UserEntity user = userModel.getObject();
+        ConnectionManager cm = ConnectionManager.getInstance();
+
+        StringBuffer sql = new StringBuffer();
+        int count = 0;
+        sql.append("UPDATE project_db.follow SET FOLLOW_LEVEL = ? WHERE USER_ID = ? AND FOLLOW_ID = ?");
+
+        int result = 0;
+
+        try (Connection con = cm.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql.toString())) {
+
+        	pstmt.setInt(1, iFollowLevel);
+        	pstmt.setInt(2, follow.getUserId());
+            pstmt.setInt(3, follow.getFollowId());
+
             result = pstmt.executeUpdate();
 
         } catch (SQLException e) {

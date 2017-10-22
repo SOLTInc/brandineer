@@ -3,21 +3,19 @@ package com.solt_inc.page.profilePage.panel.profile;
 import java.time.LocalDate;
 
 import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
-import com.solt_inc.model.dao.UserDao;
-import com.solt_inc.model.entity.UserEntity;
-
 import com.solt_inc.model.dao.FollowDao;
-import com.solt_inc.model.dto.FollowDto;
+import com.solt_inc.model.dao.UserDao;
 import com.solt_inc.model.entity.FollowEntity;
-
+import com.solt_inc.model.entity.UserEntity;
 import com.solt_inc.page.profilePage.ProfilePage;
 
 public class UserPanel extends Panel {
@@ -62,7 +60,7 @@ public class UserPanel extends Panel {
             	System.out.println(updateFlg);
             }
 
-            if (updateFlg) {	
+            if (updateFlg) {
            	 ProfilePage profilePage = new ProfilePage(userId);
            	 setResponsePage(profilePage);
             } else {
@@ -76,7 +74,7 @@ public class UserPanel extends Panel {
     public UserPanel(String id, IModel<Integer> userId) {
 
         super(id, userId);
-        
+
                 this.userId = userId;
 
         UserDao userDao = new UserDao();
@@ -132,14 +130,25 @@ public class UserPanel extends Panel {
     private boolean updateFollow(int userId) {
     	boolean updateFlg = true;
 
-        FollowDao followDao = new FollowDao();
+    	FollowDao followDao = new FollowDao();
+    	IModel<java.lang.Integer> myUserId = Model.of((Integer)Session.get().getAttribute("loginUser"));
+    	FollowEntity followEntity = new FollowEntity();
+    	followEntity.setFollowId(userId);
+    	followEntity.setUserId(myUserId.getObject());
 
-        FollowEntity followEntity = new FollowEntity();
-	followEntity.setFollowId(userId);
-	followEntity.setUserId(userId);
-        updateFlg = followDao.insert(followEntity);
+    	//USER_ID,FOLLOW_IDをキーに検索を行い、検索結果が存在する場合にUPDATE、存在しない場合INSERT
 
-        return updateFlg;
+    	if (followDao.checkFollower(followEntity.getUserId(),followEntity.getFollowId())) {
+    		//UPDATE
+    		updateFlg = followDao.update(followEntity,1);
+    	}else {
+    		//INSERT
+    		updateFlg = followDao.insert(followEntity,1);
+    	}
+
+
+
+    	return updateFlg;
     }
 
 }
